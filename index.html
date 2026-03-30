@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Digest — Monday, March 30 2026</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="The Digest" />
+  <meta name="theme-color" content="#1c1c1c" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="dd_icon.png" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f0ede8;
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: #1c1c1c;
+      padding: 40px 16px 80px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 620px; margin: 0 auto; }
+
+    /* ── Masthead ── */
+    .masthead {
+      text-align: center;
+      padding-bottom: 28px;
+      border-bottom: 2px solid #1c1c1c;
+      margin-bottom: 36px;
+    }
+    .masthead-eyebrow {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 10px;
+    }
+    .masthead h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 52px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+    .masthead-date {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #aaa;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── Top section label ── */
+    .top-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 16px;
+    }
+
+    /* ── Newsletter card ── */
+    .newsletter-card {
+      background: #fff;
+      border-radius: 3px;
+      padding: 28px 30px 24px;
+      margin-bottom: 14px;
+      border: 1px solid #e2dfd9;
+    }
+    .card-source {
+      display: inline-block;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #fff;
+      background: #1c1c1c;
+      padding: 3px 8px 2px;
+      border-radius: 2px;
+      margin-bottom: 12px;
+    }
+    .card-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: #1c1c1c;
+      margin-bottom: 20px;
+    }
+    .card-meta {
+      margin-top: 20px;
+      padding-top: 12px;
+      border-top: 1px solid #f0ece6;
+      font-size: 10px;
+      color: #ccc;
+    }
+
+    /* ── Flyover body blocks ── */
+    .story-headline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: #1c1c1c;
+      margin: 22px 0 8px;
+      padding-top: 20px;
+      border-top: 1px solid #ece9e3;
+    }
+    .story-headline:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+
+    .story-para {
+      font-size: 14px;
+      line-height: 1.75;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .story-para:last-child { margin-bottom: 0; }
+
+    .story-para a, .story-bullets a, .tldr-summary a {
+      color: #1c1c1c;
+      text-decoration: underline;
+      text-decoration-color: #bbb;
+      text-underline-offset: 2px;
+    }
+    .story-para a:hover, .story-bullets a:hover, .tldr-summary a:hover {
+      text-decoration-color: #1c1c1c;
+    }
+
+    .story-bullets {
+      list-style: none;
+      margin: 8px 0 12px;
+      padding: 0;
+    }
+    .story-bullets li {
+      font-size: 14px;
+      line-height: 1.65;
+      color: #333;
+      padding: 7px 0 7px 18px;
+      border-bottom: 1px solid #f5f2ed;
+      position: relative;
+    }
+    .story-bullets li:last-child { border-bottom: none; }
+    .story-bullets li::before {
+      content: "›";
+      position: absolute;
+      left: 0;
+      color: #bbb;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      margin: 22px 0 14px;
+    }
+    .section-divider::before, .section-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #e8e5df;
+    }
+    .section-divider span {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #bbb;
+      padding: 0 10px;
+    }
+
+    /* ── Market grid ── */
+    .stock-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 7px;
+      margin: 10px 0 4px;
+    }
+    .stock-card {
+      background: #fafaf8;
+      border: 1px solid #e8e4de;
+      border-radius: 3px;
+      padding: 10px 8px 8px;
+      text-align: center;
+    }
+    .stock-card.up   { border-top: 2px solid #2d9e5f; }
+    .stock-card.down { border-top: 2px solid #c0392b; }
+    .stock-ticker { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: #444; margin-bottom: 4px; }
+    .stock-price  { font-size: 12px; font-weight: 600; color: #1c1c1c; margin-bottom: 3px; }
+    .stock-change { font-size: 11px; font-weight: 500; }
+    .stock-card.up   .stock-change { color: #2d9e5f; }
+    .stock-card.down .stock-change { color: #c0392b; }
+
+    /* ── TLDR styles ── */
+    .tldr-category {
+      display: flex;
+      align-items: center;
+      margin: 20px 0 12px;
+    }
+    .tldr-category::before, .tldr-category::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #e8e5df;
+    }
+    .tldr-category span {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #bbb;
+      padding: 0 10px;
+    }
+    .tldr-category:first-child { margin-top: 0; }
+
+    .tldr-story {
+      padding: 14px 0;
+      border-bottom: 1px solid #f0ede8;
+    }
+    .tldr-story:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .tldr-headline {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1c1c1c;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+    .tldr-headline a { color: inherit; text-decoration: none; }
+    .tldr-headline a:hover { text-decoration: underline; }
+
+    .tldr-summary {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #444;
+      margin-bottom: 8px;
+    }
+
+    .story-read-link {
+      font-size: 11px;
+      font-weight: 600;
+      color: #1c1c1c;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 1px;
+    }
+    .story-read-link:hover { border-color: #1c1c1c; }
+
+    /* ── AI Papers ── */
+    .papers-section { margin-top: 14px; }
+
+    .paper-item {
+      background: #fff;
+      border: 1px solid #e2dfd9;
+      border-left: 3px solid #6366f1;
+      border-radius: 3px;
+      padding: 16px 20px;
+      margin-bottom: 10px;
+    }
+    .paper-item:last-child { margin-bottom: 0; }
+
+    .paper-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1c1c1c;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+
+    .paper-summary {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    /* ── Tweet feed ── */
+    .tweets-section { margin-top: 14px; }
+
+    .tweet-account-block { margin-bottom: 20px; }
+
+    .tweet-account-header {
+      font-size: 11px;
+      font-weight: 600;
+      color: #888;
+      letter-spacing: 0.03em;
+      margin-bottom: 6px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #e8e5df;
+    }
+
+    .tweet-feed-item {
+      display: flex;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #f5f2ed;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #2a2a2a;
+    }
+    .tweet-feed-item:last-child { border-bottom: none; }
+
+    .tweet-dot {
+      flex-shrink: 0;
+      width: 5px;
+      height: 5px;
+      background: #ccc;
+      border-radius: 50%;
+      margin-top: 8px;
+    }
+
+    .tweet-feed-text { flex: 1; }
+
+    .tweet-feed-link {
+      display: inline-block;
+      margin-left: 6px;
+      font-size: 10px;
+      color: #bbb;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+    .tweet-feed-link:hover { color: #1c1c1c; }
+
+    /* ── Quote ── */
+    .quote-block {
+      text-align: center;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      border-top: 1px solid #e2dfd9;
+      border-bottom: 1px solid #e2dfd9;
+    }
+    .quote-text {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 16px;
+      font-style: italic;
+      line-height: 1.65;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .quote-attr {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #aaa;
+    }
+    .quote-attr span { color: #888; }
+
+    /* ── Jump nav ── */
+    .jump-nav {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .jump-nav a {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #888;
+      text-decoration: none;
+      padding: 5px 12px;
+      border: 1px solid #d8d5cf;
+      border-radius: 20px;
+      background: #fff;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .jump-nav a:hover {
+      color: #1c1c1c;
+      border-color: #1c1c1c;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid #d5d2cc;
+      text-align: center;
+      font-size: 10px;
+      color: #ccc;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="masthead">
+    <div class="masthead-eyebrow">Your Morning Briefing</div>
+    <h1>The Digest</h1>
+    <div class="masthead-date">Monday, March 30 2026</div>
+  </div>
+
+  
+  <div class="quote-block">
+    <div class="quote-text">"The test of a first-rate intelligence is the ability to hold two opposed ideas in mind at the same time and still retain the ability to function."</div>
+    <div class="quote-attr">
+      <span>— F. Scott Fitzgerald</span>, novelist &amp; chronicler of the Jazz Age
+    </div>
+  </div>
+  
+
+  <nav class="jump-nav" aria-label="Jump to section">
+    
+      <a href="#section-1">Aadrij Upadya</a>
+    
+      <a href="#section-2">The Flyover</a>
+    
+      <a href="#section-3">TLDR</a>
+    
+      <a href="#section-4">TLDR</a>
+    
+      <a href="#section-5">TLDR</a>
+    
+      <a href="#section-6">TLDR</a>
+    
+    
+      <a href="#section-papers">AI Research</a>
+    
+  </nav>
+
+  
+  
+  <div id="section-1" class="top-label">Aadrij Upadya</div>
+  <div class="newsletter-card">
+    <div class="card-source">Aadrij Upadya</div>
+    <div class="card-title">Fwd: SpaceX IPO playbook 🚀, Apple allows AI assistants 🤖, Stripe Projects 🧑‍💻</div>
+    <p class="story-para">---------- Forwarded message --------- From: TLDR</p>
+<p class="story-para">&lt; dan@tldrnewsletter.com &gt;</p>
+<p class="story-para">Date: Fri, Mar 27, 2026 at 3:39 AM</p>
+<p class="story-para">Subject: SpaceX IPO playbook 🚀, Apple allows AI assistants 🤖, Stripe Projects 🧑‍💻 To:  &lt; adrij2005@gmail.com &gt;</p>
+<p class="story-para">SpaceX is preparing for an initial public offering aimed at mid-June. Musk wants investors to visit SpaceX&#39;s manufacturing facilities ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌  ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌</p>
+<h3 class="story-headline"><a href="https://l.gotourl.es/l/b296c5e1f80928b560ff234a899e84b3efbfb7f3?u=9174676" target="_blank">Sign Up</a></h3>
+<p class="story-para"><a href="https://l.gotourl.es/l/0ddff333c2ed880e431b422cd10ed70d1037e579?u=9174676" target="_blank">| Advertise</a> |</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/4a7cee838f0d2d5c4adb343661722ea8cce58a28?u=9174676" target="_blank">View Online</a></p>
+<p class="story-para">T L D R</p>
+<p class="story-para">Together With</p>
+<p class="story-para">TLDR 2026-03-27</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/ad6f7de19ffb2a4a60fe3b29a3ee91221b3f9c8e?u=9174676" target="_blank">Plaid adds $382k in pipeline with TLDR campaign (Sponsor)</a></p>
+<p class="story-para"><a href="https://l.gotourl.es/l/636e43c3c04067ecd5f4833f88fe70b4d7c3192a?u=9174676" target="_blank">Plaid achieved their best-performing direct buy to date, adding $382k in pipeline, earning 70 leads, and achieving 20.1x ROI. This case study breaks down their strategy, results, and example ads. Read the Plaid case study.</a></p>
+<p class="story-para">📱</p>
+<h3 class="story-headline">Big Tech &amp; Startups</h3>
+<p class="story-para"><a href="https://l.gotourl.es/l/c88d94de6dcd6f419ca5d9450cdbb79ccf7ad457?u=9174676" target="_blank">Apple Plans to Open Up Siri to Rival AI Assistants in iOS 27 Update (5 minute read)</a></p>
+<p class="story-para">Apple will let Siri use AI services other than ChatGPT as part of the iOS 27 update. The approach will help Apple generate more revenue from third-party subscriptions through the App Store. It will mean Apple can add more external AI services without entering business discussions. The change is separate from Apple&#39;s work with Google to rebuild Siri using Gemini models.</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/4cc79966624269d34347ae764a773b9febfe0607?u=9174676" target="_blank">The SpaceX IPO Will Be Just as Unconventional as Musk Himself (5 minute read)</a></p>
+<p class="story-para">SpaceX is preparing for an initial public offering aimed at mid-June, just before Elon Musk&#39;s birthday. Musk wants investors to visit SpaceX&#39;s manufacturing facilities and possibly witness rocket launches. He is betting that fund managers and analysts will leave with the desire to put in big orders for the IPO, which is expected to raise between $40 billion and $80 billion. The filing for the IPO is expected to be done in the coming days.</p>
+<p class="story-para">🚀</p>
+<h3 class="story-headline">Science &amp; Futuristic Technology</h3>
+<p class="story-para"><a href="https://l.gotourl.es/l/68b0b457659a84354569339a6046a975ea51380a?u=9174676" target="_blank">Here is NASA&amp;#39;s plan for nuking Gateway and sending it to Mars (9 minute read)</a></p>
+<p class="story-para">NASA announced on Tuesday that it will pause work on a lunar space station and focus instead on building a surface base on the Moon. The agency has spent close to $4.5 billion on developing technology for the Gateway program since its beginning in 2019. There are pieces of the space station undergoing construction and testing in factories around the world. NASA plans to repurpose the core of Gateway, the Power and Propulsion Element, into a nuclear propulsion demo. It will use the nuclear engine in the interplanetary SR-1 mission scheduled before the end of 2028.</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/03a6efb900cfe930de689b68a6bba317c413a4c2?u=9174676" target="_blank">What happens when you clone mice for 20 years straight? (6 minute read)</a></p>
+<p class="story-para">Two scientists conducted a study over 20 years where they cloned generations of mice to see what would happen. The researchers created a total of 58 generations before the project ended - the mouse cells just wouldn&#39;t make clones. This took 30,947 individual attempts due to the low efficiency of cloning technology. There was a steady accumulation of mutations over the generations, and an entire X chromosome was lost at some point between generations 25 and 45, and never regained. The various other chromosomal deletions, inversions, and translocations added to the reasons why the cloning process failed after 58 generations.</p>
+<p class="story-para">💻</p>
+<h3 class="story-headline">Programming, Design &amp; Data Science</h3>
+<p class="story-para"><a href="https://l.gotourl.es/l/12a6ea33aefca4dc4850742b1a62a03d38580a67?u=9174676" target="_blank">Stop stitching databases for AI agents (Sponsor)</a></p>
+<h3 class="story-headline">Oracle AI Database acts as a</h3>
+<p class="story-para"><a href="https://l.gotourl.es/l/bba3156990077285ffdda9e487b54743be1b0e6b?u=9174676" target="_blank">unified memory core for agents</a> . Vector search, relational, JSON, and graph data live together so agents can reason over live enterprise data without extra vector stores, pipelines, or synchronization jobs.</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/1169c2f51c6818cdbecd04e13489f26a13ff841e?u=9174676" target="_blank">See how developers build agent memory →</a></p>
+<p class="story-para"><a href="https://l.gotourl.es/l/4cbd420c849a7cb7f6f887d9187551dae7404f7a?u=9174676" target="_blank">Stripe Projects: provision a production-ready dev stack from your terminal (5 minute read)</a></p>
+<p class="story-para">Stripe Projects is a new tool in the Stripe CLI that lets users provision real services from the terminal, keep resources in their provider accounts, sync agent-ready credentials safely, and upgrade to paid tiers when needed, without rebuilding their stacks or leaving the terminal. It is designed to make setups repeatable across machines and teammates, and deterministic enough for agents to operate safely. Projects can handle payment without re-entering payment details across provider dashboards for paid tiers. Developers can use it to go from a local repository to a working stack backed by provider accounts they own.</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/d17d243a62e73152bedfb01bc8bc3238a4605761?u=9174676" target="_blank">What&amp;#39;s in a codebase? (8 minute read)</a></p>
+<p class="story-para">Humans collectively can do incredible things, but much of it is illegible tribal knowledge passed down orally through generations of apprentices, and through the capabilities of machines that fabricate the next generation of machines. A lot has been done to refine human knowledge, extract its essence, and compile it into a form that can help future generations reach new heights. So far, this has proved to be a uniquely human capability. Diagnosing, fixing, and then figuring out how to test the real fix is hard enough as a human. Reproducing these system failures in an agent-testable way is inevitably going to be expensive and impractical.</p>
+<p class="story-para">🎁</p>
+<p class="story-para">Miscellaneous</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/acf2b86e6a39837b80847271b356688967799b4d?u=9174676" target="_blank">Read TIME&amp;#39;s Full Interview with SpaceX&amp;#39;s Gwynne Shotwell (20 minute read)</a></p>
+<p class="story-para">This article contains a transcript of an interview with SpaceX&#39;s President and COO, Gwynne Shotwell. The interview covers the xAI/SpaceX merger, SpaceX&#39;s upcoming IPO, data centers in space, Starlink in war zones, orbital traffic, and more. Shotwell also discusses her personal relationship with Elon Musk. She also talks about her experience as a woman in an industry where more than 75% of the leadership is male.</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/7d70e0c95e93cc67b94332a43de2af8e57d6952b?u=9174676" target="_blank">The White Collar Revolution is Here (9 minute read)</a></p>
+<p class="story-para">Software developers get rewarded for adopting new technologies fast, but white-collar workers get penalized as stability and risk mitigation are major parts of the value they provide to clients. Companies need to pair subject matter experts with cutting-edge researchers to take full advantage of the AI era. This business model encourages practitioners to hand off tasks to be automated instead of clinging to old ways of working. The winning businesses build the machines that build the machines.</p>
+<p class="story-para">⚡</p>
+<p class="story-para">Quick Links</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/8b59377bf9d06199d9757258199361fcbda50686?u=9174676" target="_blank">Now Shipping: Microsoft Build 2026, June 2-3, San Francisco (#MicrosoftPartner) (Sponsor)</a></p>
+<p class="story-para">Devs &amp; Builders Only: Access cutting‑edge models, agent capabilities, data, and compute—then leave ready to apply the latest AI workflows in your projects. Stay at the forefront of AI innovation.</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/e1a324914ff39167f9562a70d5ba79a9ae232cec?u=9174676" target="_blank">Learn more</a> .</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/a8dbb89388a47eb6d9a37ce7226c7dcfdbbd8fac?u=9174676" target="_blank">What about juniors? (6 minute read)</a></p>
+<p class="story-para">The new junior path involved getting engaged much earlier with the essence of engineering.</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/731c1f5db2b268dd912bdecb1e8395da0f81b0ea?u=9174676" target="_blank">The Handoff Problem (5 minute read)</a></p>
+<p class="story-para">Tesla&#39;s Full Self-Driving has always depended on handing off to the human, and this has resulted in Tesla&#39;s robotaxi service with &#39;safety monitors&#39; crashing six times as often as human-driven taxis.</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/ea977789e30595c51984f17b632b3342f852b306?u=9174676" target="_blank">Jensen Manifesting The Future (21 minute read)</a></p>
+<p class="story-para">Jensen Huang discussed a future of AI factories that manufacture tokens during his 2.5-hour-long keynote at Nvidia&#39;s multi-day GTC 2026 developer conference.</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/e484b220e3c527ff6ab9e9049f80808cfe0a1b7d?u=9174676" target="_blank">Apple discontinues the Mac Pro with no plans for future hardware (2 minute read)</a></p>
+<p class="story-para">The Mac Pro has been removed from Apple&#39;s website, and Apple has no plans to offer future Mac Pro hardware.</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/05ca8c8e951f568de98135bbe6f1fdd6358ab2c5?u=9174676" target="_blank">Apple Gives iPhone Designers Bonuses Up to $400K to Counter OpenAI Poaching (1 minute read)</a></p>
+<p class="story-para">The bonuses are in the form of restricted stock units that vest over a four-year period.</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/cbd4c69e12f4459d9c0ffb5c020085161c1ae77e?u=9174676" target="_blank">We need better stories about the future (13 minute read)</a></p>
+<p class="story-para">The headlines reaching mainstream audiences about AI range from depressing to doomsday.</p>
+<h3 class="story-headline">Love TLDR? Tell your friends and get rewards!</h3>
+<h3 class="story-headline">Share your referral link below with friends to get free TLDR swag!</h3>
+<p class="story-para"><a href="https://l.gotourl.es/l/82348381d70e30742ae2bace069cf7436066c8be?u=9174676" target="_blank">https://refer.tldr.tech/523b19a2/</a></p>
+<p class="story-para"><a href="https://l.gotourl.es/l/917221eb6e59fc2b653f5bfe73ab1fe00240a449?u=9174676" target="_blank">Track your referrals here.</a></p>
+<h3 class="story-headline">Want to advertise in TLDR? 📰</h3>
+<p class="story-para"><a href="https://l.gotourl.es/l/18b0d2fd819f370820c625e6d6a2163471cabf6e?u=9174676" target="_blank">If your company is interested in reaching an audience of tech executives, decision-makers and engineers, you may want to advertise with us</a> .</p>
+<h3 class="story-headline">Want to work at TLDR? 💼</h3>
+<h3 class="story-headline"><a href="https://l.gotourl.es/l/e7dbebfd1bb7e8feb910fcef47fa5a5a272c5fcd?u=9174676" target="_blank">Apply here</a></h3>
+<p class="story-para">,</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/cabdff85d1aeb239d97c3fd621b2d0e23665b512?u=9174676" target="_blank">create your own role</a> or send a friend&#39;s resume to jobs@tldr.tech</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/9ebfb03fb406c99cd6c43bf465bdf25de8ab5b8d?u=9174676" target="_blank">and get $1k if we hire them! TLDR is one of Inc.&amp;#39;s Best Bootstrapped businesses</a> of 2025.</p>
+<h3 class="story-headline">If you have any comments or feedback, just respond to this email!</h3>
+<h3 class="story-headline">Thanks for reading,</h3>
+<h3 class="story-headline"><a href="https://l.gotourl.es/l/309aa703827a435cfd165281ac9cb42f9ca14446?u=9174676" target="_blank">Dan Ni</a></h3>
+<p class="story-para">&amp;</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/ef8c432183f22bbd6c270ce184239611109e150c?u=9174676" target="_blank">Stephen Flanders</a></p>
+<p class="story-para"><a href="https://l.gotourl.es/l/87de571858f90abbe83b0d438df701218dafeee6?u=9174676" target="_blank">Manage your subscriptions</a></p>
+<p class="story-para"><a href="https://l.gotourl.es/l/d61964a4eca1b53859acc7e4bce665a740c7f6cd?u=9174676" target="_blank">to our other newsletters on tech, startups, and programming. Or if TLDR isn&amp;#39;t for you, please unsubscribe</a> .</p>
+    <div class="card-meta">Sun, 29 Mar 2026 16:52:23 -0700</div>
+  </div>
+  
+  <div id="section-2" class="top-label">The Flyover</div>
+  <div class="newsletter-card">
+    <div class="card-source">The Flyover</div>
+    <div class="card-title">Pentagon Eyes Ground Ops, KitKat Heist, and Cake Picnic</div>
+    <h3 class="story-headline">The Pentagon is preparing for weeks of</h3>
+<p class="story-para">ground operations in Iran , including possible raids on Kharg Island and coastal sites near the Strait of Hormuz, according to a report citing multiple U.S. officials.</p>
+<p class="story-para">͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌</p>
+<h3 class="story-headline">deal to purchase Alaska</h3>
+<p class="story-para">from Russia for $7.2 million, roughly two cents per acre. Critics called it &#34;Seward&#39;s Folly,&#34; but the laughter stopped when gold strikes in the territory helped prove the land&#39;s vast worth.</p>
+<h3 class="story-headline">NASA can&#39;t explain why astronaut Mike Fincke suddenly</h3>
+<p class="story-para">lost the ability to speak aboard the International Space Station in January. What they do know is it wasn&#39;t a heart attack, it lasted 20 minutes, and it triggered the first medical evacuation in the station&#39;s history. The full story is below.</p>
+<h3 class="story-headline">Big news for our West Coast readers:</h3>
+<p class="story-para">The California Flyover launches this Wednesday, April 1, bringing the same daily briefing to the Golden State. If you&#39;ve got friends or family in California, share the signup link, so they&#39;re in from day one. Sign up here .</p>
+<h3 class="story-headline">Later today, watch for a quick note from our partner,</h3>
+<p class="story-para">Upwellness , sharing a simple approach to help tackle stubborn fat, low energy, and digestive issues.</p>
+<h3 class="story-headline">Save hundreds on GLP-1 meds with these top providers from today&#39;s sponsor,</h3>
+<p class="story-para">ChooseGLP-1 .</p>
+<h3 class="story-headline">Pentagon Plans Ground Operations in Iran</h3>
+<h3 class="story-headline">The Pentagon is preparing for weeks of</h3>
+<p class="story-para">ground operations in Iran , including possible raids on Kharg Island and coastal sites near the Strait of Hormuz, according to a report citing multiple U.S. officials.</p>
+<p class="story-para">The plans would involve special operations forces and conventional infantry but fall short of a full-scale invasion. About 3,500 Marines and sailors aboard the</p>
+<p class="story-para">USS Tripoliarrived Friday , and soldiers from the 82nd Airborne Division are also deploying.</p>
+<h3 class="story-headline">White House press secretary</h3>
+<p class="story-para">Karoline Leavitt said it&#39;s &#34;the job of the Pentagon to make preparations,&#34; but that it &#34;does not mean the President has made a decision.&#34;</p>
+<h3 class="story-headline">Iran&#39;s parliament speaker responded Sunday, warning that Iranian forces are</h3>
+<p class="story-para">waiting for American soldiers &#34;to rain fire upon them.&#34;</p>
+<h3 class="story-headline">Astronaut&#39;s Mystery Illness Still Baffles NASA</h3>
+<h3 class="story-headline">NASA astronaut Mike Fincke revealed that he</h3>
+<p class="story-para">suddenly lost the ability to speak while eating dinner aboard the International Space Station on Jan. 7, an episode that triggered the first medical evacuation in the station&#39;s history and remains unexplained.</p>
+<p class="story-para">Fincke, 59, said the episode hit &#34;like a very, very fast lightning bolt,&#34; lasted about 20 minutes, and left his six crewmates scrambling to help.</p>
+<p class="story-para">Doctors have ruled out a heart attack, but after months of testing, everything else is still on the table, possibly linked to his 549 days in weightlessness.</p>
+<p class="story-para">The mystery comes as NASA prepares to launch the Artemis II crew around the moon on Wednesday, a 10-day mission in which a quick return to Earth wouldn&#39;t be an option.</p>
+<h3 class="story-headline">Thieves Swipe 12 Tons of KitKat Bars</h3>
+<p class="story-para">Thieves stole a truck carrying more than 413,000 KitKat bars somewhere between Italy and Poland last week, and the vehicle and its 12 tons of chocolate are still missing.</p>
+<p class="story-para">The shipment left a Nestle factory in central Italy and was headed to distribution points across Europe, but never reached its destination. Nestle did not say where along the 800-mile route the truck disappeared.</p>
+<p class="story-para">The company warned the stolen bars could pop up in unofficial sales channels but said each one is traceable through a unique batch code .</p>
+<p class="story-para">A</p>
+<p class="story-para">KitKat spokesperson couldn&#39;t resist : &#34; We&#39;ve always encouraged people to have a break with KitKat, but it seems thieves have taken the message too literally.&#34;</p>
+<p class="story-para">Love reading The Flyover ? Click here to share with your friends and family.</p>
+<div class="section-divider"><span>Flyover Podcast</span></div>
+<h3 class="story-headline">Clicking the links will take you directly to these stories:</h3>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Bank of America agreed to pay $72.5 million to Epstein survivors who allege the bank serviced accounts tied to his trafficking operation. ( Hear Details )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Vanessa Trump reportedly gave Tiger Woods an ultimatum after his DUI, while the Trump family says Secret Service was already driving the grandkids. ( Hear Story )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">A professor says</p>
+<p class="story-para">one word is a dead giveaway that a student used AI to write a paper. ( Hear Word )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">A record 57 House members have announced they won&#39;t seek re-election, including 36 Republicans, the most GOP retirements ahead of a midterm in nearly a century. ( See Details )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Politico pulled a cartoon depicting President Trump and Israeli Prime Minister Benjamin Netanyahu covered in blood after backlash, with the outlet stating it didn&#39;t meet their standards. ( See Cartoon )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">TSA agents should start seeing paychecks as early as today after President Trump signed an emergency order, border czar Tom Homan said, though the broader DHS shutdown remains unresolved. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Sen. Cory Booker said he is definitely not ruling out a 2028 presidential run, joining a growing list of Democrats positioning themselves for a potential White House bid. ( More )</p>
+<h3 class="story-headline">Tired of the Ozempic price tag and endless doctor&#39;s appointments?</h3>
+<h3 class="story-headline">Over 15 million Americans are now using weight-loss injections, but here&#39;s the secret:</h3>
+<p class="story-para">telehealth providers offer FDA-approved GLP-1 medications for as low as just a few dollars per day , delivered to your door... no insurance required.</p>
+<p class="story-para">We&#39;ve ranked the top 7 providers for 2026 with exclusive discount codes that could save you hundreds.</p>
+<p class="story-para">LEARN MORE</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Kimi Antonelli</p>
+<p class="story-para">won the Japanese Grand Prix on Sunday for his second straight victory, and the 19-year-old became the youngest championship leader in Formula 1 history. Antonelli was denied champagne on the podium in Suzuka for being under Japan&#39;s legal drinking age of 20.</p>
+<p class="story-para">( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Los Angeles Lakers star Luka Dončić was suspended one game after picking up his 16th technical foul, forcing him to miss the Lakers’ matchup with the Wizards. He received the technical during an altercation against the Brooklyn Nets on Friday. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Belgium beat the United States 5-2 in men’s soccer in a friendly match on Saturday after trailing 1-0, with goals from Zeno Debast, Amadou Onana, Charles De Ketelaere, and two from Dodi Lukébakio. Weston McKennie and Patrick Agyemang scored for the U.S. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">The Vikings announced Sunday that Ring of Honor safety Joey Browner died at age 65. A six-time Pro Bowl selection, Browner recorded 37 interceptions during his nine seasons with Minnesota and was a key part of the team’s defense in the 1980s. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Y esterday&#39;s Results: NBA | MLB | NHL | NCAAB | NCAASB | Soccer | PGA | LPGA | Tennis | NASCAR | F1</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">No. 2 seed UConn forced a turnover in the closing seconds, and guard Braylon Mullins hit a game-winning 3-pointer to upset No. 1 overall seed Duke, 73-72, and send the Huskies to the Final Four. UConn once trailed by 19 points. ( Watch Moment )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">The NCAA men’s Final Four is set after UConn shocked Duke, and No. 1 seed Michigan routed No. 6 seed Tennessee. On Saturday, UConn will face No. 3 seed Illinois, while No. 1 seeds Arizona and Michigan will meet in the other semifinal. ( See Schedule )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">No. 1 seeds UConn and UCLA opened the NCAA women’s Elite Eight with wins over No. 6 seed Notre Dame and No. 3 seed Duke, respectively. Today, No. 2 seed Michigan faces No. 1 seed Texas, while No. 3 seed TCU looks to upset top-seeded South Carolina. ( See Schedule )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Fannie Mae will accept crypto-backed mortgages for the first time, allowing homebuyers to pledge bitcoin as down payment collateral through a new partnership with Coinbase and Better Home &amp; Finance. ( See Details )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Eli Lilly reached a $2.75 billion deal with Hong Kong-based Insilico Medicine to bring AI-discovered drugs to the global market, with $115 million upfront and at least 28 compounds already in development. ( See Deal )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Rare Pokémon cards have outperformed the S&amp;P 500 in recent years, with spending on the collectibles jumping 350% since 2020 as investors treat them like alternative assets. ( See Values )</p>
+<h3 class="story-headline">Ozempic and Wegovy are just the beginning. In 2026,</h3>
+<p class="story-para">dozens of telehealth providers now offer GLP-1 weight-loss medications online ... often without insurance or a doctor visit.</p>
+<h3 class="story-headline">We reviewed the top companies,</h3>
+<p class="story-para">compared pricing, approvals, and results , and ranked the best options available today.</p>
+<p class="story-para">LEARN MORE</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Japanese scientists cloned a single mouse for 20 years across 58 generations before the line went extinct, finding that mutations pile up three times faster than in natural reproduction. ( See Study )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Just in time for March Madness, researchers found that the difference between making or missing a basketball shot comes down to brain stability, with successful shots showing more focused neural activity and less mid-shot correction. ( See Study )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Anthropic&#39;s Claude is surging among paying consumers, with the AI company&#39;s subscription revenue skyrocketing as it competes with OpenAI&#39;s ChatGPT for the consumer market. ( See Growth )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Feminine product companies have faced lawsuits over a hidden chemical linked to bladder leaks, even years after use, according to Harvard research. This issue has affected thousands of women, leading to frustration and discomfort. But there’s hope:</p>
+<p class="story-para">a simple, 7-second, Harvard-backed method is helping over 52,000 women regain bladder control, no surgery or Kegels required .</p>
+<h3 class="story-headline">Beyond Our Borders is brought to you by:</h3>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Foreign ministers from Saudi Arabia, Turkey, and Egypt met in Pakistan on Sunday to push for direct talks between the U.S. and Iran, with Pakistan&#39;s foreign minister saying both sides have expressed &#34;full support and confidence&#34; in the effort. ( See Talks )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">European allies are telling American diplomats that Russia is directly helping Iran&#39;s war effort beyond what the U.S. has publicly acknowledged, including sharing satellite imagery of a U.S. air base days before an Iranian attack. ( See Report )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">North Korea&#39;s Kim Jong Un observed a test of an upgraded solid-fuel engine for weapons capable of reaching the U.S. mainland, calling it a major boost to the country&#39;s strategic arsenal. ( See Details )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Tired of switching between reading and distance glasses?</p>
+<p class="story-para">Clario View uses adjustable lens technology to deliver clear vision at any distance with a simple twist of a dial. Lightweight and comfortable, they replace multiple pairs of glasses, helping you read, work, and see clearly throughout your day. ( SHOP NOW )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Two delivery robots crashed into bus shelters in Chicago within days of each other, shattering glass panels in separate incidents, one of which was caught on camera. ( See Crash )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">A Las Vegas man reclaimed a Guinness World Record by dining at 28 Michelin-starred restaurants in New York City in 24 hours, spending just under $1,000 on food alone. ( See Feast )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Cake Picnic , a viral event requiring every attendee to bring a whole cake, drew more than 500 people to Sydney&#39;s Botanic Gardens after selling out dates in four countries. ( See Cakes )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">After analyzing weight loss patterns in 600+ patients aged 45–75 and conducting extensive tests, a doctor developed a simple, affordable chocolate-based method to help shed extra pounds in just weeks—without yo-yo dieting. Best of all, you can start from home today.</p>
+<p class="story-para">Discover how to reach your ideal weight with this doctor-vetted chocolate hack .</p>
+<h3 class="story-headline">What would you steal 12 tons of?</h3>
+<p class="story-para">Chocolate</p>
+<p class="story-para">Coffee</p>
+<p class="story-para">Pizza</p>
+<p class="story-para">Steak</p>
+<h3 class="story-headline">Other (reply to tell us)</h3>
+<p class="story-para">I&#39;m law-abiding, thank you</p>
+<p class="story-para">Yes: 52%</p>
+<p class="story-para">No: 25%</p>
+<h3 class="story-headline">No, but I want to: 15%</h3>
+<p class="story-para">Yes, the full route: 8%</p>
+<h3 class="story-headline">&#34;This wasn&#39;t you. This was space, right? You didn&#39;t let anybody down.&#34;</h3>
+<p class="story-para">— Jared Isaacman , NASA Administrator, to astronaut Mike Fincke after his unexplained medical episode aboard the International Space Station</p>
+<h3 class="story-headline">Which U.S. president appears on the $2 bill?</h3>
+    <div class="card-meta">Mon, 30 Mar 2026 10:03:51 +0000</div>
+  </div>
+  
+  <div id="section-3" class="top-label">TLDR</div>
+  <div class="newsletter-card">
+    <div class="card-source">TLDR</div>
+    <div class="card-title">Anthropic model leaks 🤖, OpenAI Anthropic feud 💼, important AI ideas 🧠</div>
+    <div class="tldr-story"><div class="tldr-headline">Big Tech &amp; Startups</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Anthropic readies Mythos model with high cybersecurity risk</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Science &amp; Futuristic Technology</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">I&#39;ve taken agency in the treatment of my bone cancer (Website)</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Programming, Design &amp; Data Science</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Unblocked: Context that saves you time and tokens (Sponsor)</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Stop babysitting your coding agents.</div><p class="tldr-summary">Unblocked gives them the decisions, history, and conventions behind your code so they generate mergeable output. It pulls from organizational knowledge, resolves conflicts, and cuts rework by delivering only the context agents need for the task at hand. See how Unblocked works.</p></div>
+<div class="tldr-story"><div class="tldr-headline">Pretext</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">The Most Important Ideas in AI Right Now</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">See how monday.com cut dev cycle time by 70%.</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">AI Unmasked Our Work as Scaffolding</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">jsongrep is faster than {jq, jmespath, jsonpath-rust, jql}</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Operational Benefits of Databases Built on Object Storage</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Why are executives enamored with AI but ICs aren&#39;t?</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">pgmicro (GitHub Repo)</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Love TLDR? Tell your friends and get rewards!</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Share your referral link below with friends to get free TLDR swag!</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Want to advertise in TLDR? 📰</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">advertise with us</div><p class="tldr-summary">.</p></div>
+<div class="tldr-story"><div class="tldr-headline">Want to work at TLDR? 💼</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">or send a friend&#39;s resume to</div><p class="tldr-summary"><a href="https://tracking.tldrnewsletter.com/CL0/https:%2F%2Fwww.linkedin.com%2Ffeed%2Fupdate%2Furn:li:activity:7401699691039830016%2F/1/0100019d3e684078-324d88ef-8526-4fb3-9e7d-b7de3293c0ac-000000/nlaGL7vjBp5yQLNJNrEQSlytZkq12E9EOGZtmbdfEuU=450" target="_blank">jobs@tldr.tech and get $1k if we hire them! TLDR is one of Inc.&amp;#39;s Best Bootstrapped businesses</a> of 2025.</p><a class="story-read-link" href="https://tracking.tldrnewsletter.com/CL0/https:%2F%2Fwww.linkedin.com%2Ffeed%2Fupdate%2Furn:li:activity:7401699691039830016%2F/1/0100019d3e684078-324d88ef-8526-4fb3-9e7d-b7de3293c0ac-000000/nlaGL7vjBp5yQLNJNrEQSlytZkq12E9EOGZtmbdfEuU=450" target="_blank">Read more →</a></div>
+<div class="tldr-story"><div class="tldr-headline">If you have any comments or feedback, just respond to this email!</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Thanks for reading,</div><p class="tldr-summary"></p></div>
+    <div class="card-meta">Mon, 30 Mar 2026 11:01:52 +0000</div>
+  </div>
+  
+  <div id="section-4" class="top-label">TLDR</div>
+  <div class="newsletter-card">
+    <div class="card-source">TLDR</div>
+    <div class="card-title">Inference Era ⌛, Fastly’s Agent Toolkit 🧰, Kubernetes Dynamic Resource Allocation 💰</div>
+    <div class="tldr-story"><div class="tldr-headline">Datadog achieves ISO 42001 certification for responsible AI</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">DRA: A new era of Kubernetes device management with Dynamic Resource Allocation</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">NVIDIA GTC 2026 Confirmed It: The Inference Era Is Here</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Opinions &amp; Tutorials</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Build a News Roundup With Docker Agent</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">How we use Abstract Syntax Trees (ASTs) to turn Workflows code into visual diagrams</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Resources &amp; Tools</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Putting an end to vendor lock-in and predatory pricing for observability (Sponsor)</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Ready to break free from your SaaS observability vendor?</div><p class="tldr-summary">This ebook shows you how to start using Prometheus in your observability stack. Read it for the practical advice you need to hit the ground running with open-source observability. Grab your copy of the ebook.</p></div>
+<div class="tldr-story"><div class="tldr-headline">Onyx (GitHub Repo)</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Superset (GitHub Repo)</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">The Hidden Failure Points in Your AI Strategy</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Three pillars for building effective runtime-powered cloud defense, the right way</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">EDB Postgres: The World&#39;s First Sovereign AI and Data Platform (Sponsor)</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Spec out your database</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Your AI coding agent just got better at Fastly</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Ubuntu 26.04 Beta is now available to download</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Zero-Downtime Patching in Lakebase Part 1: Prewarming</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Love TLDR? Tell your friends and get rewards!</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Share your referral link below with friends to get free TLDR swag!</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Want to advertise in TLDR? 📰</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">advertise with us</div><p class="tldr-summary">.</p></div>
+<div class="tldr-story"><div class="tldr-headline">Want to work at TLDR? 💼</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">or send a friend&#39;s resume to</div><p class="tldr-summary"><a href="https://tracking.tldrnewsletter.com/CL0/https:%2F%2Fwww.linkedin.com%2Ffeed%2Fupdate%2Furn:li:activity:7401699691039830016%2F/1/0100019d3e6c6010-99010ddb-33c9-4793-aa07-9720090c4c88-000000/3J6YFJqtVoD22926GOqb-LILydS0JJWzBAKkD-tI3TQ=450" target="_blank">jobs@tldr.tech and get $1k if we hire them! TLDR is one of Inc.&amp;#39;s Best Bootstrapped businesses</a> of 2025.</p><a class="story-read-link" href="https://tracking.tldrnewsletter.com/CL0/https:%2F%2Fwww.linkedin.com%2Ffeed%2Fupdate%2Furn:li:activity:7401699691039830016%2F/1/0100019d3e6c6010-99010ddb-33c9-4793-aa07-9720090c4c88-000000/3J6YFJqtVoD22926GOqb-LILydS0JJWzBAKkD-tI3TQ=450" target="_blank">Read more →</a></div>
+<div class="tldr-story"><div class="tldr-headline">If you have any comments or feedback, just respond to this email!</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Thanks for reading,</div><p class="tldr-summary"></p></div>
+    <div class="card-meta">Mon, 30 Mar 2026 11:06:23 +0000</div>
+  </div>
+  
+  <div id="section-5" class="top-label">TLDR</div>
+  <div class="newsletter-card">
+    <div class="card-source">TLDR</div>
+    <div class="card-title">YC $1M ARR benchmark 📈, state of software 💻, selling to agents 🤖 </div>
+    <div class="tldr-story"><div class="tldr-headline">Headlines &amp; Trends</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">YC W26 Demo Day: 14 Companies Hit $1M ARR Before Presenting</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Strategies &amp; Tactics</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Selling to AI Agents</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Per Token Pricing Is Coming for Every AI Company</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Tools &amp; Resources</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">This is what AI was supposed to feel like.</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Mistral open-sourced a text-to-speech model that outperforms ElevenLabs on benchmarks.</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">RequestClip</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Verify Humans with Short Video.</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Practice and improve startup pitches with feedback.</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">The Only Path Left in Software: Accelerate or Die</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">The Energy Situation, Explained for Tech People</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Heidi Sturrock shares how a costly mistake became a competitive advantage</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Love TLDR? Tell your friends and get rewards!</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Share your referral link below with friends to get free TLDR swag!</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Want to advertise in TLDR? 📰</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">advertise with us</div><p class="tldr-summary">.</p></div>
+<div class="tldr-story"><div class="tldr-headline">Want to work at TLDR? 💼</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">or send a friend&#39;s resume to</div><p class="tldr-summary"><a href="https://tracking.tldrnewsletter.com/CL0/https:%2F%2Fwww.linkedin.com%2Ffeed%2Fupdate%2Furn:li:activity:7401699691039830016%2F/1/0100019d3ea30537-b3a5db87-58c7-4b89-a95f-7fb3a8d4234c-000000/hSG_neAMz1ZsGOjEJZCWkxIRQjukBc1gPqMB7s2wJUE=450" target="_blank">jobs@tldr.tech and get $1k if we hire them! TLDR is one of Inc.&amp;#39;s Best Bootstrapped businesses</a> of 2025.</p><a class="story-read-link" href="https://tracking.tldrnewsletter.com/CL0/https:%2F%2Fwww.linkedin.com%2Ffeed%2Fupdate%2Furn:li:activity:7401699691039830016%2F/1/0100019d3ea30537-b3a5db87-58c7-4b89-a95f-7fb3a8d4234c-000000/hSG_neAMz1ZsGOjEJZCWkxIRQjukBc1gPqMB7s2wJUE=450" target="_blank">Read more →</a></div>
+<div class="tldr-story"><div class="tldr-headline">If you have any comments or feedback, just respond to this email!</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Thanks for reading,</div><p class="tldr-summary"></p></div>
+    <div class="card-meta">Mon, 30 Mar 2026 12:06:04 +0000</div>
+  </div>
+  
+  <div id="section-6" class="top-label">TLDR</div>
+  <div class="newsletter-card">
+    <div class="card-source">TLDR</div>
+    <div class="card-title">Claude Mythos leaks 🤖, last xAI cofounder exits 👋, lessons from OpenAI 💡</div>
+    <div class="tldr-story"><div class="tldr-headline">Headlines &amp; Launches</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Deep Dives &amp; Analysis</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Function Calling Harness: From 6.75% to 100%</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">AI&#39;s capability improvements haven&#39;t come from it getting less affordable</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Engineering &amp; Research</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Schedule tasks on the web</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">lat.md (GitHub Repo)</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">What Pretext Reinforced About AI Loops</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">xAI&#39;s Last Cofounder Leaves</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Things I learned at OpenAI</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Clerk Core 3: auth your agents can set up themselves (Sponsor)</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">That lab was likely Anthropic, which trained Mythos.</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Live Translate Comes to Headphones on iOS</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">AI-powered exploitation can attack systems at a scale never possible before.</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Love TLDR? Tell your friends and get rewards!</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Share your referral link below with friends to get free TLDR swag!</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Want to advertise in TLDR? 📰</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">advertise with us</div><p class="tldr-summary">.</p></div>
+<div class="tldr-story"><div class="tldr-headline">Want to work at TLDR? 💼</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">or send a friend&#39;s resume to</div><p class="tldr-summary"><a href="https://tracking.tldrnewsletter.com/CL0/https:%2F%2Fwww.linkedin.com%2Ffeed%2Fupdate%2Furn:li:activity:7401699691039830016%2F/1/0100019d3f08149e-d9f795ab-ba9f-4a19-9fae-25bef20ddffc-000000/llTMlYno80DE-Ge3k0vOqnqpEUzb5D32VC7FYU4QveQ=450" target="_blank">jobs@tldr.tech and get $1k if we hire them! TLDR is one of Inc.&amp;#39;s Best Bootstrapped businesses</a> of 2025.</p><a class="story-read-link" href="https://tracking.tldrnewsletter.com/CL0/https:%2F%2Fwww.linkedin.com%2Ffeed%2Fupdate%2Furn:li:activity:7401699691039830016%2F/1/0100019d3f08149e-d9f795ab-ba9f-4a19-9fae-25bef20ddffc-000000/llTMlYno80DE-Ge3k0vOqnqpEUzb5D32VC7FYU4QveQ=450" target="_blank">Read more →</a></div>
+<div class="tldr-story"><div class="tldr-headline">If you have any comments or feedback, just respond to this email!</div><p class="tldr-summary"></p></div>
+<div class="tldr-story"><div class="tldr-headline">Thanks for reading,</div><p class="tldr-summary"></p></div>
+    <div class="card-meta">Mon, 30 Mar 2026 13:56:27 +0000</div>
+  </div>
+  
+  
+
+  
+  <div class="papers-section">
+    <div id="section-papers" class="top-label">Cutting Edge AI Research</div>
+    
+    <div class="paper-item">
+      <div class="paper-title">PixelSmile: Toward Fine-Grained Facial Expression Editing</div>
+      <div class="paper-summary">This paper presents a method for precise, pixel-level control over facial expressions in images, enabling detailed manipulation of specific emotion features. The work is significant because fine-grained facial expression editing has applications in content creation, virtual communication, and psychological research, and the pixel-level precision represents a step forward from coarser expression transfer methods.</div>
+    </div>
+    
+    <div class="paper-item">
+      <div class="paper-title">Intern-S1-Pro: Scientific Multimodal Foundation Model at Trillion Scale</div>
+      <div class="paper-summary">The paper introduces a trillion-parameter multimodal foundation model specifically designed for scientific domains, capable of processing text, images, and scientific notation together. This is noteworthy because scaling foundation models to scientific tasks with trillion parameters could unlock new capabilities in research automation, scientific discovery, and cross-disciplinary reasoning that general-purpose models struggle with.</div>
+    </div>
+    
+    <div class="paper-item">
+      <div class="paper-title">RealRestorer: Towards Generalizable Real-World Image Restoration with Large-Scale Image Editing Models</div>
+      <div class="paper-summary">The paper leverages large-scale image editing models to improve generalization in real-world image restoration tasks like denoising and deblurring. This matters because it demonstrates that repurposing existing large models for restoration achieves better cross-domain generalization than traditional restoration-specific methods, reducing the need for task-specific training data.</div>
+    </div>
+    
+    <div class="paper-item">
+      <div class="paper-title">Calibri: Enhancing Diffusion Transformers via Parameter-Efficient Calibration</div>
+      <div class="paper-summary">This work proposes parameter-efficient calibration techniques to improve the performance of diffusion transformers without requiring full model retraining. The novelty lies in achieving better diffusion model quality through lightweight calibration methods, which is practically important for making these increasingly large generative models more practical to optimize.</div>
+    </div>
+    
+  </div>
+  
+
+
+  <div class="footer">The Digest &middot; Monday, March 30 2026</div>
+
+</div>
+</body>
+</html>
