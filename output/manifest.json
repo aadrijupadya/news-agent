@@ -1,0 +1,22 @@
+{
+  "name": "The Digest",
+  "short_name": "Digest",
+  "description": "Your daily news digest",
+  "start_url": "/news-agent/",
+  "display": "standalone",
+  "background_color": "#f0ede8",
+  "theme_color": "#1c1c1c",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
