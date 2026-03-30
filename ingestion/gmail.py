@@ -15,7 +15,7 @@ Returns a list of dicts:
 import email
 import email.policy
 import ssl
-from datetime import date
+from datetime import date, timedelta
 from email.message import EmailMessage
 
 from imapclient import IMAPClient
@@ -71,16 +71,21 @@ def fetch_newsletters(mark_seen: bool = True) -> list[dict]:
     results = []
 
     # IMAP SINCE date format: "28-Mar-2026"
-    since_str = date.today().strftime("%-d-%b-%Y")
+    today_str     = date.today().strftime("%-d-%b-%Y")
+    yesterday_str = (date.today() - timedelta(days=1)).strftime("%-d-%b-%Y")
+
+    # HuggingFace arrives at ~6pm the same day — use yesterday's date at 5am run
+    _YESTERDAY_SENDERS = {"daily_papers_digest@notifications.huggingface.co", "adrij2005@gmail.com"}
 
     with IMAPClient(config.IMAP_HOST, port=config.IMAP_PORT, ssl=True, ssl_context=_SSL_CONTEXT) as client:
         client.login(config.GMAIL_EMAIL, config.GMAIL_APP_PASSWORD)
         client.select_folder(config.IMAP_MAILBOX, readonly=not mark_seen)
 
-        # Fetch from each allowed sender separately and union the UIDs
+        # Fetch from each allowed sender with appropriate date window
         all_uids = set()
         for sender in config.NEWSLETTER_SENDERS:
-            matched = client.search(["SINCE", since_str, "FROM", sender])
+            since = yesterday_str if any(s in sender for s in _YESTERDAY_SENDERS) else today_str
+            matched = client.search(["SINCE", since, "FROM", sender])
             all_uids.update(matched)
 
         if not all_uids:
