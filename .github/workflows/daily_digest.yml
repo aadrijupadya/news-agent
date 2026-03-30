@@ -42,3 +42,4 @@ jobs:
           publish_dir: ./output
           publish_branch: gh-pages
           force_orphan: true
+          commit_message: "digest: ${{ github.run_id }}"
