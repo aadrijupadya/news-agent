@@ -1,0 +1,22 @@
+# Claude API (used for HuggingFace paper selection)
+anthropic>=0.25.0
+
+# Gmail / IMAP
+IMAPClient>=3.0.1
+certifi>=2024.0.0
+
+# Email parsing
+beautifulsoup4>=4.12.0
+lxml>=5.0.0
+
+# Email delivery (SMTP)
+# Uses stdlib smtplib — no extra package needed
+
+# HTML templating
+jinja2>=3.1.0
+
+# Environment / config
+python-dotenv>=1.0.0
+
+# Utilities
+requests>=2.31.0

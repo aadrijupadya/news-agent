@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Digest — Sunday, March 29 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f0ede8;
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: #1c1c1c;
+      padding: 40px 16px 80px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 620px; margin: 0 auto; }
+
+    /* ── Masthead ── */
+    .masthead {
+      text-align: center;
+      padding-bottom: 28px;
+      border-bottom: 2px solid #1c1c1c;
+      margin-bottom: 36px;
+    }
+    .masthead-eyebrow {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 10px;
+    }
+    .masthead h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 52px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+    .masthead-date {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #aaa;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── Top section label ── */
+    .top-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 16px;
+    }
+
+    /* ── Newsletter card ── */
+    .newsletter-card {
+      background: #fff;
+      border-radius: 3px;
+      padding: 28px 30px 24px;
+      margin-bottom: 14px;
+      border: 1px solid #e2dfd9;
+    }
+    .card-source {
+      display: inline-block;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #fff;
+      background: #1c1c1c;
+      padding: 3px 8px 2px;
+      border-radius: 2px;
+      margin-bottom: 12px;
+    }
+    .card-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: #1c1c1c;
+      margin-bottom: 20px;
+    }
+    .card-meta {
+      margin-top: 20px;
+      padding-top: 12px;
+      border-top: 1px solid #f0ece6;
+      font-size: 10px;
+      color: #ccc;
+    }
+
+    /* ── Flyover body blocks ── */
+    .story-headline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: #1c1c1c;
+      margin: 22px 0 8px;
+      padding-top: 20px;
+      border-top: 1px solid #ece9e3;
+    }
+    .story-headline:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+
+    .story-para {
+      font-size: 14px;
+      line-height: 1.75;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .story-para:last-child { margin-bottom: 0; }
+
+    .story-para a, .story-bullets a, .tldr-summary a {
+      color: #1c1c1c;
+      text-decoration: underline;
+      text-decoration-color: #bbb;
+      text-underline-offset: 2px;
+    }
+    .story-para a:hover, .story-bullets a:hover, .tldr-summary a:hover {
+      text-decoration-color: #1c1c1c;
+    }
+
+    .story-bullets {
+      list-style: none;
+      margin: 8px 0 12px;
+      padding: 0;
+    }
+    .story-bullets li {
+      font-size: 14px;
+      line-height: 1.65;
+      color: #333;
+      padding: 7px 0 7px 18px;
+      border-bottom: 1px solid #f5f2ed;
+      position: relative;
+    }
+    .story-bullets li:last-child { border-bottom: none; }
+    .story-bullets li::before {
+      content: "›";
+      position: absolute;
+      left: 0;
+      color: #bbb;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      margin: 22px 0 14px;
+    }
+    .section-divider::before, .section-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #e8e5df;
+    }
+    .section-divider span {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #bbb;
+      padding: 0 10px;
+    }
+
+    /* ── Market grid ── */
+    .stock-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 7px;
+      margin: 10px 0 4px;
+    }
+    .stock-card {
+      background: #fafaf8;
+      border: 1px solid #e8e4de;
+      border-radius: 3px;
+      padding: 10px 8px 8px;
+      text-align: center;
+    }
+    .stock-card.up   { border-top: 2px solid #2d9e5f; }
+    .stock-card.down { border-top: 2px solid #c0392b; }
+    .stock-ticker { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: #444; margin-bottom: 4px; }
+    .stock-price  { font-size: 12px; font-weight: 600; color: #1c1c1c; margin-bottom: 3px; }
+    .stock-change { font-size: 11px; font-weight: 500; }
+    .stock-card.up   .stock-change { color: #2d9e5f; }
+    .stock-card.down .stock-change { color: #c0392b; }
+
+    /* ── TLDR styles ── */
+    .tldr-category {
+      display: flex;
+      align-items: center;
+      margin: 20px 0 12px;
+    }
+    .tldr-category::before, .tldr-category::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #e8e5df;
+    }
+    .tldr-category span {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #bbb;
+      padding: 0 10px;
+    }
+    .tldr-category:first-child { margin-top: 0; }
+
+    .tldr-story {
+      padding: 14px 0;
+      border-bottom: 1px solid #f0ede8;
+    }
+    .tldr-story:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .tldr-headline {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1c1c1c;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+    .tldr-headline a { color: inherit; text-decoration: none; }
+    .tldr-headline a:hover { text-decoration: underline; }
+
+    .tldr-summary {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #444;
+      margin-bottom: 8px;
+    }
+
+    .story-read-link {
+      font-size: 11px;
+      font-weight: 600;
+      color: #1c1c1c;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 1px;
+    }
+    .story-read-link:hover { border-color: #1c1c1c; }
+
+    /* ── AI Papers ── */
+    .papers-section { margin-top: 14px; }
+
+    .paper-item {
+      background: #fff;
+      border: 1px solid #e2dfd9;
+      border-left: 3px solid #6366f1;
+      border-radius: 3px;
+      padding: 16px 20px;
+      margin-bottom: 10px;
+    }
+    .paper-item:last-child { margin-bottom: 0; }
+
+    .paper-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1c1c1c;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+
+    .paper-summary {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    /* ── Tweet feed ── */
+    .tweets-section { margin-top: 14px; }
+
+    .tweet-account-block { margin-bottom: 20px; }
+
+    .tweet-account-header {
+      font-size: 11px;
+      font-weight: 600;
+      color: #888;
+      letter-spacing: 0.03em;
+      margin-bottom: 6px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #e8e5df;
+    }
+
+    .tweet-feed-item {
+      display: flex;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #f5f2ed;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #2a2a2a;
+    }
+    .tweet-feed-item:last-child { border-bottom: none; }
+
+    .tweet-dot {
+      flex-shrink: 0;
+      width: 5px;
+      height: 5px;
+      background: #ccc;
+      border-radius: 50%;
+      margin-top: 8px;
+    }
+
+    .tweet-feed-text { flex: 1; }
+
+    .tweet-feed-link {
+      display: inline-block;
+      margin-left: 6px;
+      font-size: 10px;
+      color: #bbb;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+    .tweet-feed-link:hover { color: #1c1c1c; }
+
+    /* ── Quote ── */
+    .quote-block {
+      text-align: center;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      border-top: 1px solid #e2dfd9;
+      border-bottom: 1px solid #e2dfd9;
+    }
+    .quote-text {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 16px;
+      font-style: italic;
+      line-height: 1.65;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .quote-attr {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #aaa;
+    }
+    .quote-attr span { color: #888; }
+
+    /* ── Jump nav ── */
+    .jump-nav {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .jump-nav a {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #888;
+      text-decoration: none;
+      padding: 5px 12px;
+      border: 1px solid #d8d5cf;
+      border-radius: 20px;
+      background: #fff;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .jump-nav a:hover {
+      color: #1c1c1c;
+      border-color: #1c1c1c;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid #d5d2cc;
+      text-align: center;
+      font-size: 10px;
+      color: #ccc;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="masthead">
+    <div class="masthead-eyebrow">Your Morning Briefing</div>
+    <h1>The Digest</h1>
+    <div class="masthead-date">Sunday, March 29 2026</div>
+  </div>
+
+  
+  <div class="quote-block">
+    <div class="quote-text">"The test of a first-rate intelligence is the ability to hold two opposed ideas in mind at the same time and still retain the ability to function."</div>
+    <div class="quote-attr">
+      <span>— F. Scott Fitzgerald</span>, novelist &amp; chronicler of the Jazz Age
+    </div>
+  </div>
+  
+
+  <nav class="jump-nav" aria-label="Jump to section">
+    
+      
+        <a href="#section-flyover">Flyover</a>
+      
+    
+      
+        <a href="#section-2">Aadrij Upadya &lt;adrij</a>
+      
+    
+    
+      <a href="#section-papers">AI Research</a>
+    
+  </nav>
+
+  
+  
+  
+  <div id="section-flyover" class="top-label">The Flyover</div>
+  
+  <div class="newsletter-card">
+    <div class="card-source">The Flyover &lt;news@editor.jointheflyover.com&gt;</div>
+    <div class="card-title">DHS Fight Continues, A 78-year-old Daredevil, and Teen Finds Megalodon Tooth</div>
+    <h3 class="story-headline">The House of Representatives voted Friday</h3>
+<p class="story-para">to approve a short-term bill to fund the entire Department of Homeland Security for eight weeks, sending the measure back to the Senate, where Democratic Minority Leader Chuck Schumer says it is &#34;dead on arrival.&#34;</p>
+<p class="story-para">͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌</p>
+<p class="story-para">Appomattox , the final Civil War campaign, began in Virginia as Union troops under Gen. Ulysses S. Grant advanced on Confederate soldiers led by Gen. Robert E. Lee near Petersburg.</p>
+<p class="story-para">Route 66, the Chicago-to-Los Angeles highway of 2,448 miles, once promised versions of the American dream and lots of cheesy attractions. The highway was decommissioned years ago, but most of it remains drivable, as shown in today’s</p>
+<div class="section-divider"><span>Whatever Happened To…</span></div>
+<h3 class="story-headline">In case you missed it,</h3>
+<div class="section-divider"><span>Flyover Podcast</span></div>
+<p class="story-para">broke down what summer travel could look like this year as conditions shift and oil prices climb. Host Amy Hess shared why experts say one booking strategy could help travelers save money in a volatile season. !</p>
+<h3 class="story-headline">Senate, House Clash over DHS Funding</h3>
+<h3 class="story-headline">The House of Representatives voted Friday</h3>
+<p class="story-para">to approve a short-term bill to fund the entire DHS for eight weeks, sending the measure back to the Senate, where Democrat Minority Leader Chuck Schumer says it is &#34;dead on arrival.&#34;</p>
+<p class="story-para">The move came after House Speaker Mike Johnson angrily rebuked a plan the Senate had agreed to the night before as a “joke,” a dramatic denunciation of a deal that Senate Majority Leader John Thune had negotiated after weeks of effort.</p>
+<h3 class="story-headline">Johnson and other Republicans</h3>
+<p class="story-para">criticized the deal because it didn&#39;t fund ICE and Customs and Border Protection.</p>
+<h3 class="story-headline">With the stalemate entering its seventh week, President Trump on Friday directed DHS</h3>
+<p class="story-para">to pay Transportation Security Administration (TSA) employees , saying, “these circumstances constitute an emergency situation compromising the Nation’s security.”</p>
+<h3 class="story-headline">US Troops Injured in Air Base Attack</h3>
+<p class="story-para">Ten U.S. service members were injured in an attack on Prince Sultan Air Base in Saudi Arabia on Friday, according to U.S. officials. The attack involved Iranian missiles and drones.</p>
+<h3 class="story-headline">Two of the troops were</h3>
+<p class="story-para">seriously wounded , one of the officials said. The attack damaged several U.S. refueling aircraft.</p>
+<h3 class="story-headline">The U.S. and Iran</h3>
+<p class="story-para">each submitted ceasefire terms as the conflict starts its fifth week. Iran publicly rejected the United States’ 15-point peace plan, sending a counterproposal that calls for Iranian sovereignty over the Strait of Hormuz, an end to hostilities, and a stop to attacks on government officials.</p>
+<h3 class="story-headline">List: Most Welcoming Cities</h3>
+<p class="story-para">Fredericksburg, Texas, was selected as the most welcoming place in the United States, according to travel website Booking.com.</p>
+<p class="story-para">The top five were rounded out by Palm Desert, California; Cape May, New Jersey; Broken Bow, Oklahoma; and Waikoloa, Hawaii.</p>
+<h3 class="story-headline">With close to 11,000 residents in the Texas Hill Country,</h3>
+<p class="story-para">Fredericksburg is noted for its German heritage, live music venues, and more than 50 wineries and tasting rooms.</p>
+<p class="story-para">The rankings, based on more than 370 million reviews, describe the top destinations as places where guests consistently give high scores for warmth, friendliness, and overall hospitality.</p>
+<p class="story-para">Enjoy reading The Flyover ? Click here to share with your friends and family.</p>
+<div class="section-divider"><span>Flyover Podcast</span></div>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Meet the astronauts heading back to the moon after more than 50 years. ( Hear More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">A new study breaks down what it truly costs to live comfortably in America. ( Listen Now )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">HBO’s Harry Potter reboot is smashing records before it even premieres. ( Podcast Available )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Los Angeles Lakers legend LeBron James linked up with his son, Bronny James, for the first father-to-son assist in NBA history on Friday night. ( See Assist )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Cleveland Guardians rookie Chase DeLauter became the third player in modern MLB history to hit three home runs in his first two career games, doing so with a</p>
+<p class="story-para">blast in his first at-bat on Friday . The 24-year-old out of James Madison University is one of the favorites to win American League Rookie of the Year. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Los Angeles Dodgers new closer Edwin Diaz made his team debut on Friday night, bringing his iconic “Narco” entrance to Dodger Stadium. ( See Entrance )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Ravichandran Ashwin , one of the best cricket players of all time, is joining Major League Cricket, the United States’ professional cricket league, which was founded in 2023. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Yesterday&#39;s Results: NBA | MLB | NHL | NCAAM | NCAAW | NCAAB | NCAASB | Soccer | PGA | LPGA | Tennis</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Who would have thought that a candy could save anyone struggling with tooth decay and inflamed gums?</p>
+<p class="story-para">This natural, soft candy has stunned both scientists and people all around the world: simply let it melt in your mouth, after brushing your teeth, to get rid of cavities almost overnight. It will not only restore your teeth, but also rebuild your gums and eliminate bad breath.</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Four Wildcats scored in double figures as No. 1 seed Arizona pulled away from No. 2 seed Purdue in the second half for a 79-64 win, earning the program’s first trip to the NCAA men’s Final Four since 2001. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">No. 3 seed Illinois clinched its first NCAA men’s Final Four appearance in 21 years, beating Big Ten rival Iowa 71-59 after closing the game on a 21-8 run. Keaton Wagler led the Fighting Illini with 25 points. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Higher seeds dominated Saturday’s NCAA women’s Sweet 16 games, setting up an Elite Eight featuring all four top seeds. ( See Schedule )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Find support and relief with the</p>
+<p class="story-para">Compressa Knee Sleeve , designed to help reduce joint pain, stiffness, and swelling. Its flexible, breathable fabric provides targeted compression to support movement during daily activities, workouts, or long days on your feet—helping you stay active and move with greater confidence. ( LEARN MORE )</p>
+<div class="section-divider"><span>Markets</span></div>
+<p class="story-para">NASDAQ</p>
+<p class="story-para">National Association of Securities Dealers Automated Quotations</p>
+<p class="story-para">20,948.36</p>
+<p class="story-para">-4.76%</p>
+<p class="story-para">SPX S&amp;P 500</p>
+<p class="story-para">6,368.85</p>
+<p class="story-para">-3.13%</p>
+<p class="story-para">DJI</p>
+<p class="story-para">Dow Jones Industrial Average</p>
+<p class="story-para">45,166.64</p>
+<p class="story-para">-1.39%</p>
+<p class="story-para">BTC Bitcoin</p>
+<p class="story-para">$66,338.38</p>
+<p class="story-para">-2.22%</p>
+<p class="story-para">GOLD Per Ounce</p>
+<p class="story-para">$4,492.00</p>
+<p class="story-para">3.19%</p>
+<p class="story-para">SILVER Per Ounce</p>
+<p class="story-para">$69.54</p>
+<p class="story-para">0.93%</p>
+<p class="story-para">OIL</p>
+<p class="story-para">West Texas Intermediate Crude</p>
+<p class="story-para">$99.64</p>
+<p class="story-para">-0.87%</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">The Dow Jones Industrial Average fell nearly 800 points on Friday, down more than 10% from its recent all-time high, and the S&amp;P 500 declined nearly 1.7%. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">The average tax refund this tax season for individual filers is $3,571, nearly 11% higher compared with the same period in 2025. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Costco will</p>
+<p class="story-para">replace its traditional checkout system with a high-tech pre-scan model and automated pay stations, promising to process orders in under 10 seconds. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<h3 class="story-headline">Most experts say</h3>
+<p class="story-para">travelers should act sooner rather than later, but one professor argues waiting could still lead to cheaper fares. What is the main reason many analysts say this is not a normal year for booking flights? ( Podcast Available )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Video shows an Air Canada Express jet striking a fire truck on a LaGuardia runway, killing two pilots after the vehicle crossed the runway with clearance. ( See Jet )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">A 78-year-old woman took on a 500-foot rope swing in Moab, Utah, thrilling onlookers and calling the heart-stopping plunge a &#34;super pleasurable experience.&#34; ( See Daredevil )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Bloating, irregularity, and sluggish digestion are more common than most people realize. This program takes a gut-first approach, combining targeted nutrients and simple habits designed to support more consistent digestion. It’s an easy addition to your routine that many are exploring right now.</p>
+<p class="story-para">See how it works here.</p>
+<p class="story-para">Even better, you could get approved extremely fast—and if you are, you’ll receive an insanely valuable welcome bonus deposited straight into your Amazon account for immediate use. No hoops or extra spending.</p>
+<p class="story-para">Get approved, and the bonus is yours . If you shop at Amazon or Whole Foods, this card could help you earn meaningful cash back from purchases you’re already making. This offer won’t last forever, and for Prime members, it’s basically a no-brainer.</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">A Tennessee school bus crash killed two students and injured others on Friday, prompting airlifts to trauma centers as authorities investigate the multi-vehicle collision on Highway 70. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">A judge ruled Missouri’s new congressional maps will take effect for midterms, rejecting a lawsuit to block them as officials review petition signatures that could trigger a statewide referendum vote. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Houthi militants launched a missile attack on Israel on Saturday, marking the Iran-backed group’s entry into the widening Middle East conflict and raising fears of further disruptions to critical global shipping lanes. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">French police foiled an apparent bomb attack outside a Bank of America building in Paris, arresting a suspect who placed a homemade explosive device early Saturday before it could detonate. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">A Wyoming teen discovered a rare 6-inch megalodon tooth while diving off Florida’s Manasota Key, celebrating the unusual find as experts say specimens of that size are uncommon. ( See Tooth )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Character actor</p>
+<p class="story-para">James Tolkan, known for roles in</p>
+<p class="story-para">Back to the Future and Top Gun , in which he delivered the memorable line, “</p>
+<p class="story-para">Your ego is writing checks your body can’t cash</p>
+<p class="story-para">,” has died. He was 94. ( See Tolkan )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Over 50 and feeling weaker or more forgetful? Researchers have linked a “silent epidemic” to increased frailty in aging adults. Now, a powerful, often-overlooked superfood—recognized by Nobel Prize-winning science—is gaining attention for supporting brain health, muscle strength, and bone density. Discover how this simple daily addition could help you feel stronger and sharper.</p>
+<div class="section-divider"><span>Whatever Happened To…</span></div>
+<p class="story-para">Once America&#39;s &#34;Main Street,&#34; Route 66 stretched 2,448 miles from Chicago to Los Angeles, carrying Depression-era migrants, post-war families, and cross-country dreamers through the heart of eight states.</p>
+<p class="story-para">The iconic highway opened in 1926 and became synonymous with American adventure. In 1960, it even spawned a TV show called Route 66 , featuring two young men cruising from one adventure to another in their Corvette sports car, with a memorable theme song by Nelson Riddle.</p>
+<p class="story-para">You can see an opening credits scene here.</p>
+<p class="story-para">Families posed with the Cadillac Ranch outside Amarillo, Texas, and marveled at Arizona&#39;s Wigwam Motel, where you could sleep in a concrete teepee. The neon motel signs of Tucumcari, New Mexico, welcomed weary travelers, while in Oatman, Arizona&#39;s wild burros, roamed freely through town. Every few miles brought another hand-painted billboard for Meramec Caverns or a kitschy giant roadside attraction.</p>
+<p class="story-para">Here are some archival photos .</p>
+<p class="story-para">But Route 66&#39;s glory days ended on June 27, 1985, when it was officially decommissioned. The Interstate Highway System bypassed the slower, winding route, strangling small towns that depended on highway traffic. Businesses shuttered, motels closed, entire communities withered.</p>
+<p class="story-para">Today, about 85% of the original road remains drivable. A preservation movement keeps the legend alive—restored diners, vintage motels, nostalgic road-trippers seeking authentic Americana.</p>
+<p class="story-para">While no longer on maps, Route 66 endures as America&#39;s most famous ghost highway and inspiration for many songs. Let’s hit the road to Nat King Cole’s popular hit version of(Get Your Kicks on) Route 66.</p>
+<p class="story-para">Did you ever drive Route 66 in its heyday, or more recently? Let us know your experience by replying to this email.</p>
+<p class="story-para">Yes</p>
+<p class="story-para">Yes, the full route</p>
+<p class="story-para">No</p>
+<h3 class="story-headline">No, but I want to</h3>
+<p class="story-para">Yes, loved it: 43%</p>
+<p class="story-para">No, not interested: 27%</p>
+<p class="story-para">Yes, it wasn&#39;t for me: 17%</p>
+<p class="story-para">No, but I&#39;d like to: 13%</p>
+<p class="story-para">&#34;Our relationship with the United States Military reflects a shared belief that leadership, service, and love of country are not abstract ideals—they are values forged through action, discipline, and commitment.&#34;</p>
+<p class="story-para">—</p>
+<p class="story-para">Scouting America Chief Executive Roger Krone , on how the organization is renewing its focus on training young people with life skills, providing fun and educational outdoor experiences.</p>
+<h3 class="story-headline">Who was the first U.S. president born in a hospital?</h3>
+    <div class="card-meta">Sun, 29 Mar 2026 10:04:42 +0000</div>
+  </div>
+  
+  
+  <div id="section-2" class="top-label">Aadrij Upadya &lt;adrij2005@gmail.com&gt;</div>
+  
+  <div class="newsletter-card">
+    <div class="card-source">Aadrij Upadya &lt;adrij2005@gmail.com&gt;</div>
+    <div class="card-title">Fwd: SpaceX IPO playbook 🚀, Apple allows AI assistants 🤖, Stripe Projects 🧑‍💻</div>
+    <p class="story-para">---------- Forwarded message --------- From: TLDR</p>
+<p class="story-para">&lt; dan@tldrnewsletter.com &gt;</p>
+<p class="story-para">Date: Fri, Mar 27, 2026 at 3:39 AM</p>
+<p class="story-para">Subject: SpaceX IPO playbook 🚀, Apple allows AI assistants 🤖, Stripe Projects 🧑‍💻 To:  &lt; adrij2005@gmail.com &gt;</p>
+<p class="story-para">SpaceX is preparing for an initial public offering aimed at mid-June. Musk wants investors to visit SpaceX&#39;s manufacturing facilities ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌  ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌</p>
+<h3 class="story-headline"><a href="https://l.gotourl.es/l/b296c5e1f80928b560ff234a899e84b3efbfb7f3?u=9174676" target="_blank">Sign Up</a></h3>
+<p class="story-para"><a href="https://l.gotourl.es/l/0ddff333c2ed880e431b422cd10ed70d1037e579?u=9174676" target="_blank">| Advertise</a> |</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/4a7cee838f0d2d5c4adb343661722ea8cce58a28?u=9174676" target="_blank">View Online</a></p>
+<p class="story-para">T L D R</p>
+<p class="story-para">Together With</p>
+<p class="story-para">TLDR 2026-03-27</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/ad6f7de19ffb2a4a60fe3b29a3ee91221b3f9c8e?u=9174676" target="_blank">Plaid adds $382k in pipeline with TLDR campaign (Sponsor)</a></p>
+<p class="story-para"><a href="https://l.gotourl.es/l/636e43c3c04067ecd5f4833f88fe70b4d7c3192a?u=9174676" target="_blank">Plaid achieved their best-performing direct buy to date, adding $382k in pipeline, earning 70 leads, and achieving 20.1x ROI. This case study breaks down their strategy, results, and example ads. Read the Plaid case study.</a></p>
+<p class="story-para">📱</p>
+<h3 class="story-headline">Big Tech &amp; Startups</h3>
+<p class="story-para"><a href="https://l.gotourl.es/l/c88d94de6dcd6f419ca5d9450cdbb79ccf7ad457?u=9174676" target="_blank">Apple Plans to Open Up Siri to Rival AI Assistants in iOS 27 Update (5 minute read)</a></p>
+<p class="story-para">Apple will let Siri use AI services other than ChatGPT as part of the iOS 27 update. The approach will help Apple generate more revenue from third-party subscriptions through the App Store. It will mean Apple can add more external AI services without entering business discussions. The change is separate from Apple&#39;s work with Google to rebuild Siri using Gemini models.</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/4cc79966624269d34347ae764a773b9febfe0607?u=9174676" target="_blank">The SpaceX IPO Will Be Just as Unconventional as Musk Himself (5 minute read)</a></p>
+<p class="story-para">SpaceX is preparing for an initial public offering aimed at mid-June, just before Elon Musk&#39;s birthday. Musk wants investors to visit SpaceX&#39;s manufacturing facilities and possibly witness rocket launches. He is betting that fund managers and analysts will leave with the desire to put in big orders for the IPO, which is expected to raise between $40 billion and $80 billion. The filing for the IPO is expected to be done in the coming days.</p>
+<p class="story-para">🚀</p>
+<h3 class="story-headline">Science &amp; Futuristic Technology</h3>
+<p class="story-para"><a href="https://l.gotourl.es/l/68b0b457659a84354569339a6046a975ea51380a?u=9174676" target="_blank">Here is NASA&amp;#39;s plan for nuking Gateway and sending it to Mars (9 minute read)</a></p>
+<p class="story-para">NASA announced on Tuesday that it will pause work on a lunar space station and focus instead on building a surface base on the Moon. The agency has spent close to $4.5 billion on developing technology for the Gateway program since its beginning in 2019. There are pieces of the space station undergoing construction and testing in factories around the world. NASA plans to repurpose the core of Gateway, the Power and Propulsion Element, into a nuclear propulsion demo. It will use the nuclear engine in the interplanetary SR-1 mission scheduled before the end of 2028.</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/03a6efb900cfe930de689b68a6bba317c413a4c2?u=9174676" target="_blank">What happens when you clone mice for 20 years straight? (6 minute read)</a></p>
+<p class="story-para">Two scientists conducted a study over 20 years where they cloned generations of mice to see what would happen. The researchers created a total of 58 generations before the project ended - the mouse cells just wouldn&#39;t make clones. This took 30,947 individual attempts due to the low efficiency of cloning technology. There was a steady accumulation of mutations over the generations, and an entire X chromosome was lost at some point between generations 25 and 45, and never regained. The various other chromosomal deletions, inversions, and translocations added to the reasons why the cloning process failed after 58 generations.</p>
+<p class="story-para">💻</p>
+<h3 class="story-headline">Programming, Design &amp; Data Science</h3>
+<p class="story-para"><a href="https://l.gotourl.es/l/12a6ea33aefca4dc4850742b1a62a03d38580a67?u=9174676" target="_blank">Stop stitching databases for AI agents (Sponsor)</a></p>
+<h3 class="story-headline">Oracle AI Database acts as a</h3>
+<p class="story-para"><a href="https://l.gotourl.es/l/bba3156990077285ffdda9e487b54743be1b0e6b?u=9174676" target="_blank">unified memory core for agents</a> . Vector search, relational, JSON, and graph data live together so agents can reason over live enterprise data without extra vector stores, pipelines, or synchronization jobs.</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/1169c2f51c6818cdbecd04e13489f26a13ff841e?u=9174676" target="_blank">See how developers build agent memory →</a></p>
+<p class="story-para"><a href="https://l.gotourl.es/l/4cbd420c849a7cb7f6f887d9187551dae7404f7a?u=9174676" target="_blank">Stripe Projects: provision a production-ready dev stack from your terminal (5 minute read)</a></p>
+<p class="story-para">Stripe Projects is a new tool in the Stripe CLI that lets users provision real services from the terminal, keep resources in their provider accounts, sync agent-ready credentials safely, and upgrade to paid tiers when needed, without rebuilding their stacks or leaving the terminal. It is designed to make setups repeatable across machines and teammates, and deterministic enough for agents to operate safely. Projects can handle payment without re-entering payment details across provider dashboards for paid tiers. Developers can use it to go from a local repository to a working stack backed by provider accounts they own.</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/d17d243a62e73152bedfb01bc8bc3238a4605761?u=9174676" target="_blank">What&amp;#39;s in a codebase? (8 minute read)</a></p>
+<p class="story-para">Humans collectively can do incredible things, but much of it is illegible tribal knowledge passed down orally through generations of apprentices, and through the capabilities of machines that fabricate the next generation of machines. A lot has been done to refine human knowledge, extract its essence, and compile it into a form that can help future generations reach new heights. So far, this has proved to be a uniquely human capability. Diagnosing, fixing, and then figuring out how to test the real fix is hard enough as a human. Reproducing these system failures in an agent-testable way is inevitably going to be expensive and impractical.</p>
+<p class="story-para">🎁</p>
+<p class="story-para">Miscellaneous</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/acf2b86e6a39837b80847271b356688967799b4d?u=9174676" target="_blank">Read TIME&amp;#39;s Full Interview with SpaceX&amp;#39;s Gwynne Shotwell (20 minute read)</a></p>
+<p class="story-para">This article contains a transcript of an interview with SpaceX&#39;s President and COO, Gwynne Shotwell. The interview covers the xAI/SpaceX merger, SpaceX&#39;s upcoming IPO, data centers in space, Starlink in war zones, orbital traffic, and more. Shotwell also discusses her personal relationship with Elon Musk. She also talks about her experience as a woman in an industry where more than 75% of the leadership is male.</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/7d70e0c95e93cc67b94332a43de2af8e57d6952b?u=9174676" target="_blank">The White Collar Revolution is Here (9 minute read)</a></p>
+<p class="story-para">Software developers get rewarded for adopting new technologies fast, but white-collar workers get penalized as stability and risk mitigation are major parts of the value they provide to clients. Companies need to pair subject matter experts with cutting-edge researchers to take full advantage of the AI era. This business model encourages practitioners to hand off tasks to be automated instead of clinging to old ways of working. The winning businesses build the machines that build the machines.</p>
+<p class="story-para">⚡</p>
+<p class="story-para">Quick Links</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/8b59377bf9d06199d9757258199361fcbda50686?u=9174676" target="_blank">Now Shipping: Microsoft Build 2026, June 2-3, San Francisco (#MicrosoftPartner) (Sponsor)</a></p>
+<p class="story-para">Devs &amp; Builders Only: Access cutting‑edge models, agent capabilities, data, and compute—then leave ready to apply the latest AI workflows in your projects. Stay at the forefront of AI innovation.</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/e1a324914ff39167f9562a70d5ba79a9ae232cec?u=9174676" target="_blank">Learn more</a> .</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/a8dbb89388a47eb6d9a37ce7226c7dcfdbbd8fac?u=9174676" target="_blank">What about juniors? (6 minute read)</a></p>
+<p class="story-para">The new junior path involved getting engaged much earlier with the essence of engineering.</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/731c1f5db2b268dd912bdecb1e8395da0f81b0ea?u=9174676" target="_blank">The Handoff Problem (5 minute read)</a></p>
+<p class="story-para">Tesla&#39;s Full Self-Driving has always depended on handing off to the human, and this has resulted in Tesla&#39;s robotaxi service with &#39;safety monitors&#39; crashing six times as often as human-driven taxis.</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/ea977789e30595c51984f17b632b3342f852b306?u=9174676" target="_blank">Jensen Manifesting The Future (21 minute read)</a></p>
+<p class="story-para">Jensen Huang discussed a future of AI factories that manufacture tokens during his 2.5-hour-long keynote at Nvidia&#39;s multi-day GTC 2026 developer conference.</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/e484b220e3c527ff6ab9e9049f80808cfe0a1b7d?u=9174676" target="_blank">Apple discontinues the Mac Pro with no plans for future hardware (2 minute read)</a></p>
+<p class="story-para">The Mac Pro has been removed from Apple&#39;s website, and Apple has no plans to offer future Mac Pro hardware.</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/05ca8c8e951f568de98135bbe6f1fdd6358ab2c5?u=9174676" target="_blank">Apple Gives iPhone Designers Bonuses Up to $400K to Counter OpenAI Poaching (1 minute read)</a></p>
+<p class="story-para">The bonuses are in the form of restricted stock units that vest over a four-year period.</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/cbd4c69e12f4459d9c0ffb5c020085161c1ae77e?u=9174676" target="_blank">We need better stories about the future (13 minute read)</a></p>
+<p class="story-para">The headlines reaching mainstream audiences about AI range from depressing to doomsday.</p>
+<h3 class="story-headline">Love TLDR? Tell your friends and get rewards!</h3>
+<h3 class="story-headline">Share your referral link below with friends to get free TLDR swag!</h3>
+<p class="story-para"><a href="https://l.gotourl.es/l/82348381d70e30742ae2bace069cf7436066c8be?u=9174676" target="_blank">https://refer.tldr.tech/523b19a2/</a></p>
+<p class="story-para"><a href="https://l.gotourl.es/l/917221eb6e59fc2b653f5bfe73ab1fe00240a449?u=9174676" target="_blank">Track your referrals here.</a></p>
+<h3 class="story-headline">Want to advertise in TLDR? 📰</h3>
+<p class="story-para"><a href="https://l.gotourl.es/l/18b0d2fd819f370820c625e6d6a2163471cabf6e?u=9174676" target="_blank">If your company is interested in reaching an audience of tech executives, decision-makers and engineers, you may want to advertise with us</a> .</p>
+<h3 class="story-headline">Want to work at TLDR? 💼</h3>
+<h3 class="story-headline"><a href="https://l.gotourl.es/l/e7dbebfd1bb7e8feb910fcef47fa5a5a272c5fcd?u=9174676" target="_blank">Apply here</a></h3>
+<p class="story-para">,</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/cabdff85d1aeb239d97c3fd621b2d0e23665b512?u=9174676" target="_blank">create your own role</a> or send a friend&#39;s resume to jobs@tldr.tech</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/9ebfb03fb406c99cd6c43bf465bdf25de8ab5b8d?u=9174676" target="_blank">and get $1k if we hire them! TLDR is one of Inc.&amp;#39;s Best Bootstrapped businesses</a> of 2025.</p>
+<h3 class="story-headline">If you have any comments or feedback, just respond to this email!</h3>
+<h3 class="story-headline">Thanks for reading,</h3>
+<h3 class="story-headline"><a href="https://l.gotourl.es/l/309aa703827a435cfd165281ac9cb42f9ca14446?u=9174676" target="_blank">Dan Ni</a></h3>
+<p class="story-para">&amp;</p>
+<p class="story-para"><a href="https://l.gotourl.es/l/ef8c432183f22bbd6c270ce184239611109e150c?u=9174676" target="_blank">Stephen Flanders</a></p>
+<p class="story-para"><a href="https://l.gotourl.es/l/87de571858f90abbe83b0d438df701218dafeee6?u=9174676" target="_blank">Manage your subscriptions</a></p>
+<p class="story-para"><a href="https://l.gotourl.es/l/d61964a4eca1b53859acc7e4bce665a740c7f6cd?u=9174676" target="_blank">to our other newsletters on tech, startups, and programming. Or if TLDR isn&amp;#39;t for you, please unsubscribe</a> .</p>
+    <div class="card-meta">Sun, 29 Mar 2026 16:52:23 -0700</div>
+  </div>
+  
+  
+
+  
+  <div class="papers-section">
+    <div id="section-papers" class="top-label">Cutting Edge AI Research</div>
+    
+    <div class="paper-item">
+      <div class="paper-title">PixelSmile: Toward Fine-Grained Facial Expression Editing</div>
+      <div class="paper-summary">This paper presents a method for precise pixel-level manipulation of facial expressions in images, enabling detailed control over specific emotion features. The work matters because fine-grained facial editing has applications in content creation, entertainment, and accessibility, while the high upvote count suggests the community sees this as a meaningful advance in expression control.</div>
+    </div>
+    
+    <div class="paper-item">
+      <div class="paper-title">Intern-S1-Pro: Scientific Multimodal Foundation Model at Trillion Scale</div>
+      <div class="paper-summary">Intern-S1-Pro is a large-scale foundation model trained on scientific multimodal data (text, images, tables, equations) at trillion-token scale for scientific understanding and reasoning tasks. This is significant because it represents progress toward domain-specific AI systems that can genuinely support scientific research across disciplines, moving beyond general-purpose models to tackle specialized scientific problems.</div>
+    </div>
+    
+    <div class="paper-item">
+      <div class="paper-title">RealRestorer: Towards Generalizable Real-World Image Restoration with Large-Scale Image Editing Models</div>
+      <div class="paper-summary">RealRestorer leverages large-scale image editing models to improve generalization on real-world image restoration tasks (denoising, deblurring, etc.) without task-specific fine-tuning. The novelty lies in repurposing existing large editing models for restoration, reducing the need for specialized datasets and showing that foundation models can be effectively adapted to this traditionally challenging problem.</div>
+    </div>
+    
+    <div class="paper-item">
+      <div class="paper-title">Calibri: Enhancing Diffusion Transformers via Parameter-Efficient Calibration</div>
+      <div class="paper-summary">Calibri introduces parameter-efficient calibration techniques to improve the performance of diffusion transformer models without adding significant computational overhead. This matters because diffusion transformers are increasingly central to generation tasks, and parameter-efficient methods make improvements accessible even for computationally constrained applications.</div>
+    </div>
+    
+    <div class="paper-item">
+      <div class="paper-title">SlopCodeBench: Benchmarking How Coding Agents Degrade Over Long-Horizon Iterative Tasks</div>
+      <div class="paper-summary">This paper introduces a benchmark specifically designed to measure how AI coding agents&#39; performance deteriorates when solving complex, multi-step coding tasks over extended interactions. The benchmark is important because it highlights a critical real-world failure mode—error accumulation during long interactions—that existing benchmarks miss, pushing the community toward more robust agent design.</div>
+    </div>
+    
+  </div>
+  
+
+
+  <div class="footer">The Digest &middot; Sunday, March 29 2026</div>
+
+</div>
+</body>
+</html>

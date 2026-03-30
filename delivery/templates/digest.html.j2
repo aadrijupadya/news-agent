@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Digest — {{ date }}</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f0ede8;
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: #1c1c1c;
+      padding: 40px 16px 80px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 620px; margin: 0 auto; }
+
+    /* ── Masthead ── */
+    .masthead {
+      text-align: center;
+      padding-bottom: 28px;
+      border-bottom: 2px solid #1c1c1c;
+      margin-bottom: 36px;
+    }
+    .masthead-eyebrow {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 10px;
+    }
+    .masthead h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 52px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+    .masthead-date {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #aaa;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── Top section label ── */
+    .top-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 16px;
+    }
+
+    /* ── Newsletter card ── */
+    .newsletter-card {
+      background: #fff;
+      border-radius: 3px;
+      padding: 28px 30px 24px;
+      margin-bottom: 14px;
+      border: 1px solid #e2dfd9;
+    }
+    .card-source {
+      display: inline-block;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #fff;
+      background: #1c1c1c;
+      padding: 3px 8px 2px;
+      border-radius: 2px;
+      margin-bottom: 12px;
+    }
+    .card-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: #1c1c1c;
+      margin-bottom: 20px;
+    }
+    .card-meta {
+      margin-top: 20px;
+      padding-top: 12px;
+      border-top: 1px solid #f0ece6;
+      font-size: 10px;
+      color: #ccc;
+    }
+
+    /* ── Flyover body blocks ── */
+    .story-headline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: #1c1c1c;
+      margin: 22px 0 8px;
+      padding-top: 20px;
+      border-top: 1px solid #ece9e3;
+    }
+    .story-headline:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+
+    .story-para {
+      font-size: 14px;
+      line-height: 1.75;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .story-para:last-child { margin-bottom: 0; }
+
+    .story-para a, .story-bullets a, .tldr-summary a {
+      color: #1c1c1c;
+      text-decoration: underline;
+      text-decoration-color: #bbb;
+      text-underline-offset: 2px;
+    }
+    .story-para a:hover, .story-bullets a:hover, .tldr-summary a:hover {
+      text-decoration-color: #1c1c1c;
+    }
+
+    .story-bullets {
+      list-style: none;
+      margin: 8px 0 12px;
+      padding: 0;
+    }
+    .story-bullets li {
+      font-size: 14px;
+      line-height: 1.65;
+      color: #333;
+      padding: 7px 0 7px 18px;
+      border-bottom: 1px solid #f5f2ed;
+      position: relative;
+    }
+    .story-bullets li:last-child { border-bottom: none; }
+    .story-bullets li::before {
+      content: "›";
+      position: absolute;
+      left: 0;
+      color: #bbb;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      margin: 22px 0 14px;
+    }
+    .section-divider::before, .section-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #e8e5df;
+    }
+    .section-divider span {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #bbb;
+      padding: 0 10px;
+    }
+
+    /* ── Market grid ── */
+    .stock-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 7px;
+      margin: 10px 0 4px;
+    }
+    .stock-card {
+      background: #fafaf8;
+      border: 1px solid #e8e4de;
+      border-radius: 3px;
+      padding: 10px 8px 8px;
+      text-align: center;
+    }
+    .stock-card.up   { border-top: 2px solid #2d9e5f; }
+    .stock-card.down { border-top: 2px solid #c0392b; }
+    .stock-ticker { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: #444; margin-bottom: 4px; }
+    .stock-price  { font-size: 12px; font-weight: 600; color: #1c1c1c; margin-bottom: 3px; }
+    .stock-change { font-size: 11px; font-weight: 500; }
+    .stock-card.up   .stock-change { color: #2d9e5f; }
+    .stock-card.down .stock-change { color: #c0392b; }
+
+    /* ── TLDR styles ── */
+    .tldr-category {
+      display: flex;
+      align-items: center;
+      margin: 20px 0 12px;
+    }
+    .tldr-category::before, .tldr-category::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #e8e5df;
+    }
+    .tldr-category span {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #bbb;
+      padding: 0 10px;
+    }
+    .tldr-category:first-child { margin-top: 0; }
+
+    .tldr-story {
+      padding: 14px 0;
+      border-bottom: 1px solid #f0ede8;
+    }
+    .tldr-story:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .tldr-headline {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1c1c1c;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+    .tldr-headline a { color: inherit; text-decoration: none; }
+    .tldr-headline a:hover { text-decoration: underline; }
+
+    .tldr-summary {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #444;
+      margin-bottom: 8px;
+    }
+
+    .story-read-link {
+      font-size: 11px;
+      font-weight: 600;
+      color: #1c1c1c;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 1px;
+    }
+    .story-read-link:hover { border-color: #1c1c1c; }
+
+    /* ── AI Papers ── */
+    .papers-section { margin-top: 14px; }
+
+    .paper-item {
+      background: #fff;
+      border: 1px solid #e2dfd9;
+      border-left: 3px solid #6366f1;
+      border-radius: 3px;
+      padding: 16px 20px;
+      margin-bottom: 10px;
+    }
+    .paper-item:last-child { margin-bottom: 0; }
+
+    .paper-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1c1c1c;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+
+    .paper-summary {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    /* ── Tweet feed ── */
+    .tweets-section { margin-top: 14px; }
+
+    .tweet-account-block { margin-bottom: 20px; }
+
+    .tweet-account-header {
+      font-size: 11px;
+      font-weight: 600;
+      color: #888;
+      letter-spacing: 0.03em;
+      margin-bottom: 6px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #e8e5df;
+    }
+
+    .tweet-feed-item {
+      display: flex;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #f5f2ed;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #2a2a2a;
+    }
+    .tweet-feed-item:last-child { border-bottom: none; }
+
+    .tweet-dot {
+      flex-shrink: 0;
+      width: 5px;
+      height: 5px;
+      background: #ccc;
+      border-radius: 50%;
+      margin-top: 8px;
+    }
+
+    .tweet-feed-text { flex: 1; }
+
+    .tweet-feed-link {
+      display: inline-block;
+      margin-left: 6px;
+      font-size: 10px;
+      color: #bbb;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+    .tweet-feed-link:hover { color: #1c1c1c; }
+
+    /* ── Quote ── */
+    .quote-block {
+      text-align: center;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      border-top: 1px solid #e2dfd9;
+      border-bottom: 1px solid #e2dfd9;
+    }
+    .quote-text {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 16px;
+      font-style: italic;
+      line-height: 1.65;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .quote-attr {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #aaa;
+    }
+    .quote-attr span { color: #888; }
+
+    /* ── Jump nav ── */
+    .jump-nav {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .jump-nav a {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #888;
+      text-decoration: none;
+      padding: 5px 12px;
+      border: 1px solid #d8d5cf;
+      border-radius: 20px;
+      background: #fff;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .jump-nav a:hover {
+      color: #1c1c1c;
+      border-color: #1c1c1c;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid #d5d2cc;
+      text-align: center;
+      font-size: 10px;
+      color: #ccc;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="masthead">
+    <div class="masthead-eyebrow">Your Morning Briefing</div>
+    <h1>The Digest</h1>
+    <div class="masthead-date">{{ date }}</div>
+  </div>
+
+  {% if quote and quote.quote %}
+  <div class="quote-block">
+    <div class="quote-text">"{{ quote.quote }}"</div>
+    <div class="quote-attr">
+      <span>— {{ quote.author }}</span>{% if quote.context %}, {{ quote.context }}{% endif %}
+    </div>
+  </div>
+  {% endif %}
+
+  <nav class="jump-nav" aria-label="Jump to section">
+    {% for n in newsletters %}
+      <a href="#section-{{ loop.index }}">{{ n | display_name }}</a>
+    {% endfor %}
+    {% if papers %}
+      <a href="#section-papers">AI Research</a>
+    {% endif %}
+  </nav>
+
+  {% if newsletters %}
+  {% for n in newsletters %}
+  <div id="section-{{ loop.index }}" class="top-label">{{ n | display_name }}</div>
+  <div class="newsletter-card">
+    <div class="card-source">{{ n | display_name }}</div>
+    <div class="card-title">{{ n.subject }}</div>
+    {{ n | render_body }}
+    <div class="card-meta">{{ n.date }}</div>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  {% if papers %}
+  <div class="papers-section">
+    <div id="section-papers" class="top-label">Cutting Edge AI Research</div>
+    {% for p in papers %}
+    <div class="paper-item">
+      <div class="paper-title">{{ p.title }}</div>
+      <div class="paper-summary">{{ p.summary }}</div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+
+  <div class="footer">The Digest &middot; {{ date }}</div>
+
+</div>
+</body>
+</html>
