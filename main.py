@@ -10,7 +10,12 @@ from datetime import date
 
 from ingestion.gmail import fetch_newsletters
 from processing.summarizer import process_newsletters
-from processing.papers import process_hf_papers, is_hf_papers, get_quote_of_the_day
+from processing.papers import (
+    get_quote_of_the_day,
+    get_word_of_the_day,
+    is_hf_papers,
+    process_hf_papers,
+)
 from delivery.email import send_digest
 from delivery.webpage import write_webpage
 
@@ -42,10 +47,12 @@ def run():
 
     print("      Generating quote of the day...")
     quote = get_quote_of_the_day()
+    print("      Generating word of the day...")
+    word = get_word_of_the_day()
 
     print("\n[3/3] Sending email + writing static page...")
-    send_digest(newsletters, [], today, papers=papers, quote=quote)
-    write_webpage(newsletters, [], today, papers=papers, quote=quote)
+    send_digest(newsletters, [], today, papers=papers, quote=quote, word=word)
+    write_webpage(newsletters, [], today, papers=papers, quote=quote, word=word)
 
     print("\nDone.")
 
