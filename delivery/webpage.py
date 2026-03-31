@@ -1,32 +1,54 @@
 """
-Write the digest as a static HTML file for web hosting / GitHub Pages.
+Write the digest as static HTML for web hosting / GitHub Pages.
+
+Writes ``index.html`` (always the latest run) and ``digest-YYYY-MM-DD.html``
+for that calendar day so each date has a stable URL; same-day re-runs overwrite
+the dated file and refresh ``index.html``.
 """
 
-import os
+from datetime import date
+from pathlib import Path
 
 from delivery.renderer import render_digest
 import config
 
 
-def write_webpage(newsletters: list[dict], tweets: list[dict], date: str, papers: list[dict] | None = None, quote: dict | None = None) -> str:
+def write_webpage(
+    newsletters: list[dict],
+    tweets: list[dict],
+    date: str,
+    papers: list[dict] | None = None,
+    quote: dict | None = None,
+    run_date: date | None = None,
+) -> str:
     """
-    Render the digest and write it to OUTPUT_DIR/index.html.
+    Render the digest and write ``index.html`` plus a dated archive file.
 
     Args:
         newsletters: processed newsletter dicts
-        tweets:      processed tweet summary dicts
-        date:        human-readable date string
+        tweets:        processed tweet summary dicts
+        date:          human-readable date string (shown in the digest)
+        papers:        optional HuggingFace paper summaries
+        quote:         optional quote-of-the-day dict
+        run_date:      calendar day for the archive filename; defaults to today
 
     Returns:
-        Absolute path to the written file.
+        Absolute path to ``index.html``.
     """
     html = render_digest(newsletters, tweets, date, papers=papers, quote=quote)
 
-    os.makedirs(config.OUTPUT_DIR, exist_ok=True)
-    out_path = os.path.join(config.OUTPUT_DIR, "index.html")
+    day = run_date or date.today()
+    slug = day.isoformat()
 
-    with open(out_path, "w", encoding="utf-8") as f:
-        f.write(html)
+    out_dir = Path(config.OUTPUT_DIR)
+    out_dir.mkdir(parents=True, exist_ok=True)
 
-    print(f"Static page written to: {out_path}")
-    return out_path
+    dated_path = out_dir / f"digest-{slug}.html"
+    index_path = out_dir / "index.html"
+
+    dated_path.write_text(html, encoding="utf-8")
+    index_path.write_text(html, encoding="utf-8")
+
+    print(f"Static page written to: {index_path}")
+    print(f"Archive copy written to: {dated_path}")
+    return str(index_path.resolve())
