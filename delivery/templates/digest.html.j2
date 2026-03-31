@@ -253,6 +253,112 @@
     }
     .story-read-link:hover { border-color: #1c1c1c; }
 
+    /* ── Stocks & Income (Beehiiv, rich HTML + images) ── */
+    .top-label.stocks-income-eyebrow {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #1c1c1c;
+      margin-bottom: 10px;
+    }
+    .newsletter-card.stocks-income-card {
+      border-radius: 8px;
+      border: 1px solid #d8d5cf;
+      box-shadow: 0 1px 0 rgba(28, 28, 28, 0.04);
+    }
+    .newsletter-card.stocks-income-card .card-title {
+      font-size: 19px;
+      line-height: 1.3;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #ece9e3;
+    }
+    .stocks-income-body {
+      font-size: 14px;
+      line-height: 1.75;
+      color: #333;
+    }
+    .stocks-income-body > *:first-child { margin-top: 0; }
+    .stocks-income-body p {
+      margin: 0 0 14px;
+    }
+    .stocks-income-body p:last-child { margin-bottom: 0; }
+    .stocks-income-body strong,
+    .stocks-income-body b {
+      font-weight: 600;
+      color: #1c1c1c;
+    }
+    .stocks-income-body h1,
+    .stocks-income-body h2,
+    .stocks-income-body h3,
+    .stocks-income-body h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+      color: #1c1c1c;
+      line-height: 1.25;
+      margin: 20px 0 10px;
+    }
+    .stocks-income-body h1:first-child,
+    .stocks-income-body h2:first-child,
+    .stocks-income-body h3:first-child { margin-top: 0; }
+    .stocks-income-body h2 { font-size: 18px; }
+    .stocks-income-body h3 { font-size: 16px; }
+    .stocks-income-body a {
+      color: #1c1c1c;
+      text-decoration: underline;
+      text-decoration-color: #bbb;
+      text-underline-offset: 2px;
+    }
+    .stocks-income-body a:hover { text-decoration-color: #1c1c1c; }
+    .stocks-income-body img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 16px 0;
+      border-radius: 6px;
+      border: 1px solid #e8e5df;
+    }
+    .stocks-income-body figure {
+      margin: 16px 0;
+    }
+    .stocks-income-body figcaption {
+      font-size: 11px;
+      color: #888;
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+    .stocks-income-body blockquote {
+      margin: 14px 0;
+      padding-left: 14px;
+      border-left: 3px solid #e2dfd9;
+      color: #555;
+    }
+    .stocks-income-body table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 12px 0;
+    }
+    .stocks-income-body td,
+    .stocks-income-body th {
+      border: 1px solid #ece9e3;
+      padding: 8px;
+      vertical-align: top;
+    }
+    .stocks-income-body .si-disclaimer,
+    .stocks-income-body p.si-disclaimer {
+      font-size: 11px;
+      font-style: italic;
+      line-height: 1.55;
+      color: #777;
+      margin-top: 22px;
+      margin-bottom: 0;
+      padding-top: 14px;
+      border-top: 1px solid #f0ece6;
+    }
+
     /* ── AI Papers ── */
     .papers-section { margin-top: 14px; }
 
@@ -422,8 +528,8 @@
 
   {% if newsletters %}
   {% for n in newsletters %}
-  <div id="section-{{ loop.index }}" class="top-label">{{ n | display_name }}</div>
-  <div class="newsletter-card">
+  <div id="section-{{ loop.index }}" class="top-label{% if n.body_html %} stocks-income-eyebrow{% endif %}">{{ n | display_name }}</div>
+  <div class="newsletter-card{% if n.body_html %} stocks-income-card{% endif %}">
     <div class="card-source">{{ n | display_name }}</div>
     <div class="card-title">{{ n.subject }}</div>
     {{ n | render_body }}

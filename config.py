@@ -9,9 +9,15 @@ GMAIL_APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD", "")  # Gmail App Password (
 IMAP_HOST = os.getenv("IMAP_HOST", "imap.gmail.com")
 IMAP_PORT = int(os.getenv("IMAP_PORT", "993"))
 IMAP_MAILBOX = os.getenv("IMAP_MAILBOX", "INBOX")
+# Substring match against the From header (e.g. "Name <stocks-income@mail.beehiiv.com>")
+STOCKS_INCOME_SENDER = "stocks-income@mail.beehiiv.com"
 NEWSLETTER_SENDERS = [
     s.strip()
-    for s in os.getenv("NEWSLETTER_SENDERS", "news@editor.jointheflyover.com,dan@tldrnewsletter.com,adrij2005@gmail.com,daily_papers_digest@notifications.huggingface.co").split(",")
+    for s in os.getenv(
+        "NEWSLETTER_SENDERS",
+        "news@editor.jointheflyover.com,dan@tldrnewsletter.com,adrij2005@gmail.com,"
+        "daily_papers_digest@notifications.huggingface.co,stocks-income@mail.beehiiv.com",
+    ).split(",")
     if s.strip()
 ]
 

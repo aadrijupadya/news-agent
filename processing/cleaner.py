@@ -5,6 +5,8 @@ Clean raw newsletter HTML before rendering.
   and boilerplate (polls, trivia, daily quote).
 - Preserves article links as "text (url)" for the renderer.
 - Keeps ➤ bullets, section headers, and market data intact.
+- Stocks & Income (Beehiiv): builds sanitized ``body_html`` (images + limited tags)
+  and plain ``clean_text`` for fallback.
 """
 
 import re
@@ -139,6 +141,25 @@ def clean_newsletter_html(html: str) -> str:
 
 
 def clean_newsletter(newsletter: dict) -> dict:
+    from processing.beehiiv_clean import clean_stocks_income_html, is_stocks_income_newsletter
+
+    if newsletter.get("html") and is_stocks_income_newsletter(newsletter):
+        body_html = clean_stocks_income_html(newsletter["html"])
+        plain = BeautifulSoup(body_html, "lxml").get_text(separator="\n")
+        plain = _strip_invisible(plain)
+        lines = [ln.strip() for ln in plain.splitlines()]
+        collapsed: list[str] = []
+        prev_blank = False
+        for line in lines:
+            if not line:
+                if not prev_blank:
+                    collapsed.append("")
+                prev_blank = True
+            else:
+                collapsed.append(line)
+                prev_blank = False
+        clean = "\n".join(collapsed).strip()
+        return {**newsletter, "clean_text": clean, "body_html": body_html}
     if newsletter.get("html"):
         clean = clean_newsletter_html(newsletter["html"])
     else:

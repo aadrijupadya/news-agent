@@ -16,7 +16,7 @@ import config
 def write_webpage(
     newsletters: list[dict],
     tweets: list[dict],
-    date: str,
+    display_date: str,
     papers: list[dict] | None = None,
     quote: dict | None = None,
     run_date: date | None = None,
@@ -27,7 +27,7 @@ def write_webpage(
     Args:
         newsletters: processed newsletter dicts
         tweets:        processed tweet summary dicts
-        date:          human-readable date string (shown in the digest)
+        display_date:  human-readable date string (shown in the digest)
         papers:        optional HuggingFace paper summaries
         quote:         optional quote-of-the-day dict
         run_date:      calendar day for the archive filename; defaults to today
@@ -35,7 +35,7 @@ def write_webpage(
     Returns:
         Absolute path to ``index.html``.
     """
-    html = render_digest(newsletters, tweets, date, papers=papers, quote=quote)
+    html = render_digest(newsletters, tweets, display_date, papers=papers, quote=quote)
 
     day = run_date or date.today()
     slug = day.isoformat()
