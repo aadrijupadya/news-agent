@@ -19,12 +19,13 @@ Every morning at **5am PST (1pm UTC)**, the pipeline:
 | The Flyover | `news@editor.jointheflyover.com` | Today |
 | TLDR Newsletter | `dan@tldrnewsletter.com` | Today |
 | HuggingFace Daily Papers | `daily_papers_digest@notifications.huggingface.co` | Yesterday (arrives 6pm PST) |
+| Stocks & Income | `stocks-income@mail.beehiiv.com` | Today |
 
 ## Project structure
 
 ```
 ingestion/      Gmail IMAP fetching
-processing/     HTML cleaning, HF paper selection (Claude), quote generation
+processing/     HTML cleaning (incl. Beehiiv rich HTML), HF papers, quote
 delivery/       Jinja2 rendering, SMTP email, static HTML output
 main.py         Production entry point
 dry_run.py      Local testing — does not mark emails as read, skips email send

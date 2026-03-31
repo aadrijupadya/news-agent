@@ -4,12 +4,15 @@ Shared Jinja2 rendering + content block parsing.
 Two parsers:
   - parse_tldr()    for TLDR newsletter (category headers, headline+summary+link)
   - parse_flyover() for Flyover (section labels, ➤ bullets, market data, headlines)
+  - Stocks & Income (Beehiiv): sanitized HTML fragment in body_html
 """
 
 import re
 
 import markupsafe
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+
+import config
 
 _TEMPLATE_DIR = __file__.replace("renderer.py", "templates")
 
@@ -371,12 +374,25 @@ def _render_flyover(text: str) -> markupsafe.Markup:
     return markupsafe.Markup("\n".join(parts))
 
 
+def _render_stocks_income(newsletter: dict) -> markupsafe.Markup:
+    """
+    Render Beehiiv Stocks & Income digest from pre-sanitized HTML (images + basic
+    typography). Falls back to Flyover-style plain text if body_html is empty.
+    """
+    html = (newsletter.get("body_html") or "").strip()
+    if not html:
+        return _render_flyover(newsletter.get("summary", ""))
+    return markupsafe.Markup(f'<div class="stocks-income-body">{html}</div>')
+
+
 # ── Jinja2 filters ─────────────────────────────────────────────────────────────
 
 def _render_body(newsletter: dict) -> markupsafe.Markup:
-    """Choose parser based on sender."""
+    """Choose parser based on sender and available fields."""
     sender = newsletter.get("sender", "").lower()
     text = newsletter.get("summary", "")
+    if config.STOCKS_INCOME_SENDER.lower() in sender:
+        return _render_stocks_income(newsletter)
     if "tldr" in sender:
         return _render_tldr(text)
     return _render_flyover(text)
@@ -390,6 +406,8 @@ def _nl2br(value: str) -> markupsafe.Markup:
 def _display_name(newsletter: dict) -> str:
     sender = newsletter.get("sender", "").lower()
     subject = newsletter.get("subject", "").lower()
+    if config.STOCKS_INCOME_SENDER.lower() in sender:
+        return "Stocks & Income"
     if "tldr" in sender or "tldr" in subject or "dan@tldrnewsletter" in sender:
         return "TLDR"
     if "flyover" in sender:
