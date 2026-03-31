@@ -35,11 +35,13 @@ jobs:
           ANTHROPIC_API_KEY:  ${{ secrets.ANTHROPIC_API_KEY }}
         run: python main.py
 
+      # keep_files + non-orphan so past digest-YYYY-MM-DD.html pages stay on gh-pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./output
           publish_branch: gh-pages
-          force_orphan: true
+          force_orphan: false
+          keep_files: true
           commit_message: "digest: ${{ github.run_id }}"
