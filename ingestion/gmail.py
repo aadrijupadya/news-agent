@@ -74,8 +74,12 @@ def fetch_newsletters(mark_seen: bool = True) -> list[dict]:
     today_str     = date.today().strftime("%-d-%b-%Y")
     yesterday_str = (date.today() - timedelta(days=1)).strftime("%-d-%b-%Y")
 
-    # HuggingFace arrives at ~6pm the same day — use yesterday's date at 5am run
-    _YESTERDAY_SENDERS = {"daily_papers_digest@notifications.huggingface.co", "adrij2005@gmail.com"}
+    # Some digests arrive late evening — include yesterday's window at morning run.
+    _YESTERDAY_SENDERS = {
+        "daily_papers_digest@notifications.huggingface.co",
+        "stocks-income@mail.beehiiv.com",
+        "adrij2005@gmail.com",
+    }
 
     with IMAPClient(config.IMAP_HOST, port=config.IMAP_PORT, ssl=True, ssl_context=_SSL_CONTEXT) as client:
         client.login(config.GMAIL_EMAIL, config.GMAIL_APP_PASSWORD)

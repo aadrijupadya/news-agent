@@ -3,9 +3,14 @@ Parse HuggingFace Daily Papers email and use Claude to select and summarize
 the 3-5 most interesting papers for a non-specialist tech audience.
 """
 
+import hashlib
+import json
+import os
 import re
+from pathlib import Path
 
 import anthropic
+import requests
 
 import config
 
@@ -43,21 +48,158 @@ writer, or historical figure. Choose someone whose ideas are genuinely interesti
 Respond ONLY as JSON: {"quote": "...", "author": "...", "context": "..."}
 Where context is one short phrase describing who they are (e.g. "physicist & Nobel laureate")."""
 
+_WORD_PROMPT = """\
+Generate a single "Word of the Day" for a smart, curious general audience.
+Choose an uncommon but useful English word (not obscure to the point of unusable).
+
+Respond ONLY as JSON:
+{"word": "...", "meaning": "...", "example": "..."}
+"""
+
+_HISTORY_FILE = "history.json"
+_MAX_HISTORY = 500
+
+
+def _history_url() -> str:
+    """
+    Return a URL to fetch persisted history from, if available.
+
+    Priority:
+      1) DIGEST_HISTORY_URL env var
+      2) raw.githubusercontent.com/<repo>/gh-pages/history.json (in Actions)
+    """
+    explicit = os.getenv("DIGEST_HISTORY_URL", "").strip()
+    if explicit:
+        return explicit
+    repo = os.getenv("GITHUB_REPOSITORY", "").strip()
+    if not repo:
+        return ""
+    return f"https://raw.githubusercontent.com/{repo}/gh-pages/{_HISTORY_FILE}"
+
+
+def _history_path() -> Path:
+    """Return local history file path inside OUTPUT_DIR."""
+    out_dir = Path(config.OUTPUT_DIR)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    return out_dir / _HISTORY_FILE
+
+
+def _load_history() -> dict:
+    """
+    Load history from local file if present; else bootstrap from remote URL.
+
+    Storage is intentionally minimal:
+      {"quotes": ["<sha1>", ...], "words": ["<lowercase-word>", ...]}
+    """
+    path = _history_path()
+    if path.exists():
+        try:
+            return json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            return {"quotes": [], "words": []}
+
+    remote = _history_url()
+    if remote:
+        try:
+            resp = requests.get(remote, timeout=5)
+            if resp.ok:
+                payload = resp.json()
+                if isinstance(payload, dict):
+                    return payload
+        except Exception:
+            pass
+    return {"quotes": [], "words": []}
+
+
+def _save_history(history: dict) -> None:
+    """Persist de-duplicated bounded history to OUTPUT_DIR/history.json."""
+    quotes = list(dict.fromkeys(history.get("quotes", [])))[:_MAX_HISTORY]
+    words = list(dict.fromkeys(history.get("words", [])))[:_MAX_HISTORY]
+    payload = {"quotes": quotes, "words": words}
+    _history_path().write_text(json.dumps(payload, ensure_ascii=True), encoding="utf-8")
+
+
+def _quote_key(quote: dict) -> str:
+    """Return stable hash key for quote de-duplication."""
+    core = f"{quote.get('quote', '').strip()}|{quote.get('author', '').strip()}".lower()
+    return hashlib.sha1(core.encode("utf-8")).hexdigest()
+
+
+def _parse_json_response(text: str) -> dict:
+    """Parse Claude JSON response, stripping markdown fences if present."""
+    raw = text.strip()
+    raw = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw, flags=re.MULTILINE).strip()
+    return json.loads(raw)
+
 
 def get_quote_of_the_day() -> dict:
-    """Return {"quote": str, "author": str, "context": str} from Claude Haiku."""
-    try:
-        message = _client.messages.create(
-            model=config.CLAUDE_MODEL,
-            max_tokens=200,
-            messages=[{"role": "user", "content": _QUOTE_PROMPT}],
+    """
+    Return non-repeating {"quote": str, "author": str, "context": str} and persist
+    minimal quote history.
+    """
+    history = _load_history()
+    seen = set(history.get("quotes", []))
+    exclusion = ""
+    if seen:
+        exclusion = (
+            "Avoid any quote/author pair whose hash appears in this set:\n"
+            + ", ".join(sorted(seen)[-30:])
         )
-        import json, re
-        raw = message.content[0].text.strip()
-        raw = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw, flags=re.MULTILINE).strip()
-        return json.loads(raw)
-    except Exception:
-        return {}
+    prompt = _QUOTE_PROMPT + ("\n\n" + exclusion if exclusion else "")
+    for _ in range(4):
+        try:
+            message = _client.messages.create(
+                model=config.CLAUDE_MODEL,
+                max_tokens=220,
+                messages=[{"role": "user", "content": prompt}],
+            )
+            candidate = _parse_json_response(message.content[0].text)
+            if not candidate.get("quote") or not candidate.get("author"):
+                continue
+            key = _quote_key(candidate)
+            if key in seen:
+                continue
+            history.setdefault("quotes", []).append(key)
+            _save_history(history)
+            return candidate
+        except Exception:
+            continue
+    return {}
+
+
+def get_word_of_the_day() -> dict:
+    """
+    Return non-repeating {"word": str, "meaning": str, "example": str} and persist
+    minimal word history.
+    """
+    history = _load_history()
+    seen = {w.strip().lower() for w in history.get("words", []) if isinstance(w, str)}
+    avoid_words = ", ".join(sorted(seen)[-50:])
+    prompt = _WORD_PROMPT + (f"\nAvoid these words: {avoid_words}" if avoid_words else "")
+    for _ in range(4):
+        try:
+            message = _client.messages.create(
+                model=config.CLAUDE_MODEL,
+                max_tokens=220,
+                messages=[{"role": "user", "content": prompt}],
+            )
+            candidate = _parse_json_response(message.content[0].text)
+            word = str(candidate.get("word", "")).strip()
+            if not word:
+                continue
+            key = word.lower()
+            if key in seen:
+                continue
+            history.setdefault("words", []).append(key)
+            _save_history(history)
+            return {
+                "word": word,
+                "meaning": str(candidate.get("meaning", "")).strip(),
+                "example": str(candidate.get("example", "")).strip(),
+            }
+        except Exception:
+            continue
+    return {}
 
 
 def parse_papers_from_html(html_body: str) -> list[dict]:

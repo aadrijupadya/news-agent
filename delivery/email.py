@@ -11,12 +11,19 @@ from delivery.renderer import render_digest
 import config
 
 
-def send_digest(newsletters: list[dict], tweets: list[dict], date: str, papers: list[dict] | None = None, quote: dict | None = None) -> None:
+def send_digest(
+    newsletters: list[dict],
+    tweets: list[dict],
+    date: str,
+    papers: list[dict] | None = None,
+    quote: dict | None = None,
+    word: dict | None = None,
+) -> None:
     if not config.DIGEST_RECIPIENTS:
         print("No DIGEST_RECIPIENTS configured — skipping email send.")
         return
 
-    html = render_digest(newsletters, tweets, date, papers=papers, quote=quote)
+    html = render_digest(newsletters, tweets, date, papers=papers, quote=quote, word=word)
     print(f"      Rendered HTML size: {len(html):,} bytes")
 
     msg = MIMEMultipart("alternative")

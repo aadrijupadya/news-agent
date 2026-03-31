@@ -460,6 +460,42 @@
     }
     .quote-attr span { color: #888; }
 
+    .word-block {
+      margin: -12px auto 28px;
+      max-width: 560px;
+      background: #fff;
+      border: 1px solid #e2dfd9;
+      border-radius: 4px;
+      padding: 14px 16px;
+    }
+    .word-label {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .word-main {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 24px;
+      line-height: 1.2;
+      color: #1c1c1c;
+      margin-bottom: 6px;
+    }
+    .word-meaning {
+      font-size: 13px;
+      line-height: 1.65;
+      color: #444;
+    }
+    .word-example {
+      font-size: 12px;
+      line-height: 1.55;
+      color: #777;
+      margin-top: 8px;
+      font-style: italic;
+    }
+
     /* ── Jump nav ── */
     .jump-nav {
       display: flex;
@@ -514,6 +550,14 @@
     <div class="quote-attr">
       <span>— {{ quote.author }}</span>{% if quote.context %}, {{ quote.context }}{% endif %}
     </div>
+  </div>
+  {% endif %}
+  {% if word and word.word %}
+  <div class="word-block">
+    <div class="word-label">Word of the Day</div>
+    <div class="word-main">{{ word.word }}</div>
+    {% if word.meaning %}<div class="word-meaning">{{ word.meaning }}</div>{% endif %}
+    {% if word.example %}<div class="word-example">"{{ word.example }}"</div>{% endif %}
   </div>
   {% endif %}
 

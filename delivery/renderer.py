@@ -425,6 +425,20 @@ _env.filters["nl2br"]         = _nl2br
 _env.filters["display_name"]  = _display_name
 
 
-def render_digest(newsletters: list[dict], tweets: list[dict], date: str, papers: list[dict] | None = None, quote: dict | None = None) -> str:
+def render_digest(
+    newsletters: list[dict],
+    tweets: list[dict],
+    date: str,
+    papers: list[dict] | None = None,
+    quote: dict | None = None,
+    word: dict | None = None,
+) -> str:
     template = _env.get_template("digest.html.j2")
-    return template.render(newsletters=newsletters, tweets=tweets, date=date, papers=papers or [], quote=quote or {})
+    return template.render(
+        newsletters=newsletters,
+        tweets=tweets,
+        date=date,
+        papers=papers or [],
+        quote=quote or {},
+        word=word or {},
+    )
