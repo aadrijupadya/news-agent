@@ -25,6 +25,37 @@ _ALLCAPS_RE = re.compile(r'^[A-Z][A-Z\s,&\-]{8,}$')
 # "(X minute read)" or "(X min read)" suffix on TLDR headlines
 _READ_TIME_RE = re.compile(r'\s*\(\d+\s+min(?:ute)?\s+read\)\s*$', re.IGNORECASE)
 
+_TLDR_CATEGORY_CONNECTORS = frozenset(
+    {"and", "or", "the", "a", "an", "of", "in", "to", "for", "vs", "as", "at", "&"}
+)
+
+
+def _is_tldr_category_header(line: str) -> bool:
+    """
+    True for TLDR section titles: ALL CAPS blocks or compact title-case lines
+    (e.g. 'Big Tech and Startups', 'Programming, Design & Data Science').
+    Excludes lines that look like stories (read time, inline link).
+    """
+    if _READ_TIME_RE.search(line) or _LINK_RE.search(line):
+        return False
+    if _ALLCAPS_RE.match(line) and len(line) > 6:
+        return True
+    raw_words = line.split()
+    if len(raw_words) < 2 or len(line) < 12 or len(line) > 100:
+        return False
+    if line.endswith("."):
+        return False
+    content = [w.strip(",") for w in raw_words if w.strip(",") and w.strip(",") not in _TLDR_CATEGORY_CONNECTORS]
+    if not (2 <= len(content) <= 12):
+        return False
+    for w in content:
+        if not w[0].isupper():
+            return False
+    # Longer lines need tighter word count so we do not grab sentence-y blurbs
+    if len(line) > 72 and len(content) > 6:
+        return False
+    return True
+
 _FLYOVER_SECTION_RE = [
     (re.compile(r"flyover podcast", re.I),               "Flyover Podcast"),
     (re.compile(r"march madness", re.I),                 "March Madness"),
@@ -63,6 +94,9 @@ def parse_tldr(text: str) -> list[dict]:
     Parse TLDR newsletter into blocks:
       {"type": "category",  "text": str}
       {"type": "story",     "headline": str, "summary": str, "url": str|None}
+
+    Structure: category header, then repeating article title (often with min read)
+    and summary; blanks between title and summary are optional.
     """
     lines = [l.strip() for l in text.splitlines()]
     blocks = []
@@ -79,9 +113,10 @@ def parse_tldr(text: str) -> list[dict]:
             i += 1
             continue
 
-        # Category header — ALL CAPS line
-        if _ALLCAPS_RE.match(line) and len(line) > 6:
-            blocks.append({"type": "category", "text": line.title()})
+        # Category header — ALL CAPS or title-case section line
+        if _is_tldr_category_header(line):
+            label = line.title() if _ALLCAPS_RE.match(line) else line
+            blocks.append({"type": "category", "text": label})
             i += 1
             continue
 
@@ -101,15 +136,20 @@ def parse_tldr(text: str) -> list[dict]:
             else:
                 headline = _READ_TIME_RE.sub("", line).strip()
 
-            # Collect following paragraph lines as the summary
+            # Collect following paragraph lines as the summary.
+            # TLDR often inserts a blank line between headline and body; treat
+            # those as separators to skip, not as "end of summary" before any text.
             i += 1
             summary_lines = []
             while i < len(lines):
                 l = lines[i]
                 if not l:
+                    if summary_lines:
+                        i += 1
+                        break
                     i += 1
-                    break
-                if _ALLCAPS_RE.match(l) or _SKIP_LINE_RE.match(l):
+                    continue
+                if _is_tldr_category_header(l) or _SKIP_LINE_RE.match(l):
                     break
                 # Stop if next line also looks like a headline
                 if len(l) < 120 and bool(_READ_TIME_RE.search(l)):
