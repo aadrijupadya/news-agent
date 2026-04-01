@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Digest — Tuesday, March 31 2026</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="The Digest" />
+  <meta name="theme-color" content="#1c1c1c" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="dd_icon.png" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f0ede8;
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: #1c1c1c;
+      padding: 40px 16px 80px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 620px; margin: 0 auto; }
+
+    /* ── Masthead ── */
+    .masthead {
+      text-align: center;
+      padding-bottom: 28px;
+      border-bottom: 2px solid #1c1c1c;
+      margin-bottom: 36px;
+    }
+    .masthead-eyebrow {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 10px;
+    }
+    .masthead h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 52px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+    .masthead-date {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #aaa;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── Top section label ── */
+    .top-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 16px;
+    }
+
+    /* ── Newsletter card ── */
+    .newsletter-card {
+      background: #fff;
+      border-radius: 3px;
+      padding: 28px 30px 24px;
+      margin-bottom: 14px;
+      border: 1px solid #e2dfd9;
+    }
+    .card-source {
+      display: inline-block;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #fff;
+      background: #1c1c1c;
+      padding: 3px 8px 2px;
+      border-radius: 2px;
+      margin-bottom: 12px;
+    }
+    .card-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: #1c1c1c;
+      margin-bottom: 20px;
+    }
+    .card-meta {
+      margin-top: 20px;
+      padding-top: 12px;
+      border-top: 1px solid #f0ece6;
+      font-size: 10px;
+      color: #ccc;
+    }
+
+    /* ── Flyover body blocks ── */
+    .story-headline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: #1c1c1c;
+      margin: 22px 0 8px;
+      padding-top: 20px;
+      border-top: 1px solid #ece9e3;
+    }
+    .story-headline:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+
+    .story-para {
+      font-size: 14px;
+      line-height: 1.75;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .story-para:last-child { margin-bottom: 0; }
+
+    .story-para a, .story-bullets a, .tldr-summary a {
+      color: #1c1c1c;
+      text-decoration: underline;
+      text-decoration-color: #bbb;
+      text-underline-offset: 2px;
+    }
+    .story-para a:hover, .story-bullets a:hover, .tldr-summary a:hover {
+      text-decoration-color: #1c1c1c;
+    }
+
+    .story-bullets {
+      list-style: none;
+      margin: 8px 0 12px;
+      padding: 0;
+    }
+    .story-bullets li {
+      font-size: 14px;
+      line-height: 1.65;
+      color: #333;
+      padding: 7px 0 7px 18px;
+      border-bottom: 1px solid #f5f2ed;
+      position: relative;
+    }
+    .story-bullets li:last-child { border-bottom: none; }
+    .story-bullets li::before {
+      content: "›";
+      position: absolute;
+      left: 0;
+      color: #bbb;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      margin: 22px 0 14px;
+    }
+    .section-divider::before, .section-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #e8e5df;
+    }
+    .section-divider span {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #bbb;
+      padding: 0 10px;
+    }
+
+    /* ── Market grid ── */
+    .stock-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 7px;
+      margin: 10px 0 4px;
+    }
+    .stock-card {
+      background: #fafaf8;
+      border: 1px solid #e8e4de;
+      border-radius: 3px;
+      padding: 10px 8px 8px;
+      text-align: center;
+    }
+    .stock-card.up   { border-top: 2px solid #2d9e5f; }
+    .stock-card.down { border-top: 2px solid #c0392b; }
+    .stock-ticker { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: #444; margin-bottom: 4px; }
+    .stock-price  { font-size: 12px; font-weight: 600; color: #1c1c1c; margin-bottom: 3px; }
+    .stock-change { font-size: 11px; font-weight: 500; }
+    .stock-card.up   .stock-change { color: #2d9e5f; }
+    .stock-card.down .stock-change { color: #c0392b; }
+
+    /* ── TLDR styles ── */
+    .tldr-category {
+      display: flex;
+      align-items: center;
+      margin: 20px 0 12px;
+    }
+    .tldr-category::before, .tldr-category::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #e8e5df;
+    }
+    .tldr-category span {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #bbb;
+      padding: 0 10px;
+    }
+    .tldr-category:first-child { margin-top: 0; }
+
+    .tldr-story {
+      padding: 14px 0;
+      border-bottom: 1px solid #f0ede8;
+    }
+    .tldr-story:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .tldr-headline {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1c1c1c;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+    .tldr-headline a { color: inherit; text-decoration: none; }
+    .tldr-headline a:hover { text-decoration: underline; }
+
+    .tldr-summary {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #444;
+      margin-bottom: 8px;
+    }
+
+    .story-read-link {
+      font-size: 11px;
+      font-weight: 600;
+      color: #1c1c1c;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 1px;
+    }
+    .story-read-link:hover { border-color: #1c1c1c; }
+
+    /* ── Stocks & Income (Beehiiv, rich HTML + images) ── */
+    .top-label.stocks-income-eyebrow {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #1c1c1c;
+      margin-bottom: 10px;
+    }
+    .newsletter-card.stocks-income-card {
+      border-radius: 8px;
+      border: 1px solid #d8d5cf;
+      box-shadow: 0 1px 0 rgba(28, 28, 28, 0.04);
+    }
+    .newsletter-card.stocks-income-card .card-title {
+      font-size: 19px;
+      line-height: 1.3;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #ece9e3;
+    }
+    .stocks-income-body {
+      font-size: 14px;
+      line-height: 1.75;
+      color: #333;
+    }
+    .stocks-income-body > *:first-child { margin-top: 0; }
+    .stocks-income-body p {
+      margin: 0 0 14px;
+    }
+    .stocks-income-body p:last-child { margin-bottom: 0; }
+    .stocks-income-body strong,
+    .stocks-income-body b {
+      font-weight: 600;
+      color: #1c1c1c;
+    }
+    .stocks-income-body h1,
+    .stocks-income-body h2,
+    .stocks-income-body h3,
+    .stocks-income-body h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+      color: #1c1c1c;
+      line-height: 1.25;
+      margin: 20px 0 10px;
+    }
+    .stocks-income-body h1:first-child,
+    .stocks-income-body h2:first-child,
+    .stocks-income-body h3:first-child { margin-top: 0; }
+    .stocks-income-body h2 { font-size: 18px; }
+    .stocks-income-body h3 { font-size: 16px; }
+    .stocks-income-body a {
+      color: #1c1c1c;
+      text-decoration: underline;
+      text-decoration-color: #bbb;
+      text-underline-offset: 2px;
+    }
+    .stocks-income-body a:hover { text-decoration-color: #1c1c1c; }
+    .stocks-income-body img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 16px 0;
+      border-radius: 6px;
+      border: 1px solid #e8e5df;
+    }
+    .stocks-income-body figure {
+      margin: 16px 0;
+    }
+    .stocks-income-body figcaption {
+      font-size: 11px;
+      color: #888;
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+    .stocks-income-body blockquote {
+      margin: 14px 0;
+      padding-left: 14px;
+      border-left: 3px solid #e2dfd9;
+      color: #555;
+    }
+    .stocks-income-body table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 12px 0;
+    }
+    .stocks-income-body td,
+    .stocks-income-body th {
+      border: 1px solid #ece9e3;
+      padding: 8px;
+      vertical-align: top;
+    }
+    .stocks-income-body .si-disclaimer,
+    .stocks-income-body p.si-disclaimer {
+      font-size: 11px;
+      font-style: italic;
+      line-height: 1.55;
+      color: #777;
+      margin-top: 22px;
+      margin-bottom: 0;
+      padding-top: 14px;
+      border-top: 1px solid #f0ece6;
+    }
+
+    /* ── AI Papers ── */
+    .papers-section { margin-top: 14px; }
+
+    .paper-item {
+      background: #fff;
+      border: 1px solid #e2dfd9;
+      border-left: 3px solid #6366f1;
+      border-radius: 3px;
+      padding: 16px 20px;
+      margin-bottom: 10px;
+    }
+    .paper-item:last-child { margin-bottom: 0; }
+
+    .paper-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1c1c1c;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+
+    .paper-summary {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    /* ── Tweet feed ── */
+    .tweets-section { margin-top: 14px; }
+
+    .tweet-account-block { margin-bottom: 20px; }
+
+    .tweet-account-header {
+      font-size: 11px;
+      font-weight: 600;
+      color: #888;
+      letter-spacing: 0.03em;
+      margin-bottom: 6px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #e8e5df;
+    }
+
+    .tweet-feed-item {
+      display: flex;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #f5f2ed;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #2a2a2a;
+    }
+    .tweet-feed-item:last-child { border-bottom: none; }
+
+    .tweet-dot {
+      flex-shrink: 0;
+      width: 5px;
+      height: 5px;
+      background: #ccc;
+      border-radius: 50%;
+      margin-top: 8px;
+    }
+
+    .tweet-feed-text { flex: 1; }
+
+    .tweet-feed-link {
+      display: inline-block;
+      margin-left: 6px;
+      font-size: 10px;
+      color: #bbb;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+    .tweet-feed-link:hover { color: #1c1c1c; }
+
+    /* ── Quote ── */
+    .quote-block {
+      text-align: center;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      border-top: 1px solid #e2dfd9;
+      border-bottom: 1px solid #e2dfd9;
+    }
+    .quote-text {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 16px;
+      font-style: italic;
+      line-height: 1.65;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .quote-attr {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #aaa;
+    }
+    .quote-attr span { color: #888; }
+
+    .word-block {
+      margin: -12px auto 28px;
+      max-width: 560px;
+      background: #fff;
+      border: 1px solid #e2dfd9;
+      border-radius: 4px;
+      padding: 14px 16px;
+    }
+    .word-label {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .word-main {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 24px;
+      line-height: 1.2;
+      color: #1c1c1c;
+      margin-bottom: 6px;
+    }
+    .word-meaning {
+      font-size: 13px;
+      line-height: 1.65;
+      color: #444;
+    }
+    .word-example {
+      font-size: 12px;
+      line-height: 1.55;
+      color: #777;
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* ── Jump nav ── */
+    .jump-nav {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .jump-nav a {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #888;
+      text-decoration: none;
+      padding: 5px 12px;
+      border: 1px solid #d8d5cf;
+      border-radius: 20px;
+      background: #fff;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .jump-nav a:hover {
+      color: #1c1c1c;
+      border-color: #1c1c1c;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid #d5d2cc;
+      text-align: center;
+      font-size: 10px;
+      color: #ccc;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="masthead">
+    <div class="masthead-eyebrow">Your Morning Briefing</div>
+    <h1>The Digest</h1>
+    <div class="masthead-date">Tuesday, March 31 2026</div>
+  </div>
+
+  
+  <div class="quote-block">
+    <div class="quote-text">"The test of a first-rate intelligence is the ability to hold two opposed ideas in mind at the same time and still retain the ability to function."</div>
+    <div class="quote-attr">
+      <span>— F. Scott Fitzgerald</span>, novelist &amp; chronicler of the Jazz Age
+    </div>
+  </div>
+  
+  
+  <div class="word-block">
+    <div class="word-label">Word of the Day</div>
+    <div class="word-main">sanguine</div>
+    <div class="word-meaning">optimistic or positive, especially in an unlikely or difficult situation; also refers to a blood-red color</div>
+    <div class="word-example">"Despite the project&#39;s setbacks, she remained sanguine about their chances of success by the deadline."</div>
+  </div>
+  
+
+  <nav class="jump-nav" aria-label="Jump to section">
+    
+      <a href="#section-1">Stocks &amp; Income</a>
+    
+      <a href="#section-2">The Flyover</a>
+    
+      <a href="#section-3">The Flyover</a>
+    
+      <a href="#section-4">TLDR</a>
+    
+      <a href="#section-5">TLDR</a>
+    
+      <a href="#section-6">Stocks &amp; Income</a>
+    
+    
+      <a href="#section-papers">AI Research</a>
+    
+  </nav>
+
+  
+  
+  <div id="section-1" class="top-label stocks-income-eyebrow">Stocks &amp; Income</div>
+  <div class="newsletter-card stocks-income-card">
+    <div class="card-source">Stocks &amp; Income</div>
+    <div class="card-title">👉 Who let you in here?</div>
+    <div class="stocks-income-body">html<div><div> Your first stock brief is inside...  ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ </div><table><tr><td><table><tr><td><table><tr><td><table><tr><td><table><tbody><tr><td><img alt="" loading="lazy" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/2846843f-0eec-4265-af8a-fc5cbda39cdd/Stocks___Income_black_transparent_600_x_300.png?t=1765391959"/></td></tr></tbody></table></td></tr><tr><td><div> <img alt="" loading="lazy" src="https://link.mail.beehiiv.com/ss/o/u001.RVyNx8N6d01HmsbXlGhPjw/4pe/udvZvnMaSSeK-jlhP8BSzw/ho.gif"/> </div></td></tr><tr><td><table><tr><td><p> Ok relax, you're welcome here. </p></td></tr><tr><td><p> Welcome to Stocks &amp; Income. You just joined 100,000+ investors who want the signal without the noise. </p></td></tr><tr><td><p> Here's the deal. </p></td></tr><tr><td><p><span><b>What we send you:</b></span> A daily brief covering market moves, income plays, and stock ideas you can actually use. Short enough to read in under 60 seconds. Clear enough that you never have to Google what we meant. </p></td></tr><tr><td><p><span><b>What we need from you (takes 10 seconds):</b></span></p></td></tr><tr><td><p> To make sure this actually lands in your inbox and not some promotions graveyard: </p></td></tr><tr><td><div><ol><li><p><span><b>Move this email to your "Primary" inbox</b></span> (just drag it over if you're on Gmail) </p></li><li><p><span><b>Reply "yes" to this email.</b></span> That's it. One word. It tells Google and other email providers you actually want this, and keeps us out of spam. </p></li></ol></div></td></tr><tr><td><p> That's the whole ask. </p></td></tr><tr><td><table><tr><td>   </td></tr></table></td></tr><tr><td><p><span><b>Now here's your first look as promised.</b></span></p></td></tr><tr><td><div><ul><li><p><a href="https://link.mail.beehiiv.com/ss/c/u001.XO9D8_D0A3c_2UK-DW6XhBon3LEKj-7xyFWXZqXbTmDJ6nuhzZJ7RqHJqeETSmt7htxR891jAUjBduod4lKKfYvOnoPMGCKJD_dlXcaFKc21Ub2pZIZP9ylfwZ5fYGQDMInqR_3-FRt_pjZbe_5-pf2J5whWGDHjIUXkGDAhsK7U08ou_2JQX8M97lm8H9xZVN3qcb6VbBY74t0FyoAI43UWwH8YmaQ6EqK26vD0QoeM9hFv1xhvW9QtfsOTMZmObyq3ZR-Am2klnPRoZND1i1M3cPopSWu9kk_iqfZwGwLEnsX1N_FXL51jprg9kxf-Y7qS1d6wfUH_-5YBggJYSHFL80gx-k4z3Ch0IBpaWX0Q86yKPZ_jobsPDU4ukE7j0abLcH_6FuyZ_ohec2WIG_3bAtnqPogyo9cEkZG8x29CxCGdokXqjQOAjCaq356rJYiLjGZUmDtDu6VxlS095-x1wQCrFT_iPDElHfJdKmTx--ZmX0a2UV9Ypnlmsi0K4JMTkCWqvJmlHUI9XUdLnn3TVMIt-0TpXt0DRG3OoT2n78KqXiy_XwC0EFTi1xrXhzaf-VxqoBDv45IrHiLpDOlxAeu2WRL4FS5PNOb3lFbcKr6-Uojosb6IOv6kwFrfPMbjlXEg6NjOmPfW-GygZ8Z_Y-p1_ZBlAJzG0t6OJ9k175W7UkKGoNU27rm-Lvs9vATfIHWy594FAG91lZ_vRpZnak0f9X9UtW6sctcTftkKUKzGF-bHxKXT4e3DxSGDaztCIMbAX30-fzA2eRMnvqkdaXiJyNFUMkcAwTjkqu0/4pe/udvZvnMaSSeK-jlhP8BSzw/h0/h001.Omfdu-wHnW65GLXL7R8-ZzeT3Z7qk05uElnWPdOw5E8" rel="noopener noreferrer" target="_blank"><span>The Rebalancing Playbook: When and How to Adjust</span></a></p></li><li><p><a href="https://link.mail.beehiiv.com/ss/c/u001.CGpo8HJLVt36xz-gfZANV9AOOiJ6rCtxXj3nquU7b43q0SI44_pTCD9qr_4QPObLJ-7jlbtpQu-9mhBCyAyFvgfOdZwvYsM3X9iQwD8Wi3L3skDiz7iA1TAUiMuM5THBexndTqADx5N-7ygRXY-Ilg/4pe/udvZvnMaSSeK-jlhP8BSzw/h1/h001.nIFqYd_Nyd0dzb2Br0W5fcNoZ1WKZCJOxpJMQ79E8ZU" rel="noopener noreferrer" target="_blank"><span>AltIndex - The platform where we get our data</span></a></p></li><li><p><a href="https://link.mail.beehiiv.com/ss/c/u001.9GokX0k8NuRfxLZniTivZS3cCjbD_pc8Y9gU8qOqeSuyqUjRK_WEgfy-Azocl84WUdO2h533Jr4SXGWiqh4Cmkpg2SNitHt8IVSMudpMoNmcIN_aYaFEayOBeGTsiSk0OFnCjPN1M80XFeGW2ivDoC3oGs7IBJESdcQmM2PB7Xpq2w7bIPQpkznHTBF8Yw0n/4pe/udvZvnMaSSeK-jlhP8BSzw/h2/h001.6kP-NRLO5eiGhH4ILQP5fa-Z1_KbNXjxwWlcCMfhzKQ" rel="noopener noreferrer" target="_blank"><span>Other newsletters we think are worth your time</span></a></p></li></ul></div></td></tr><tr><td><p> Your first real issue hits tomorrow morning. Keep an eye out. </p></td></tr><tr><td><p> Cheers, Brandon &amp; Blake Stocks &amp; Income, by Invested Inc. </p></td></tr><tr><td><p><span><b>P.S.</b></span> Seriously, reply "yes" right now. It takes two seconds and makes sure you never miss an issue. We'll see it and know you're locked in. </p></td></tr></table></td></tr></table></td></tr><tr><td><table><tr><td></td></tr><tr><td><!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" style="border-top:10px solid #f8f8f8;font-size:1px;height:0px;margin:0px auto;width:610px;" role="presentation" width="610"><tr><td style="height:0;line-height:0;"> &nbsp; </td></tr></table><![endif]--><!--[if !mso]--><!--<![endif]--></td></tr><tr><td><table><tr><td><table><tr><td><img alt="" loading="lazy" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/bd88d491-ad02-435e-ac2b-fd22a96607eb/unnamed-1.png"/></td></tr></table></td></tr><tr><td><table><tr><td><p> Update your email preferences or unsubscribe <a href="https://link.mail.beehiiv.com/ss/c/u001.XO9D8_D0A3c_2UK-DW6XhBon3LEKj-7xyFWXZqXbTmD4o6zzIjJIxBY0a1PO2lrii7bP3XqvbT9_mt7zzjPS2k4fhIcpbAz2MWNpLh0N_dWhrrZt6b4HBSKuGKS5o9Q0Ak9EWVIWMu-X04sXyX-GT3No1y-27KwrGirEWVL9uAP6tKV4OqAyLSzXJIlg5xp8z2ZEXve0uJM7Ja5E9rVG8I8iDUuXtMdRzCDBpp49_0vqwqHLgk72UhpQLCUJzpFbRhFUpXikc0O5gx-QEAJ031u12jd_PcSf5A1aGJ7nUGANtniA7H-mMS7S4afHt54DAouIW7ImyEVkUAE49HFikOjKUjuR3KtCLcDKiSyQB1s1iw20vSq0fYdKgHP8wa48elm0f9iXiIsxTrxbyT57EgaAdOSdr9zfpy-uTi15aqEIXjA9iX9pCK86aR2S7POKq7hXWE9wpgMesnz2bpwJY30Z9Wqt90EdNaYWnr214j1hwzKULq6yzOMp6MfIGE_AazH8iBf_Lgma5vsPkmh46AckXduf6W8rHZp9f6i-wukrW2g4tVDVu5aexcb8PIb1T1PftrYVkDCEaSUcEzLhe0z6rxvozcSpkzsGJhym9wTIvuv86ZDfThneD7GECp9_e2FvDUxk4RWrMHf0PfafKBKrw0ADDEqGt-2VI6fmBb71xfytB8lwWQWMPUgSd_hAYDNS14wqx9dECayXQLu5ElGlUYqySGZgEC0Gx1eVQlaQ06J5jPhLBywYqMin-ARM2OVeFTpXXPm0QQcTGve7wsb6AD1WLrjQI3dYbdcgLbD6Ht3nCkCC5wcdtidpKg81KMtMGXzY2i_zy9TwwZjg3EI9NZaBgW2ntVg1mqEon58trowhk5nh80TaoVLPPMo3XelvDCAAyIqBRubMozUZHg/4pe/udvZvnMaSSeK-jlhP8BSzw/h3/h001._Jdw1Iyt2RX2Yphjohu70qfv8dnTOaMHQmyiJYncOwg" rel="noopener noreferrer" target="_blank"> here</a></p><p> © 2026 Invested Inc. </p><p> 8 The Green, Ste R<br/>Dover, DE 19901, United States </p></td></tr><tr><td><a href="https://link.mail.beehiiv.com/ss/c/u001.5tBbbmN7jl7kKD3zkBAUJUUU_BLsZ6KsoKO6iQ5ZpKVb6Hz1ZDrL0I1yawpD8qr4xlW_eINV8dM4WA19RGBuX2KLW6cwJFVEVCsWHFKnVA4/4pe/udvZvnMaSSeK-jlhP8BSzw/h4/h001.6ilik68gNknOgVTi5qLNNPSZX-jQOmA5WksaJZBHPg4" rel="noopener noreferrer" target="_blank"> Terms of Service </a></td></tr><tr><td></td></tr></table></td></tr></table></td></tr></table></td></tr></table></td></tr></table></td></tr></table></div></div>
+    <div class="card-meta">Tue, 31 Mar 2026 00:05:49 +0000</div>
+  </div>
+  
+  <div id="section-2" class="top-label">The Flyover</div>
+  <div class="newsletter-card">
+    <div class="card-source">The Flyover</div>
+    <div class="card-title">Trump Threatens Attack, 3-Minute Art Heist, and a $165,000 Motorcycle</div>
+    <p class="story-para">President Trump warned Monday that if a deal isn&#39;t reached shortly and the Strait of Hormuz isn&#39;t reopened, the U.S. will destroy</p>
+<p class="story-para">all of Iran&#39;s power plants, oil wells, and Kharg Island , infrastructure he said the military has &#34;purposefully not yet touched.&#34;</p>
+<p class="story-para">͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌</p>
+<h3 class="story-headline">America entered daylight saving time</h3>
+<p class="story-para">for the first time. Known then as “fast time,” it was a wartime measure during World War I and lasted until the war’s end, not to return as a nationwide measure until World War II.</p>
+<p class="story-para">Yesterday, we asked you in the Poll what you&#39;d steal 12 tons of, and the write-in answers stole the show. Gold and $100 bills won in a landslide, leaving chocolate and steak in the dust. A few of you kept it classy, though, writing in with good wine, champagne, ice cream, and books. We see the priorities, and we respect them.</p>
+<p class="story-para">🚙 Are Baby Boomers the safest drivers or the most dangerous? Which generation has the highest crash fatality rate? And who are the fastest drivers? In today’s Flyover Podcast , Ayla Brown breaks down a new report ranking drivers from baby boomers to Gen X to millennials and Gen Z. But where did your generation end up on the list?</p>
+<h3 class="story-headline">Tune in to find out</h3>
+<p class="story-para">!</p>
+<p class="story-para">🌴It&#39;s finally here:</p>
+<p class="story-para">The California Flyover launches tomorrow! We&#39;re bringing the same daily briefing to the Golden State, and we&#39;d love for your friends and family out West to be in from day one. Sign up here .</p>
+<p class="story-para">Today’s sponsor, Money.com , makes it simple and affordable to protect your growing family with trusted life insurance options, helping people bridge the coverage gap with plans that fit real budgets and offer fast, hassle-free approval.</p>
+<h3 class="story-headline">Trump Threatens to Destroy Iran&#39;s Infrastructure</h3>
+<p class="story-para">President Trump warned Monday that if a deal isn&#39;t reached shortly and the Strait of Hormuz isn&#39;t reopened, the U.S. will destroy</p>
+<p class="story-para">all of Iran&#39;s power plants, oil wells, and Kharg Island , infrastructure he said the military has &#34;purposefully not yet touched.&#34;</p>
+<p class="story-para">Hundreds of Navy SEALs, Army Rangers, and other special operations forces have quietly arrived in the Middle East, joining thousands of Marines and 82nd Airborne paratroopers, giving the president military options, including ground raids</p>
+<p class="story-para">on Iranian territory.</p>
+<p class="story-para">Trump said his &#34;preference&#34; would be to take Iran&#39;s oil, and separately confirmed the U.S. is negotiating with Iran&#39;s parliamentary speaker,</p>
+<p class="story-para">Mohammad Bagher Qalibaf , a former Revolutionary Guard commander who has denied any talks are taking place.</p>
+<h3 class="story-headline">First Moonshot in 53 Years Set for Wednesday</h3>
+<p class="story-para">NASA&#39;s Artemis II</p>
+<p class="story-para">mission is set to launch Wednesday at 6:24 p.m. ET, sending four astronauts on a nine-day trip around the moon for the first time since Apollo 17 in 1972. Forecasters give an 80% chance of favorable weather.</p>
+<p class="story-para">Commander Reid Wiseman, a widower and father of two teenagers, is leading the crew alongside pilot Victor Glover, mission specialist Christina Koch, and Canadian astronaut Jeremy Hansen.</p>
+<p class="story-para">Meet the crew here .</p>
+<p class="story-para">The mission will carry the crew roughly 4,700 miles past the far side of the moon, farther than any human has ever traveled, with portions of the lunar surface never seen by human eyes firsthand visible from the capsule windows.</p>
+<p class="story-para">Riding along is a plush mascot named Rise, designed by a second-grader in California and chosen from 2,600 entries across 50 countries, inspired by Apollo 8&#39;s famous Earthrise photograph.</p>
+<p class="story-para">See the mascot here .</p>
+<h3 class="story-headline">Thieves Steal Art Masterpieces in 3 Minutes</h3>
+<h3 class="story-headline">A gang of thieves stole paintings by Renoir, Cezanne, and Matisse</h3>
+<p class="story-para">, worth an estimated $10 million, from a private museum near Parma, Italy, last week, completing the heist in under 3 minutes.</p>
+<p class="story-para">The thieves used crowbars to pry open an entrance to the Magnani Rocca Foundation, went straight to a room dedicated to French artists, and grabbed three specific works before fleeing through the museum gardens.</p>
+<p class="story-para">See three paintings here .</p>
+<p class="story-para">They left behind a fourth painting they had pulled from the wall, apparently too slow to carry it out before the alarm brought security. The museum called the raid well-organized, not impromptu.</p>
+<p class="story-para">The heist is the latest in a string of brazen European museum thefts, following a $101 million jewel robbery at the Louvre in Paris last October.</p>
+<p class="story-para">Love reading The Flyover ? Click here to share with your friends and family.</p>
+<div class="section-divider"><span>Flyover Podcast</span></div>
+<h3 class="story-headline">Clicking the links will take you directly to these stories:</h3>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Data shows that this generation has the safest drivers. ( Listen Now )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Images from an Iranian strike reveal damage to a key U.S. surveillance aircraft. ( Hear Episode )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">A NATO member</p>
+<p class="story-para">has closed its airspace to U.S. aircraft involved in the Iran war. ( Podcast Available )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Treasury Secretary Scott Bessent announced a whistleblower program offering tipsters 10% to 30% of monetary sanctions collected in successful enforcement actions tied to fraud, money-laundering, and other financial scams. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">President Trump confirmed that the military is building a &#34;massive complex&#34; under his new White House ballroom, adding that it would have bulletproof glass and a drone-proof roof and exterior. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">NORAD fighter jets escorted a civilian plane out of a no-fly zone near President Trump’s Mar-a-Lago on Sunday after it violated a temporary flight restriction, dispensing flares to get the pilot&#39;s attention. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Former South Carolina Gov. Mark Sanford, who vanished from the governor&#39;s office in 2009 claiming to be hiking the Appalachian Trail while actually in Argentina, filed to run for his old 1st District congressional seat on the last day of the deadline. ( More )</p>
+<p class="story-para">47% of parents need more life insurance</p>
+<p class="story-para">Ready to bridge the gap? Welcoming a new child is an exciting milestone—but it also comes with new responsibilities. Nearly 47% of parents say they don’t have enough life insurance to fully protect their loved ones.</p>
+<p class="story-para">Coverage is more affordable than you think. Modern term life insurance is designed to fit real budgets, with some policies starting at just $7 per month.</p>
+<h3 class="story-headline">Fast, simple approval. Many top providers offer online applications</h3>
+<p class="story-para">with approval possible in under 15 minutes —no long paperwork or weeks of waiting.</p>
+<h3 class="story-headline">Compare trusted options.</h3>
+<p class="story-para">Explore Money’s top-rated life insurance providers and see how easy it can be to secure coverage that gives your growing family.</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">San Francisco 49ers GM John Lynch addressed the conspiracy theory linking the team&#39;s training facility to player injuries, saying an independent investigation found the site safe. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Gary Woodland won the Houston Open on Sunday, his first PGA Tour title since the 2019 U.S. Open and just weeks after revealing his battle with PTSD. The win also earned him a spot in the Masters. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">The NFL could begin hiring and training replacement refs in the coming weeks after negotiations stalled with the NFL Referees Association. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">The Las Vegas Golden Knights fired coach Bruce Cassidy on Sunday and replaced him with John Tortorella, with eight games left in the NHL regular season. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Yesterday&#39;s Results: NBA | MLB | NHL | NCAAW | NCAAB | NCAASB | Soccer | Tennis</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">St. John&#39;s signed Rick Pitino to a new deal that makes him the second-highest-paid coach in the Big East behind UConn&#39;s Dan Hurley. He’ll stay with the program through at least until the 2029-30 season. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Going into Duke’s game against UConn, No. 1 seeds were 134-0 when leading by 15 points at the half. The Blue Devils’ second-half collapse on Sunday changed that number to 134-1. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Texas women’s basketball beat the Michigan Wolverines 77-41 in the Elite Eight last night thanks to a suffocating defensive effort by the Longhorns.  They’ll take on UCLA in a Final Four match on Friday. ( More )</p>
+<h3 class="story-headline">Daily Market Report</h3>
+<p class="story-para">03/30/2026</p>
+<p class="story-para">NASDAQ</p>
+<p class="story-para">National Association of Securities Dealers Automated Quotations</p>
+<p class="story-para">20,794.64</p>
+<p class="story-para">-0.73%</p>
+<p class="story-para">SPX S&amp;P 500</p>
+<p class="story-para">6,343.72</p>
+<p class="story-para">-0.39%</p>
+<p class="story-para">DJI</p>
+<p class="story-para">Dow Jones Industrial Average</p>
+<p class="story-para">45,216.14</p>
+<p class="story-para">0.11%</p>
+<p class="story-para">BTC Bitcoin</p>
+<p class="story-para">$66,609.95</p>
+<p class="story-para">0.99%</p>
+<p class="story-para">GOLD Per Ounce</p>
+<p class="story-para">$4,544.70</p>
+<p class="story-para">1.17%</p>
+<p class="story-para">SILVER Per Ounce</p>
+<p class="story-para">$70.29</p>
+<p class="story-para">1.07%</p>
+<p class="story-para">OIL</p>
+<p class="story-para">West Texas Intermediate Crude</p>
+<p class="story-para">$104.15</p>
+<p class="story-para">4.53%</p>
+<p class="story-para">UTHR</p>
+<p class="story-para">United Therapeutics Corp.</p>
+<p class="story-para">$588.22</p>
+<p class="story-para">+12.51%</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Big Stock Move: United Therapeutics stock jumped nearly 13% on Monday after the company reported positive trial results for its inhaled therapy treatment for idiopathic pulmonary fibrosis. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Sysco announced a $29 billion deal to acquire Jetro Restaurant Depot, expanding the food services giant into wholesale cash-and-carry for independent restaurants. Sysco shares fell on the news. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Air Canada CEO Michael Rousseau will retire later this year after backlash over his English-only condolence video, without a bilingual French-language version, following the deadly LaGuardia Airport crash. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Ducati&#39;s $165,000 Superleggera V4 Centenario motorcycle, which it calls the most extreme and expensive road-legal motorcycle it has ever built, has already sold out the 500 units it built for its 100th anniversary, as well as the $250,000 Tricolore variant. ( See Photo )</p>
+<h3 class="story-headline">Protect your loved ones starting at $7/month</h3>
+<p class="story-para">Nearly 47% of parents say they don’t have enough life insurance to fully protect their loved ones. The good news? Modern term life insurance is more affordable and accessible than many expect, with some policies starting at just $7 per month and online applications that can be approved in under 15 minutes. Explore Money’s top-rated life insurance providers to see how easy it can be to secure coverage that brings real peace of mind for your growing family.</p>
+<h3 class="story-headline">FIND AFFORDABLE PROTECTION</h3>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">NASA announced it will launch the first nuclear-powered interplanetary spacecraft to Mars in 2028, carrying a fleet of helicopters to scout landing sites and map subsurface water ice ahead of future crewed missions. ( See Details )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">A 19-year study of more than 20,000 adults found that swapping an hour of passive TV watching for mentally active sitting like puzzles or reading cut dementia risk by 7%. ( See Study )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Scientists discovered that the parasite behind sleeping sickness builds an &#34;invisibility cloak&#34; from special proteins, solving a 40-year mystery about how the deadly disease hides in the body for years. ( See Discovery )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Senior Warning : If you were born before Jan. 1, 1965, then you’re the target audience for RFK Jr’s latest warning. And you’re also most at risk. See how this one simple warning is saving MILLIONS of American seniors by clicking here now. Watch Now</p>
+<h3 class="story-headline">Travel Tuesday is brought to you by:</h3>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">A global team of travel writers named the most beautiful places they have ever visited, producing a 51-destination list spanning six continents. ( See Destinations )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">An original 14-step section of the Eiffel Tower&#39;s 1889 spiral staircase is heading to auction in May, with bidding expected to start around $55,000 after a similar piece sold for more than $600,000 in 2016. ( See Details )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">From the Nile cruise that inspired</p>
+<p class="story-para">Death on the Nile to the tidal island behind</p>
+<p class="story-para">And Then There Were None</p>
+<p class="story-para">, seven destinations let travelers follow Agatha Christie&#39;s trail 50 years after her death. ( See Places )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Get a brighter, more confident smile from the comfort of home with</p>
+<p class="story-para">Purely White Deluxe Teeth Whitening . This easy-to-use system helps lift years of stains from coffee, wine, and everyday foods—without expensive dental visits. Designed to be gentle on teeth while delivering noticeable whitening, it’s a simple way to refresh your smile and boost your confidence.</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Costco&#39;s Easter centerpiece this year is a 10-pound chocolate bunny named Pete, priced at up to $140 and accompanied by instructions to smash it with a hammer. ( See Bunny )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Yellow caps are back on Coca-Cola bottles, signaling the annual return of the kosher version of Coke made specifically for this week&#39;s Passover celebration, a tradition dating back to an Atlanta rabbi&#39;s deal with the company in 1935. ( See Story )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">A Kansas cat tried so hard to dodge a vet visit that it got trapped inside a reclining chair, forcing firefighters to saw the chair apart for a rescue. The cat still made its appointment. ( See Cat )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">An American engineer got so fed up paying nearly $9 for a Guinness that he built an AI voice agent to call more than 3,000 pubs across all 32 counties in Ireland and ask the price, creating Ireland&#39;s most comprehensive pint database in 14 years. ( More )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Find support and relief with the</p>
+<p class="story-para">Compressa Knee Sleeve , designed to help reduce joint pain, stiffness, and swelling. Its flexible, breathable fabric provides targeted compression to support movement during daily activities, workouts, or long days on your feet—helping you stay active and move with greater confidence. ( LEARN MORE )</p>
+<h3 class="story-headline">If you could own one famous painting, which would you pick?</h3>
+<p class="story-para">The Mona Lisa</p>
+<p class="story-para">Starry Night</p>
+<h3 class="story-headline">Campbell&#39;s Soup Cans</h3>
+<p class="story-para">The Scream</p>
+<h3 class="story-headline">Dogs Playing Poker</h3>
+<p class="story-para">Other</p>
+<h3 class="story-headline">What would you steal 12 tons of?</h3>
+<p class="story-para">I&#39;m law-abiding, thanks: 56%</p>
+<p class="story-para">Steak: 13%</p>
+<p class="story-para">Coffee: 9%</p>
+<p class="story-para">Chocolate: 8%</p>
+<p class="story-para">Other: 8%</p>
+<p class="story-para">Pizza: 6%</p>
+<p class="story-para">&#34;Of all the people on planet Earth right now, there are four people that are in a position to go fly around the moon.&#34;</p>
+<p class="story-para">— Reid Wiseman</p>
+<p class="story-para">, Artemis II commander and father of two, on telling his daughters why he accepted the mission</p>
+<h3 class="story-headline">What does the ZIP in ZIP Code stand for?</h3>
+    <div class="card-meta">Tue, 31 Mar 2026 10:02:25 +0000</div>
+  </div>
+  
+  <div id="section-3" class="top-label">The Flyover</div>
+  <div class="newsletter-card">
+    <div class="card-source">The Flyover</div>
+    <div class="card-title">Data Shows Safest Drivers, Iranian Strike Damage, NATO Closes Airspace</div>
+    <p class="story-para">Data shows that this generation has the safest drivers.</p>
+<p class="story-para">͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌   ͏ ‌</p>
+<h3 class="story-headline">Today’s podcast is sponsored by HydraLift by</h3>
+<p class="story-para">Pureance .</p>
+<p class="story-para">Most shampoos are loaded with harsh ingredients that leave your hair greasy at the roots and dry at the ends. HydraLift uses a professional-grade protein complex to strengthen each strand, so your hair looks fuller, stronger, and healthier.</p>
+<p class="story-para">It’s for men and women, backed by a 365-day money-back guarantee. Use promo code FLYOVERMARCH for 35% off!</p>
+<p class="story-para">This is a site-wide limited time offer, so take advantage of the Pureance offer today!</p>
+<p class="story-para">Today’s episode of</p>
+<div class="section-divider"><span>Flyover Podcast</span></div>
+<p class="story-para">with Ayla Brown has a few stories you won’t find in today’s emailed edition, only in the podcast episode, because not everything fits in an inbox.</p>
+<h3 class="story-headline">If you like what you see,</h3>
+<p class="story-para">subscribe to our YouTube channel and never miss an episode!</p>
+<p class="story-para">Here&#39;s a sneak peek of what we&#39;re diving into in today&#39;s Podcast Extra section:</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Data shows that this generation has the safest drivers. ( Listen Now )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">Images from an Iranian strike reveal damage to a key U.S. surveillance aircraft. ( Hear Episode )</p>
+<ul class="story-bullets"><li></li></ul>
+<p class="story-para">A NATO member</p>
+<p class="story-para">has closed its airspace to U.S. aircraft involved in the Iran war. ( Podcast Available )</p>
+<p class="story-para">Hit play and get the full scoop.</p>
+<h3 class="story-headline">Thanks for cruising with us,</h3>
+<p class="story-para">The Flyover✈️</p>
+    <div class="card-meta">Tue, 31 Mar 2026 10:38:21 +0000</div>
+  </div>
+  
+  <div id="section-4" class="top-label">TLDR</div>
+  <div class="newsletter-card">
+    <div class="card-source">TLDR</div>
+    <div class="card-title">Apple&#39;s AI strategy 🤖, Codex for Claude Code 🤖, Inside Sora&#39;s fall 🎥</div>
+    <div class="tldr-category"><span>Big Tech &amp; Startups</span></div>
+<div class="tldr-category"><span>Science &amp; Futuristic Technology</span></div>
+<div class="tldr-story"><div class="tldr-headline">Inside the stealthy startup that pitched brainless human clones</div><p class="tldr-summary">A Californian startup called R3 has raised funds to create non-sentient monkey &#39;organ sacks&#39; as an alternative to animal testing. The startup&#39;s founder reportedly secretly pitched a vision where the startup creates &#39;brainless clones&#39; to serve as backups for human bodies. This could be in the form of a baby version of a person with enough brain structure to be alive in case they ever need a new kidney or liver, or it may even be possible to one day transplant a brain into a younger clone to gain a second lifespan. The company has denied that it ever made the pitch, saying that any allegations of intent or conspiracy to create human clones or humans with brain damage are categorically false.</p></div>
+<div class="tldr-story"><div class="tldr-headline">Vulnerability Research Is Cooked</div><p class="tldr-summary">Coding agents will soon drastically alter both the practice and the economics of exploit development. A substantial amount of the high-impact vulnerability research will just be pointing an agent at a source three and telling it to find zero days. This will profoundly alter information security and the Internet itself.</p></div>
+<div class="tldr-category"><span>Programming, Design &amp; Data Science</span></div>
+<div class="tldr-story"><div class="tldr-headline">Kestra [26K GitHub stars]: The automation crisis ends here. (Sponsor)</div><p class="tldr-summary"><a href="https://tracking.tldrnewsletter.com/CL0/https:%2F%2Ffandf.co%2F4d7JdY7/1/0100019d438bef70-1e573f3d-7965-4895-b165-29f3246039bb-000000/G0Kkq9df9qWgjPIsk2chsOizJNK4GG0MdgJ5Tv-DOLo=450" target="_blank">Your stack is held together by legacy cron jobs, scripts, and fragile pipelines—and it&amp;#39;s breaking. Kestra is an open-source, event-driven orchestrator to run your infrastructure, data, APIs, and AI workflows in one place. Define everything as code. Trigger in real time. Scale to millions. No glue code. No duct tape. Just reliable orchestration. Used by Apple, JPMorgan Chase, and Toyota. Discover Kestra.</a></p><a class="story-read-link" href="https://tracking.tldrnewsletter.com/CL0/https:%2F%2Ffandf.co%2F4d7JdY7/1/0100019d438bef70-1e573f3d-7965-4895-b165-29f3246039bb-000000/G0Kkq9df9qWgjPIsk2chsOizJNK4GG0MdgJ5Tv-DOLo=450" target="_blank">Read more →</a></div>
+<div class="tldr-story"><div class="tldr-headline">Codex plugin for Claude Code (GitHub Repo)</div><p class="tldr-summary">This plugin enables Claude Code users to start using Codex from the workflow they already have. Users can use Codex from inside Claude Code for code reviews or delegate tasks to Codex. The plugin uses the local Codex CLI, so existing sign-in methods and configs still apply. It also uses the same repository checkout and machine-local environment.</p></div>
+<div class="tldr-story"><div class="tldr-headline">Engineering for Agents That Never Sleep</div><p class="tldr-summary">Most of the signals that trigger engineering work are already machine-readable. The current bottleneck is where a human reads that signal, interprets it, and then types a prompt telling the agent what the signal already said. Give agents comprehensive unit tests so they can verify their own output, good documentation to discover context, reproducible dev environments to run code, and rich system accounting. This scaffolding will enable agents that can close incidents around the clock.</p></div>
+<div class="tldr-story"><div class="tldr-headline">Seeing like a spreadsheet</div><p class="tldr-summary">AI will see much further than the spreadsheet ever could. It will allow businesses to accomplish incredible things, and make possible coordinations of labor and capital more ambitious than anything we can imagine today. However, as corporations become dominated by AI systems, the most human elements of organizations may be devalued or discarded entirely. Great organizations are great because of something irreducible about the collection and organization of particular people toward particular ends.</p></div>
+<div class="tldr-story"><div class="tldr-headline">Claim your free month</div><p class="tldr-summary">with code: TLDR1MO</p></div>
+<div class="tldr-story"><div class="tldr-headline">Veblen &amp; Jevon Walk Into a Data Center</div><p class="tldr-summary">Jevon&#39;s Paradox states that the cheaper a product becomes, the more it is consumed, and Veblen goods are those whose demand increases with price - it is unknown which way the AI industry will go.</p></div>
+<div class="tldr-story"><div class="tldr-headline">Meta testing paid Instagram service that lets users secretly view Stories</div><p class="tldr-summary">Instagram Plus is being tested in select markets, including the Philippines, Japan, and Mexico, with the plans costing the equivalent of $2 USD per month.</p></div>
+<div class="tldr-story"><div class="tldr-headline">Cost to Implement vs Cost to Verify</div><p class="tldr-summary">The cost to implement is the time and expertise needed to produce code, and the cost to verify is the time and expertise needed to confirm the code is correct.</p></div>
+<div class="tldr-story"><div class="tldr-headline">Make smarter application decisions with Azure Copilot Migration Agent (Sponsor)</div><p class="tldr-summary"><a href="https://tracking.tldrnewsletter.com/CL0/https:%2F%2Ffandf.co%2F4bW0xgr/1/0100019d438bef70-1e573f3d-7965-4895-b165-29f3246039bb-000000/B4QKgUPoXiEFEiJhRDYeLZw_5FZtklQc9AgZA_SkLGE=450" target="_blank">Stop guessing what to modernize. This playbook from Microsoft&amp;#39;s Azure Copilot Migration Agent team gives you strategies to decide what to re-platform, refactor, and what to leave as is. Try it yourself–download a copy today</a> .</p><a class="story-read-link" href="https://tracking.tldrnewsletter.com/CL0/https:%2F%2Ffandf.co%2F4bW0xgr/1/0100019d438bef70-1e573f3d-7965-4895-b165-29f3246039bb-000000/B4QKgUPoXiEFEiJhRDYeLZw_5FZtklQc9AgZA_SkLGE=450" target="_blank">Read more →</a></div>
+<div class="tldr-story"><div class="tldr-headline">Your ticket is a prompt</div><p class="tldr-summary">Tickets are now handled by agents, and they only have the words on the ticket, and no other context.</p></div>
+<div class="tldr-story"><div class="tldr-headline">Apple steps up crackdown on vibe coding apps, pulls ‘Anything&#39; from the App Store</div><p class="tldr-summary">Apple is not okay with apps that can change their own behavior by generating and running code outside of App Store review.</p></div>
+<div class="tldr-story"><div class="tldr-headline">AI Agents Could Make Free Software Matter Again</div><p class="tldr-summary">AI will create more software that is free to run, study, modify, and share.</p></div>
+<div class="tldr-story"><div class="tldr-headline">Love TLDR? Tell your friends and get rewards!</div><p class="tldr-summary">Share your referral link below with friends to get free TLDR swag!</p></div>
+<div class="tldr-story"><div class="tldr-headline">Want to advertise in TLDR? 📰</div><p class="tldr-summary">If your company is interested in reaching an audience of tech executives, decision-makers and engineers, you may want to advertise with us .</p></div>
+<div class="tldr-story"><div class="tldr-headline">Want to work at TLDR? 💼</div><p class="tldr-summary"><a href="https://tracking.tldrnewsletter.com/CL0/https:%2F%2Fjobs.ashbyhq.com%2Ftldr.tech/1/0100019d438bef70-1e573f3d-7965-4895-b165-29f3246039bb-000000/B04kiLxi1TrFRJyet_ZuOgMCYDw516Yh2_n1IJ59oXM=450" target="_blank">Apply here</a> ,</p><a class="story-read-link" href="https://tracking.tldrnewsletter.com/CL0/https:%2F%2Fjobs.ashbyhq.com%2Ftldr.tech/1/0100019d438bef70-1e573f3d-7965-4895-b165-29f3246039bb-000000/B04kiLxi1TrFRJyet_ZuOgMCYDw516Yh2_n1IJ59oXM=450" target="_blank">Read more →</a></div>
+<div class="tldr-story"><div class="tldr-headline">or send a friend&#39;s resume to</div><p class="tldr-summary"><a href="https://tracking.tldrnewsletter.com/CL0/https:%2F%2Fwww.linkedin.com%2Ffeed%2Fupdate%2Furn:li:activity:7401699691039830016%2F/1/0100019d438bef70-1e573f3d-7965-4895-b165-29f3246039bb-000000/bX8GsHG5c9BS93AbrCkJQVdcg1RUjzw4o8Phk09Uw9k=450" target="_blank">jobs@tldr.tech and get $1k if we hire them! TLDR is one of Inc.&amp;#39;s Best Bootstrapped businesses</a> of 2025.</p><a class="story-read-link" href="https://tracking.tldrnewsletter.com/CL0/https:%2F%2Fwww.linkedin.com%2Ffeed%2Fupdate%2Furn:li:activity:7401699691039830016%2F/1/0100019d438bef70-1e573f3d-7965-4895-b165-29f3246039bb-000000/bX8GsHG5c9BS93AbrCkJQVdcg1RUjzw4o8Phk09Uw9k=450" target="_blank">Read more →</a></div>
+<div class="tldr-story"><div class="tldr-headline">If you have any comments or feedback, just respond to this email!</div><p class="tldr-summary">Thanks for reading,</p></div>
+    <div class="card-meta">Tue, 31 Mar 2026 10:58:57 +0000</div>
+  </div>
+  
+  <div id="section-5" class="top-label">TLDR</div>
+  <div class="newsletter-card">
+    <div class="card-source">TLDR</div>
+    <div class="card-title">Codex Plugin for Claude Code 💻, Qwen3.5-Omni 🤖, workload harness fit 🧑‍💻</div>
+    <div class="tldr-category"><span>Headlines &amp; Launches</span></div>
+<div class="tldr-story"><div class="tldr-headline">Qwen3.5-Omni: Scaling Up, Toward Native Omni-Modal AGI</div><p class="tldr-summary">Qwen3.5-Omni is a full omnimodal large language model that understands text, images, audio, and audio-visual content. It can process more than 10 hours of audio input and over 400 seconds of 720P audio-visual input at 1 FPS. The model is trained on a massive amount of text and visual data, and more than 100 million hours of audio-visual data. It supports speech recognition in 113 languages and dialects and speech generation in 36 languages and dialects.</p></div>
+<div class="tldr-story"><div class="tldr-headline">Microsoft 365 Copilot gets Critique and Council modes</div><p class="tldr-summary">Microsoft 365 Copilot has introduced Critique and Council modes to enhance research capabilities. Critique uses a dual-model system to generate and refine research drafts, outperforming single-model solutions by 13.88% on the DRACO benchmark. Council allows parallel report generation using Anthropic and OpenAI models for impactful comparison and insight aggregation.</p></div>
+<div class="tldr-category"><span>Deep Dives &amp; Analysis</span></div>
+<div class="tldr-story"><div class="tldr-headline">A Mirror Test For LLMs</div><p class="tldr-summary">The proposed &#34;Mirror Test&#34; assesses LLM self-awareness by challenging models to identify their own outputs without explicit cues. Testing reveals that Anthropic&#39;s Opus 4.6 model shows notable self-recognition capabilities due to its distinct token outputs, outperforming OpenAI&#39;s GPT models, which fail to recognize self-generated tokens. Despite indications of attempted self-marking, no LLM demonstrated consistent self-awareness, as none effectively communicated using message passing.</p></div>
+<div class="tldr-story"><div class="tldr-headline">AI Infrastructure Roadmap: Five frontiers for 2026</div><p class="tldr-summary">The first generation of AI was a world where progress meant bigger weights, more data, and stellar benchmarks. The landscape has now changed. Big labs are now designing AI that interfaces with the real world. Infrastructure optimized for scale and efficiency won&#39;t get us to the next phase. What&#39;s needed now is infrastructure for grounding AI in operational contexts, real-world experiences, and continuous learning.</p></div>
+<div class="tldr-story"><div class="tldr-headline">AI Applications and Vertical Integration</div><p class="tldr-summary">AI application companies are increasingly becoming &#34;full-stack&#34; by vertically integrating either downward into the model layer or upward into the service layer. Companies like Cursor and Intercom achieve differentiation and cost efficiency by developing proprietary models, while others, such as Crosby AI and WithCoverage, focus on delivering end-to-end services. As AI capabilities evolve, these strategies allow companies to enhance performance, reduce costs, and offer comprehensive solutions.</p></div>
+<div class="tldr-category"><span>Engineering &amp; Research</span></div>
+<div class="tldr-story"><div class="tldr-headline">Two Weeks of Ideation, Done in One Day? Here&#39;s How (Sponsor)</div><p class="tldr-summary">Most product rework traces back to the same mistake: building before validating. Miro&#39;s free webinar shows how AI-driven prototyping turns rough ideas into testable concepts that non-designers can create and iterate on. Featuring a Lufthansa product owner who&#39;s already building the right things faster. Learn how to prototype earlier and build the right thing faster</p></div>
+<div class="tldr-story"><div class="tldr-headline">Agent Labs: Workload-Harness Fit</div><p class="tldr-summary">Workloads vary by volume, value, verification property, time horizons, and other dimensions. This affects how agent labs focus their research efforts. The taxonomy of workloads governs which end markets justify training versus agent engineering. Labs also need to know what it actually costs to execute.</p></div>
+<div class="tldr-story"><div class="tldr-headline">TimesFM (GitHub Repo)</div><p class="tldr-summary">TimesFM is a pretrained time-series foundation model for time-series forecasting. The model is based on pretraining a patched-decoder style attention model on a large time-series corpus. It works well across different forecasting history lengths, prediction lengths, and temporal granularities.</p></div>
+<div class="tldr-story"><div class="tldr-headline">Composer 2 Technical Report</div><p class="tldr-summary">Composer 2 introduced a two-stage training approach combining continued pretraining and reinforcement learning to improve long-horizon coding, achieving strong results on software engineering benchmarks.</p></div>
+<div class="tldr-story"><div class="tldr-headline">Plentiful, high-paying jobs in the age of AI</div><p class="tldr-summary">AI might not eliminate high-paying human jobs due to potential constraints like limited computing power and energy usage. These constraints could lead to the principle of comparative advantage, where humans remain employed in roles despite AI&#39;s superior capabilities, because the opportunity cost of allocating AI to all tasks would be too high. As AI advances, human roles could change, but new tasks and increased wealth might sustain or even increase compensation for human jobs.</p></div>
+<div class="tldr-story"><div class="tldr-headline">Audit Claude Platform activity with the Compliance API</div><p class="tldr-summary">The Compliance API on the Claude Platform enables admins to audit logs, monitor user activities, and integrate data into existing compliance systems. It tracks admin and system activities, as well as resource activities like file creation or deletion. To access it, organizations should contact their account team and create an admin API key.</p></div>
+<div class="tldr-story"><div class="tldr-headline">Clerk Skills: auth that your AI agent actually gets right (Sponsor)</div><p class="tldr-summary">Install once with a single command and your coding agent gains specialized Clerk knowledge across every framework. Works with Claude Code, Cursor, Windsurf, Copilot, and more.</p></div>
+<div class="tldr-story"><div class="tldr-headline">China&#39;s DeepSeek suffers rare outage lasting several hours</div><p class="tldr-summary">China&#39;s DeepSeek experienced one of its longest outages since the launch of its R1 and V3 models, resolving only after more than eight hours.</p></div>
+<div class="tldr-story"><div class="tldr-headline">Starcloud raises $170 million Series A to build data centers in space</div><p class="tldr-summary">Starcloud raised $170 million in Series A funding, valuing it at $1.1 billion, to develop data centers in space.</p></div>
+<div class="tldr-story"><div class="tldr-headline">The State of Consumer AI. Part 3: Time is Money</div><p class="tldr-summary">The advertising revenue opportunity for leading consumer AI apps may be larger than the subscription opportunity.</p></div>
+<div class="tldr-story"><div class="tldr-headline">🚀 Transformers.js v4 (GitHub Repo)</div><p class="tldr-summary">Transformers.js v4 features a new WebGPU Runtime that allows the same transformers.js code to be used across a wide variety of JavaScript environments.</p></div>
+<div class="tldr-story"><div class="tldr-headline">Love TLDR? Tell your friends and get rewards!</div><p class="tldr-summary">Share your referral link below with friends to get free TLDR swag!</p></div>
+<div class="tldr-story"><div class="tldr-headline">Want to advertise in TLDR? 📰</div><p class="tldr-summary">If your company is interested in reaching an audience of AI professionals and decision makers, you may want to advertise with us .</p></div>
+<div class="tldr-story"><div class="tldr-headline">Want to work at TLDR? 💼</div><p class="tldr-summary"><a href="https://tracking.tldrnewsletter.com/CL0/https:%2F%2Fjobs.ashbyhq.com%2Ftldr.tech/1/0100019d442658bf-8af86d32-b47c-48c4-8091-3b1dbbe74331-000000/6oshphfr1BTVD12t_4ON5anhYCJKXBqWR7_l4ImxxJ0=450" target="_blank">Apply here</a> ,</p><a class="story-read-link" href="https://tracking.tldrnewsletter.com/CL0/https:%2F%2Fjobs.ashbyhq.com%2Ftldr.tech/1/0100019d442658bf-8af86d32-b47c-48c4-8091-3b1dbbe74331-000000/6oshphfr1BTVD12t_4ON5anhYCJKXBqWR7_l4ImxxJ0=450" target="_blank">Read more →</a></div>
+<div class="tldr-story"><div class="tldr-headline">or send a friend&#39;s resume to</div><p class="tldr-summary"><a href="https://tracking.tldrnewsletter.com/CL0/https:%2F%2Fwww.linkedin.com%2Ffeed%2Fupdate%2Furn:li:activity:7401699691039830016%2F/1/0100019d442658bf-8af86d32-b47c-48c4-8091-3b1dbbe74331-000000/JaMDPVOKPnsDskPjryOgVQgdGDRBSVYxTyCiyqMRO1g=450" target="_blank">jobs@tldr.tech and get $1k if we hire them! TLDR is one of Inc.&amp;#39;s Best Bootstrapped businesses</a> of 2025.</p><a class="story-read-link" href="https://tracking.tldrnewsletter.com/CL0/https:%2F%2Fwww.linkedin.com%2Ffeed%2Fupdate%2Furn:li:activity:7401699691039830016%2F/1/0100019d442658bf-8af86d32-b47c-48c4-8091-3b1dbbe74331-000000/JaMDPVOKPnsDskPjryOgVQgdGDRBSVYxTyCiyqMRO1g=450" target="_blank">Read more →</a></div>
+<div class="tldr-story"><div class="tldr-headline">If you have any comments or feedback, just respond to this email!</div><p class="tldr-summary">Thanks for reading,</p></div>
+    <div class="card-meta">Tue, 31 Mar 2026 13:47:37 +0000</div>
+  </div>
+  
+  <div id="section-6" class="top-label stocks-income-eyebrow">Stocks &amp; Income</div>
+  <div class="newsletter-card stocks-income-card">
+    <div class="card-source">Stocks &amp; Income</div>
+    <div class="card-title">20+ ETFs Ranked by Cost. 2 Model Portfolios. No Fluff.</div>
+    <div class="stocks-income-body">html<div><div> The cheapest ETF in every category  ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ ‌ </div><table><tr><td><table><tr><td><table><tr><td><table><tr><td><table><tr><td><table><tr><td><img alt="" loading="lazy" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/86d8ca0f-e388-42a5-821e-fe696ab12be2/Stocks___Income_black_transparent_600_x_300.png?t=1751474789"/></td></tr></table></td></tr><tr><td></td></tr><tr><td><table><tr><td><table><tr><td><h1>Hello.</h1></td></tr><tr><td><p> Today's a special edition. No war updates. No earnings breakdowns. </p></td></tr><tr><td><p> Instead, we're covering something that might save you more money over your lifetime than any single stock pick ever will: <b>the cheapest ETFs on the market and how to actually use them.</b></p></td></tr><tr><td><p> Most investors are paying 5 to 50 times more in fees than they need to. We're not exaggerating. <b>There are ETFs right now charging literally 0.00% in fees. </b>Zero. Others charge 0.02% or 0.03%, which on a $10,000 investment works out to about the price of a coffee per year. </p></td></tr><tr><td><p> …Meanwhile, plenty of people are still in funds charging 0.50% to 1.00% without realizing how much that costs them over time. </p></td></tr><tr><td><p> We also cover why putting Bitcoin, gold, and even real estate into your IRA through ETFs is one of the most underrated moves in personal finance right now. </p></td></tr><tr><td><p> Let's get into it. </p></td></tr></table></td></tr></table></td></tr><tr><td></td></tr><tr><td><table><tr><td><table><tr><td><table><tbody><tr><td>Gold Gets the Headlines. This Mineral May Matter More....                              </td></tr></tbody></table><table><tbody><tr><td><p><img alt="" loading="lazy" src="https://edgeonthestreet.com/wp-content/uploads/2026/03/graphite-binoculars.png"/></p><p>A Strategic Mineral Story Washington Is Watching</p><p>In America sits what may be one of the <strong>largest known graphite deposits in the world.</strong></p><p>That scale has started to attract attention from Washington.</p><p>The Department of Defense awarded <strong>$37.3 million</strong> to support feasibility work tied to the project.</p><p>The Export-Import Bank later signaled interest in <strong>$1.4 billion in financing</strong> for a graphite processing facility connected to the development.</p><p>And total federal support tied to the project could reach <strong>$2.1 billion</strong>.</p><p>Graphite may not attract the same attention as gold or lithium.</p><p>But if the United States is serious about building domestic supply chains, stories like this may become increasingly difficult to ignore.</p><p><a href="https://link.mail.beehiiv.com/v1/c/otxsFa%2BcTAThU95WZ4NJBnl5Qo4EGcV72k%2FgyhlRkUMbssTrBxaEGrDX7cX%2B%0AtdaONJg0RIUn1AaRZk4ZefDGTSQj8b9JyNDLwARl8I7pQsphIQqqXeiJ27BF%0AXzk3LHqMweJy7PtEj9Aga0npSzVKoLwBdqa9UdWKs0d%2FbWvKzBc%3D%0A/2bd5881d3227ce5e" rel="noopener noreferrer" target="_blank">Discover the company behind the project &gt;</a></p></td></tr></tbody></table><img alt="" loading="lazy" src="https://spgtraffic.go2cloud.org/aff_i?offer_id=426&amp;aff_id=1107&amp;url_id=3784&amp;source=32301&amp;aff_sub=033126&amp;sub_id2=&amp;sub_id3=1374&amp;sub_id4=&amp;sub_id5="/></td></tr></table></td></tr></table></td></tr><tr><td></td></tr><tr><td><table><tr><td><table><tr><td><h1>The Math That Should Make You Angry</h1></td></tr><tr><td><p> On a $10,000 investment earning 10% annually, the difference between a 0.03% expense ratio and a 1.00% expense ratio is <a href="https://link.mail.beehiiv.com/v1/c/63OX%2BbSbsIrdbkuzJZLLs%2BB8LsYYSv8D0mh8HvmIVZEUMkU%2Bko6UujxOyiOo%0AKApnYA%2FLJf6U%2Fqibk1NzPv9iDaEAwXZJdzf5FpkJn3TxikRQX1H01jGDMO4Y%0AbQV4SS4ZPFCp77osttA2sqWUlqk%2BeOJif%2BYMZBH5qs5E64DvjEY%3D%0A/ddf412c36201bf9f" rel="noopener noreferrer" target="_blank"><span>more than $40,000 in lost wealth over 30 years</span></a>. On $100,000, that becomes (you guessed it) <b>$400,000 lost</b>. </p></td></tr><tr><td><p> That's not a typo! You could lose four hundred thousand US Dollars just to fees. The reason is compounding: every dollar you lose to fees also loses decades of growth on top of it. The fee gets taken every year, which means you lose the fee itself plus all the future returns that money would have generated. </p></td></tr><tr><td><p> This is why <b>expense ratios are the one thing in investing you can actually control.</b> You can't control the market. You can't control interest rates. But you can absolutely refuse to pay 1% when a 0.02% option exists. </p></td></tr><tr><td></td></tr><tr><td><h1>The IRA Trick Most People Don't Know About</h1></td></tr><tr><td><p> Now here's where cheap ETFs go from "nice to have" to genuinely life-changing. </p></td></tr><tr><td><p> You can't put a house in your IRA. You can't put a gold bar in your IRA. And if you buy Bitcoin on Coinbase, those gains are taxed every time you sell. </p></td></tr><tr><td><p><b>But you can put ETFs that hold all of those things into a Roth IRA.</b> And inside a Roth, those gains grow completely tax-free. Forever. </p></td></tr><tr><td><p> Think about what that means: </p></td></tr><tr><td><p><b>Bitcoin in a Roth IRA</b> means if your $7,500 contribution turns into $500,000 over the next few decades, you pay zero taxes on the withdrawal. Buy Bitcoin on an exchange and you're looking at $175,000+ in capital gains taxes on that same gain. </p></td></tr><tr><td><p><b>Gold in a Roth IRA</b> through a gold ETF means you get inflation protection without the storage costs, insurance headaches, or the collectibles tax rate of 28% that applies to physical gold. </p></td></tr><tr><td><p><b>Real estate in a Roth IRA</b> through a REIT ETF means you get diversified exposure to the US real estate market, with dividends reinvested tax-free, no tenants calling you at 2am, and no property management fees eating 8 to 10% of your rental income. </p></td></tr><tr><td><p><b>Ethereum and Solana with staking rewards</b> in a Roth means you earn ~5% staking yields inside a tax-sheltered account. On an exchange, every staking reward is a taxable event. In a Roth, it compounds silently. </p></td></tr><tr><td><p> The 2026 Roth IRA contribution limit is $7,500 under age 50 and $8,600 for 50+. That's the most tax-advantaged money you'll deploy all year. Make it count. </p></td></tr><tr><td><table><tr><td><table><tr><td><p><i>(Quick note: everything here applies to traditional IRAs too, where you get a tax deduction upfront but pay taxes on withdrawals later. We're focusing on Roth because tax-free growth on high-upside assets like crypto and equities is where the biggest long-term advantage tends to be. If you're in a high tax bracket now and expect to be in a lower one in retirement, a traditional IRA might make more sense for you.)</i></p></td></tr></table></td></tr></table></td></tr><tr><td><p> So which ETFs do you actually use? Here's every category, ranked by cost. </p></td></tr><tr><td><table><tr><td>   </td></tr></table></td></tr><tr><td></td></tr><tr><td><h1>The Cheapest ETFs We've Found</h1></td></tr><tr><td><h2><b>Stocks</b></h2></td></tr><tr><td><table><tr><th><p> ETF Name </p></th><th><p> Ticker </p></th><th><p> What It Tracks </p></th><th><p> Expense Ratio </p></th></tr><tr><td><p> SPDR Portfolio S&amp;P 500 </p></td><td><p><b>SPYM</b></p></td><td><p> S&amp;P 500 Index </p></td><td><p><b>0.02%</b></p></td></tr><tr><td><p> Vanguard Total Stock Market </p></td><td><p><b>VTI</b></p></td><td><p> The entire investable U.S. equity market </p></td><td><p><b>0.03%</b></p></td></tr><tr><td><p> Vanguard FTSE All-World ex-US </p></td><td><p><b>VEU</b></p></td><td><p> All international stocks outside the US </p></td><td><p><b>0.04%</b></p></td></tr><tr><td><p> Vanguard Russell 2000 (Small Caps) </p></td><td><p><b>VTWO</b></p></td><td><p> US small cap stocks </p></td><td><p><b>0.06%</b></p></td></tr><tr><td><p> Invesco Nasdaq 100 </p></td><td><p><b>QQQM</b></p></td><td><p> 100 largest non-financial Nasdaq companies </p></td><td><p><b>0.15%</b></p></td></tr><tr><td><p> SPDR Dow Jones Industrial Average </p></td><td><p><b>DIA</b></p></td><td><p> 30 blue-chip Dow stocks </p></td><td><p><b>0.16%</b></p></td></tr></table></td></tr><tr><td></td></tr><tr><td><h2><b>Income</b></h2></td></tr><tr><td><table><tr><th><p> ETF Name </p></th><th><p> Ticker </p></th><th><p> What It Tracks </p></th><th><p> Expense Ratio </p></th></tr><tr><td><p> BNY Mellon Core Bond </p></td><td><p><b>BKAG</b></p></td><td><p> Broad US investment-grade bond market </p></td><td><p><b>0.00%</b></p></td></tr><tr><td><p> Global X U.S. 500 Income Edge (Covered Calls) </p></td><td><p><b>EDGX</b></p></td><td><p> S&amp;P 500 covered call strategy, targets ~9% annualized distribution </p></td><td><p><b>0.00%</b></p></td></tr><tr><td><p> Fidelity CLO (Collateralized Loan Obligation) </p></td><td><p><b>FCLO</b></p></td><td><p> Collateralized loan obligations (floating-rate corporate debt) </p></td><td><p><b>0.00%</b></p></td></tr></table></td></tr><tr><td></td></tr><tr><td><h2><b>Real Estate &amp; Commodities</b></h2></td></tr><tr><td><table><tr><th><p> ETF Name </p></th><th><p> Ticker </p></th><th><p> What It Tracks </p></th><th><p> Expense Ratio </p></th></tr><tr><td><p> Schwab US REIT </p></td><td><p><b>SCHH</b></p></td><td><p> US real estate investment trusts </p></td><td><p><b>0.07%</b></p></td></tr><tr><td><p> iShares Gold Trust Micro </p></td><td><p><b>IAUM</b></p></td><td><p> Physical gold, smaller share price than GLD/IAU </p></td><td><p><b>0.09%</b></p></td></tr><tr><td><p> GraniteShares Broad Commodities </p></td><td><p><b>COMB</b></p></td><td><p> Diversified commodity futures basket </p></td><td><p><b>0.25%</b></p></td></tr><tr><td><p> abrdn Physical Silver Shares </p></td><td><p><b>SIVR</b></p></td><td><p> Physical silver </p></td><td><p><b>0.30%</b></p></td></tr><tr><td><p> United States Oil Fund </p></td><td><p><b>USO</b></p></td><td><p> Front-month WTI crude oil futures </p></td><td><p><b>0.60%</b></p></td></tr></table></td></tr><tr><td></td></tr><tr><td><h2><b>Crypto</b></h2></td></tr><tr><td><table><tr><th><p> ETF Name </p></th><th><p> Ticker </p></th><th><p> What It Tracks </p></th><th><p> Expense Ratio </p></th></tr><tr><td><p> VanEck Ethereum (with staking) </p></td><td><p><b>ETHV</b></p></td><td><p> Spot Ethereum with staking rewards </p></td><td><p><b>0.00%</b></p></td></tr><tr><td><p> Franklin Solana (with staking) </p></td><td><p><b>SOEZ</b></p></td><td><p> Spot Solana with staking rewards </p></td><td><p><b>0.00%</b></p></td></tr><tr><td><p> Morgan Stanley Bitcoin Trust </p></td><td><p><b>MSBT</b></p></td><td><p> Spot Bitcoin (not yet launched, expected early April) </p></td><td><p><b>0.14%</b> (coming soon!) </p></td></tr><tr><td><p> Grayscale Bitcoin Mini Trust </p></td><td><p><b>BTC</b></p></td><td><p> Spot Bitcoin, spun off from GBTC </p></td><td><p><b>0.15%</b></p></td></tr></table></td></tr><tr><td><p> A couple notes on the 0.00% funds. BKLC is genuinely free and has actually beaten the S&amp;P 500 over five years. EDGX and FCLO have fee waivers that currently make them free but will eventually charge 0.50% and 0.45% respectively. Same goes for the crypto staking ETFs, where ETHV and SOEZ have promotional waivers in place. Still, free is free while it lasts, and even when the waivers expire, these are among the cheapest in their categories. </p></td></tr><tr><td><p> And on MSBT: Morgan Stanley just filed at 0.14%, undercutting BlackRock's IBIT by 11 basis points. It's expected to launch in early April. </p></td></tr><tr><td><table><tr><td>   </td></tr></table></td></tr><tr><td></td></tr><tr><td><h1>Two Model Portfolios</h1></td></tr><tr><td><p> Now let's put it all together. These are starting frameworks, not prescriptions. Adjust to your own risk tolerance. </p></td></tr><tr><td><h2><b>Portfolio 1: "Income Machine" (Cash Flow Focused)</b> </h2></td></tr><tr><td><p><i>For someone who wants regular distributions and yield.</i></p></td></tr><tr><td><table><tr><th><p> Allocation </p></th><th><p> ETF </p></th><th><p> Expense Ratio </p></th></tr><tr><td><p> 35% </p></td><td><p> SPYM (S&amp;P 500) </p></td><td><p> 0.02% </p></td></tr><tr><td><p> 20% </p></td><td><p> EDGX (Covered Call Income) </p></td><td><p> 0.00% </p></td></tr><tr><td><p> 15% </p></td><td><p> SCHH (Real Estate/REITs) </p></td><td><p> 0.07% </p></td></tr><tr><td><p> 15% </p></td><td><p> BKAG (Core Bonds) </p></td><td><p> 0.00% </p></td></tr><tr><td><p> 10% </p></td><td><p> FCLO (CLOs) </p></td><td><p> 0.00% </p></td></tr><tr><td><p> 5% </p></td><td><p> IAUM (Gold) </p></td><td><p> 0.09% </p></td></tr><tr><td><p><b>Blended</b></p></td><td></td><td><p><b>~0.02%</b></p></td></tr></table></td></tr><tr><td><p> EDGX targets a 9% annualized distribution. SCHH gives you REIT dividends. FCLO provides floating-rate income from collateralized loans. This portfolio is designed to pay you while you hold it. </p></td></tr><tr><td></td></tr><tr><td><h2><b>Portfolio 2: "Growth + Conviction" (With a Slot for Individual Stocks)</b> </h2></td></tr><tr><td><p><i>For someone who wants a low-cost core but also wants to swing on their own picks.</i></p></td></tr><tr><td><table><tr><th><p> Allocation </p></th><th><p> ETF / Asset </p></th><th><p> Expense Ratio </p></th></tr><tr><td><p> 40% </p></td><td><p> QQQM (Nasdaq 100) </p></td><td><p> 0.15% </p></td></tr><tr><td><p> 15% </p></td><td><p> VTWO (Small Caps) </p></td><td><p> 0.06% </p></td></tr><tr><td><p> 10% </p></td><td><p> BTC / MSBT (Bitcoin) </p></td><td><p> 0.14-0.15% </p></td></tr><tr><td><p> 5% </p></td><td><p> ETHV (Ethereum w/ Staking) </p></td><td><p> 0.00% </p></td></tr><tr><td><p> 5% </p></td><td><p> SOEZ (Solana w/ Staking) </p></td><td><p> 0.00% </p></td></tr><tr><td><p> 5% </p></td><td><p> IAUM (Gold) </p></td><td><p> 0.09% </p></td></tr><tr><td><p><b>20%</b></p></td><td><p><b>Individual Stock Picks</b></p></td><td><p><b>N/A</b></p></td></tr><tr><td><p><b>Blended (ETF portion)</b></p></td><td></td><td><p><b>~0.10%</b></p></td></tr></table></td></tr><tr><td><p> This one's for people who read this newsletter because they actually enjoy picking stocks. The 80% ETF core keeps your costs absurdly low and gives you diversified exposure across equities, crypto, and commodities. The 20% individual stock allocation is your playground to act on conviction, whether that's a SpaceX IPO play, a dividend compounder, or a small cap you found before anyone else. </p></td></tr><tr><td><p> The key: your core does the heavy lifting cheaply. Your stock picks are where you try to beat the market. If your picks don't work out, you've still got a low-cost diversified portfolio doing its thing underneath. </p></td></tr></table></td></tr></table></td></tr><tr><td></td></tr><tr><td><table><tr><td><table><tr><td><h1>Bottom Line</h1></td></tr><tr><td><p> Expense ratios are the silent killer of long-term wealth. The difference between 0.03% and 1.00% is not a rounding error. It's a house. </p></td></tr><tr><td><p> The ETF fee war has given retail investors access to tools that didn't exist five years ago: zero-fee stock funds, staking crypto ETFs, covered call income strategies, and gold exposure that fits inside a Roth IRA. The hard part isn't finding them. It's actually switching from whatever higher-fee funds you're currently in. </p></td></tr><tr><td><p> If you do one thing this week, open your brokerage account, look up the expense ratios on every fund you own, and ask yourself: is there a cheaper version of this? </p></td></tr><tr><td><p> If you haven’t done it before, the answer is almost certainly yes for at least a few of them. </p></td></tr></table></td></tr></table></td></tr><tr><td></td></tr><tr><td><table><tr><td><table><tr><td><h3>⭐️ What did you think of today's edition?</h3></td></tr><tr><td><div><table><tr><td><p> 5 stars – Bullish on Stocks &amp; Income 🐂 </p></td></tr><tr><td><p> 3 stars – Got the job done 👍 </p></td></tr><tr><td><p> 1 star – Bad news bears 🐻 </p></td></tr></table></div></td></tr></table></td></tr></table></td></tr><tr><td></td></tr><tr><td><table><tr><td><table><tr><td><h1>🫡 See You Next Week</h1></td></tr><tr><td><p> That’s all for today’s special edition. We hope you got value from it. Reply and let us know if you did.  </p></td></tr><tr><td><p> Until next week, </p></td></tr><tr><td><p> — Brandon &amp; Blake </p></td></tr></table></td></tr></table></td></tr><tr><td></td></tr><tr><td><table><tr><td>   </td></tr></table></td></tr><tr><td></td></tr><tr><td><p><span><i>Thumbnail image: Moneyfy</i></span></p></td></tr><tr><td><p><span><i>ADVERTISING DISCLOSURES: 1) The author of the Article, or members of the author’s immediate household or family, do not own any securities of the companies set forth in this Article. The author determined which companies would be included in this article based on research and understanding of the sector.</i></span></p></td></tr><tr><td><p><span><i>2) This email is a paid advertisement by i2i Marketing Group and does not constitute investment advice. Invested Inc. has been compensated $4,000 by i2i Marketing Group for the distribution of this profile and related marketing materials. We have not performed due diligence on the company and the information provided is for informational purposes only. We are not a registered investment advisor or broker-dealer.</i></span></p></td></tr><tr><td><p><span><i>Examples that we provide of share price increases pertaining to a particular Issuer from one referenced date to another represent an arbitrarily chosen time period and are no indication whatsoever of future stock prices for that Issuer and are of no predictive value. Our stock profiles are intended to highlight certain companies for YOUR further investigation; they are NOT stock recommendations or constitute an offer or sale of the referenced securities.</i></span></p></td></tr><tr><td><p><span><i>The information provided in Stocks &amp; Income is for informational and educational purposes only and should not be construed as financial advice, investment advice, or a recommendation to buy or sell any securities. Stocks &amp; Income is not a registered investment advisor, broker-dealer, or licensed financial planner. Always do your own research and consult with a licensed financial advisor before making any investment decisions. We may hold positions in or receive compensation from the companies or products mentioned. Disclosures will be made where applicable.</i></span></p></td></tr><tr><td><p><span><i>Stocks &amp; Income, AltIndex, Finance Wrapped, The Chain, and Future Funders are all owned by Invested, Inc.</i></span></p></td></tr></table></td></tr></table></td></tr><tr><td><table><tr><td></td></tr><tr><td><table><tr><td>   </td></tr><tr><td><table><tr><td><p> Update your email preferences or unsubscribe <a href="https://link.mail.beehiiv.com/v1/c/MXXLUmyX%2FtU05PqP1iKedefEDFMLW9NKsABFRf7bqczpHlCMzERJp4nBjytP%0A35ri9FAJX4RuiDf%2BxFei2Yt5M%2FX6xYeBF2RfA%2BQMJUITSKpZx9J%2FSWsfcOH2%0ADUQvIjWND5%2F45me3KamqYX%2Buzv3lDVAfJQg8ycuE6Yzt2ZK%2FoMc%3D%0A/0c10b832bf93029e" rel="noopener noreferrer" target="_blank"> here</a></p><p> © 2026 Invested Inc. </p><p> 8 The Green, Ste R<br/>Dover, DE 19901, United States </p></td></tr><tr><td><a href="https://hp.beehiiv.com/ddb6b5ae-08c4-42a4-b0c9-ab9d345f30bc" rel="noopener noreferrer" target="_blank"> Terms of Service </a></td></tr><tr><td></td></tr></table></td></tr></table></td></tr></table></td></tr></table></td></tr></table></td></tr></table></div></div>
+    <div class="card-meta">Tue, 31 Mar 2026 18:14:06 +0000</div>
+  </div>
+  
+  
+
+  
+  <div class="papers-section">
+    <div id="section-papers" class="top-label">Cutting Edge AI Research</div>
+    
+    <div class="paper-item">
+      <div class="paper-title">Out of Sight but Not Out of Mind: Hybrid Memory for Dynamic Video World Models</div>
+      <div class="paper-summary">This paper introduces a hybrid memory architecture that allows video world models to maintain and reason about objects and events that are currently outside the camera&#39;s frame, improving prediction accuracy for dynamic scenes. This is novel because most video models only track visible content, but real-world understanding requires reasoning about occluded or off-screen objects—a capability crucial for autonomous systems and embodied AI.</div>
+    </div>
+    
+    <div class="paper-item">
+      <div class="paper-title">ShotStream: Streaming Multi-Shot Video Generation for Interactive Storytelling</div>
+      <div class="paper-summary">The paper presents a system for generating multi-shot videos in a streaming fashion, enabling real-time interactive storytelling where users can guide narrative progression as content is being generated. This matters because it combines two hard problems—coherent multi-scene video generation and interactive control—which is essential for applications like games, interactive media, and creative tools.</div>
+    </div>
+    
+    <div class="paper-item">
+      <div class="paper-title">PackForcing: Short Video Training Suffices for Long Video Sampling and Long Context Inference</div>
+      <div class="paper-summary">The paper shows that video generation models trained only on short clips can be extended to generate and understand long videos through a technique called PackForcing that efficiently handles temporal dependencies. This is significant because training on short videos is much cheaper and faster, yet the approach achieves strong performance on long-horizon tasks—reducing computational barriers for video model development.</div>
+    </div>
+    
+    <div class="paper-item">
+      <div class="paper-title">MedOpenClaw: Auditable Medical Imaging Agents Reasoning over Uncurated Full Studies</div>
+      <div class="paper-summary">This paper presents an agent system that interprets complete medical imaging studies by reasoning over uncurated, full-length data while providing auditable explanations of its diagnostic reasoning. This matters for clinical adoption because medical AI requires transparency and accountability—the system&#39;s explicit reasoning traces enable doctors to verify and trust the model&#39;s conclusions rather than treating it as a black box.</div>
+    </div>
+    
+  </div>
+  
+
+
+  <div class="footer">The Digest &middot; Tuesday, March 31 2026</div>
+
+</div>
+</body>
+</html>
