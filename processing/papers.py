@@ -58,6 +58,7 @@ Respond ONLY as JSON:
 
 _HISTORY_FILE = "history.json"
 _MAX_HISTORY = 500
+_PROMPT_HISTORY_WINDOW = 50
 
 
 def _history_url() -> str:
@@ -94,9 +95,15 @@ def _load_history() -> dict:
     path = _history_path()
     if path.exists():
         try:
-            return json.loads(path.read_text(encoding="utf-8"))
+            payload = json.loads(path.read_text(encoding="utf-8"))
+            if not isinstance(payload, dict):
+                return {"quotes": [], "quote_pairs": [], "words": []}
+            payload.setdefault("quotes", [])
+            payload.setdefault("quote_pairs", [])
+            payload.setdefault("words", [])
+            return payload
         except Exception:
-            return {"quotes": [], "words": []}
+            return {"quotes": [], "quote_pairs": [], "words": []}
 
     remote = _history_url()
     if remote:
@@ -105,17 +112,21 @@ def _load_history() -> dict:
             if resp.ok:
                 payload = resp.json()
                 if isinstance(payload, dict):
+                    payload.setdefault("quotes", [])
+                    payload.setdefault("quote_pairs", [])
+                    payload.setdefault("words", [])
                     return payload
         except Exception:
             pass
-    return {"quotes": [], "words": []}
+    return {"quotes": [], "quote_pairs": [], "words": []}
 
 
 def _save_history(history: dict) -> None:
     """Persist de-duplicated bounded history to OUTPUT_DIR/history.json."""
     quotes = list(dict.fromkeys(history.get("quotes", [])))[:_MAX_HISTORY]
+    quote_pairs = list(dict.fromkeys(history.get("quote_pairs", [])))[:_MAX_HISTORY]
     words = list(dict.fromkeys(history.get("words", [])))[:_MAX_HISTORY]
-    payload = {"quotes": quotes, "words": words}
+    payload = {"quotes": quotes, "quote_pairs": quote_pairs, "words": words}
     _history_path().write_text(json.dumps(payload, ensure_ascii=True), encoding="utf-8")
 
 
@@ -139,11 +150,11 @@ def get_quote_of_the_day() -> dict:
     """
     history = _load_history()
     seen = set(history.get("quotes", []))
+    seen_pairs = [s for s in history.get("quote_pairs", []) if isinstance(s, str) and s.strip()]
     exclusion = ""
-    if seen:
-        exclusion = (
-            "Avoid any quote/author pair whose hash appears in this set:\n"
-            + ", ".join(sorted(seen)[-30:])
+    if seen_pairs:
+        exclusion = "Avoid reusing these recent quote/author pairs:\n" + "\n".join(
+            f"- {pair}" for pair in seen_pairs[-_PROMPT_HISTORY_WINDOW:]
         )
     prompt = _QUOTE_PROMPT + ("\n\n" + exclusion if exclusion else "")
     for _ in range(4):
@@ -160,6 +171,9 @@ def get_quote_of_the_day() -> dict:
             if key in seen:
                 continue
             history.setdefault("quotes", []).append(key)
+            history.setdefault("quote_pairs", []).append(
+                f"{candidate.get('quote', '').strip()} — {candidate.get('author', '').strip()}"
+            )
             _save_history(history)
             return candidate
         except Exception:
